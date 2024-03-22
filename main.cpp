@@ -5,6 +5,13 @@ using namespace std;
 
 int NUM_OPTIONS = 5;
 
+void edmonds_karp(){
+    cout << "edmonds karping every city" << endl;
+}
+
+void edmonds_karp(string city){
+    cout << "edmonds karping " << city << endl;
+}
 
 void menu_option_1(){
     cout << "city(type 'none' if you want every city): ";
@@ -13,7 +20,7 @@ void menu_option_1(){
     cin >> userInput;
 
     if(userInput == "none") edmonds_karp();
-    else edmonds_karp(userInput)
+    else edmonds_karp(userInput);
 }
 
 void menu_option_2(){return;}
