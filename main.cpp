@@ -5,6 +5,7 @@
 #include <limits>
 #include <vector>
 #include <filesystem>
+#include "./data_structures/Graph.h"
 using namespace std;
 
 int NUM_OPTIONS = 5;
@@ -127,7 +128,7 @@ vector<vector<string>> parseCSV(const string& filename) {
     return data;
 }
 
-void parse_data(){
+void parse_data(Graph<int> g){
 
     cout << "parsing data..." << endl;
 
@@ -137,11 +138,6 @@ void parse_data(){
     auto reservoirs = parseCSV("./Project1DataSetSmall/Reservoirs_Madeira.csv");
     auto pipes = parseCSV("./Project1DataSetSmall/Pipes_Madeira.csv");
     
-    cout << cities.size()<< endl;
-    cout << stations.size()<< endl;
-    cout << reservoirs.size()<< endl;
-    cout << pipes.size()<< endl;
-
     cout << cities[0][0] << endl;
 
     //TODO:populate graph
@@ -151,7 +147,9 @@ void parse_data(){
 
 int main() {
 
-    parse_data();
+    Graph<int> g;
+
+    parse_data(g);
 
     menu();
 
