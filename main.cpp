@@ -13,16 +13,19 @@ using namespace std;
 
 int NUM_OPTIONS = 5;
 
-
+Graph<string> g;
 
 void menu_option_1(){
-    cout << "city(type 'none' if you want every city): ";
+    cout << "city code(type 'none' if you want every city): ";
 
     string userInput;
     cin >> userInput;
 
-    if(userInput == "none") edmonds_karp();
-    else edmonds_karp(userInput);
+    if(userInput == "none") edmonds_karp(g);
+    else while(!edmonds_karp(g, userInput)){
+        cout << "city code(type 'none' if you want every city): ";
+        cin >> userInput;
+    };
 }
 
 void menu_option_2(){
@@ -97,8 +100,6 @@ void menu(){
     
 
 int main() {
-
-    Graph<string> g;
 
     populate_graph(g); //populate graph
     
