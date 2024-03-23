@@ -388,10 +388,6 @@ bool Graph<T>::addVertex(const T &in) {
 
 template <class T>
 bool Graph<T>::addVertex(Vertex<T>* vertex) {
-    std::cout << "adding vertex " << vertex->getInfo() << std::endl;
-    std::cout << "vertex address" << &vertex << std::endl;
-    std::cout << "findvertex " << findVertex(vertex->getInfo()) << std::endl;
-    if(findVertex(vertex->getInfo()) != 0 ) std::cout << "foundvertex info " << findVertex(vertex->getInfo())->getInfo() << std::endl;
     if (findVertex(vertex->getInfo()) != nullptr)
         return false;
     vertexSet.push_back(vertex);
