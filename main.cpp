@@ -6,21 +6,14 @@
 #include <vector>
 #include <filesystem>
 #include "./data_structures/Graph.h"
+#include "./data_structures/Vertex_children.h"
+#include "./utils.cpp"
+#include "./edmonds_karp.cpp"
 using namespace std;
 
 int NUM_OPTIONS = 5;
 
-void edmonds_karp(){
-    cout << "edmonds karping every city" << endl;
 
-    //TODO
-}
-
-void edmonds_karp(string city){
-    cout << "edmonds karping " << city << endl;
-
-    //TODO
-}
 
 void menu_option_1(){
     cout << "city(type 'none' if you want every city): ";
@@ -83,74 +76,32 @@ void menu(){
 
     while(!userInput || userInput > NUM_OPTIONS){
 	
-	cout << "Input choice: ";
-	cin >> userInput;
+	    cout << "Input choice: ";
+	    cin >> userInput;
 
-	if(!userInput || userInput > NUM_OPTIONS) cout << "invalid input, try again (valid options: 1-" << NUM_OPTIONS << ")" << endl;
+	    if(!userInput || userInput > NUM_OPTIONS) cout << "invalid input, try again (valid options: 1-" << NUM_OPTIONS << ")" << endl;
 
-	cin.clear(); // Clear the fail state
+	    cin.clear(); // Clear the fail state
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
     }
     
     switch(userInput){
-	case 1: menu_option_1(); break;
-	case 2: menu_option_2(); break;
-	case 3: menu_option_3(); break;
-	case 4: menu_option_4(); break;
-	case 5: menu_option_5(); break;
+        case 1: menu_option_1(); break;
+        case 2: menu_option_2(); break;
+        case 3: menu_option_3(); break;
+        case 4: menu_option_4(); break;
+        case 5: menu_option_5(); break;
     }
 }
 
-vector<vector<string>> parseCSV(const string& filename) {
-    vector<vector<string>> data;
-
-    ifstream file(filename);
-    if (!file.is_open()) {
-        cerr << "Failed to open the file: " << filename << endl;
-        return data;
-    }
-
-    string line;
-    getline(file, line); //skip first line
-    while (getline(file, line)) {
-        vector<string> row;
-        stringstream ss(line);
-        string cell;
-
-        while (getline(ss, cell, ',')) {
-            row.push_back(cell);
-        }
-
-        data.push_back(row);
-    }
-
-    file.close();
-    return data;
-}
-
-void parse_data(Graph<int> g){
-
-    cout << "parsing data..." << endl;
-
-
-    auto cities = parseCSV("./Project1DataSetSmall/Cities_Madeira.csv");
-    auto stations = parseCSV("./Project1DataSetSmall/Stations_Madeira.csv");
-    auto reservoirs = parseCSV("./Project1DataSetSmall/Reservoirs_Madeira.csv");
-    auto pipes = parseCSV("./Project1DataSetSmall/Pipes_Madeira.csv");
-    
-    cout << cities[0][0] << endl;
-
-    //TODO:populate graph
-
-}
     
 
 int main() {
 
-    Graph<int> g;
+    Graph<string> g;
 
-    parse_data(g);
-
+    populate_graph(g); //populate graph
+    
     menu();
 
     return 0;
