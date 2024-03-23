@@ -108,6 +108,7 @@ public:
      *  Returns true if successful, and false if a vertex with that content already exists.
      */
     bool addVertex(const T &in);
+    bool addVertex(Vertex<T>* vertex);
     bool removeVertex(const T &in);
 
     /*
@@ -382,6 +383,18 @@ bool Graph<T>::addVertex(const T &in) {
     if (findVertex(in) != nullptr)
         return false;
     vertexSet.push_back(new Vertex<T>(in));
+    return true;
+}
+
+template <class T>
+bool Graph<T>::addVertex(Vertex<T>* vertex) {
+    std::cout << "adding vertex " << vertex->getInfo() << std::endl;
+    std::cout << "vertex address" << &vertex << std::endl;
+    std::cout << "findvertex " << findVertex(vertex->getInfo()) << std::endl;
+    if(findVertex(vertex->getInfo()) != 0 ) std::cout << "foundvertex info " << findVertex(vertex->getInfo())->getInfo() << std::endl;
+    if (findVertex(vertex->getInfo()) != nullptr)
+        return false;
+    vertexSet.push_back(vertex);
     return true;
 }
 

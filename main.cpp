@@ -83,21 +83,21 @@ void menu(){
 
     while(!userInput || userInput > NUM_OPTIONS){
 	
-	cout << "Input choice: ";
-	cin >> userInput;
+	    cout << "Input choice: ";
+	    cin >> userInput;
 
-	if(!userInput || userInput > NUM_OPTIONS) cout << "invalid input, try again (valid options: 1-" << NUM_OPTIONS << ")" << endl;
+	    if(!userInput || userInput > NUM_OPTIONS) cout << "invalid input, try again (valid options: 1-" << NUM_OPTIONS << ")" << endl;
 
-	cin.clear(); // Clear the fail state
+	    cin.clear(); // Clear the fail state
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
     }
     
     switch(userInput){
-	case 1: menu_option_1(); break;
-	case 2: menu_option_2(); break;
-	case 3: menu_option_3(); break;
-	case 4: menu_option_4(); break;
-	case 5: menu_option_5(); break;
+        case 1: menu_option_1(); break;
+        case 2: menu_option_2(); break;
+        case 3: menu_option_3(); break;
+        case 4: menu_option_4(); break;
+        case 5: menu_option_5(); break;
     }
 }
 
@@ -117,7 +117,38 @@ vector<vector<string>> parseCSV(const string& filename) {
         stringstream ss(line);
         string cell;
 
+        bool inQuotes = false; /*pra tratar das virgulas dentro das aspas*/
+        
+        
         while (getline(ss, cell, ',')) {
+            
+            if (cell.empty()) continue;
+
+            if (cell.front() == '"' && cell.back() == '"') {
+                cell = cell.substr(1, cell.length() - 2);
+                
+            } else if (cell.front() == '"') {
+                inQuotes = true;
+                cell.erase(0, 1);
+            } else if (cell.back() == '"') {
+                inQuotes = false;
+                cell.pop_back();
+            }
+
+            if (inQuotes) {
+                std::string temp;
+                while (std::getline(ss, temp, ',')) {
+                    cell+= "," + temp;
+                    if (temp.back() == '"' ) {
+                        cell.pop_back();
+                        inQuotes = false;
+                        break;
+                    }
+                }
+            }
+
+            cell.erase(remove(cell.begin(), cell.end(), '"'), cell.end());
+            cell.erase(remove(cell.begin(), cell.end(), ','), cell.end());
             row.push_back(cell);
         }
 
@@ -128,7 +159,45 @@ vector<vector<string>> parseCSV(const string& filename) {
     return data;
 }
 
-void parse_data(Graph<int> g){
+class City: public Vertex<string> {
+    private:
+        string city;
+        int id;
+        string code;
+        float demand;
+        int population;
+    public:
+	    City(string city, int id, string code, float demand, int population)
+            : Vertex(code), city(city), id(id), code(code), demand(demand), population(population){}
+    
+};
+
+class Station: public Vertex<string> {
+    private:
+	    int id;
+	    string code;
+    public:
+	    Station(int id, string code)
+        : Vertex(code), id(id), code(code) {}
+    
+};
+
+class Reservoir: public Vertex<string> {
+    private:
+        string reservoir;
+        string city;
+        int id;
+        string code;
+        int maxDelivery;
+    public:
+	    Reservoir(string reservoir, string city, int id, string code, int maxDelivery)
+            : Vertex(code), reservoir(reservoir), city(city), id(id), code(code), maxDelivery(maxDelivery){}
+};
+
+
+
+template <class T>
+void parse_data(Graph<T> &g){
 
     cout << "parsing data..." << endl;
 
@@ -138,20 +207,56 @@ void parse_data(Graph<int> g){
     auto reservoirs = parseCSV("./Project1DataSetSmall/Reservoirs_Madeira.csv");
     auto pipes = parseCSV("./Project1DataSetSmall/Pipes_Madeira.csv");
     
-    cout << cities[0][0] << endl;
+    for(auto cityData: cities){
+        City* city = new City(cityData[0], stoi(cityData[1]), cityData[2], stof(cityData[3]), stoi(cityData[4]));
+        cout << city->getInfo() << (city->isVisited() ? " " : " not ") << "visited!" << endl;
 
-    //TODO:populate graph
+        if(!g.addVertex(city)) cout << "failed to add " << city->getInfo() << endl;
+    }
+    
+    for(auto stationData: stations){
+        Station* station = new Station(stoi(stationData[0]), stationData[1]);
+        cout << station->getInfo() << (station->isVisited() ? " " : " not ") << "visited!" << endl;
+
+        if(!g.addVertex(station)) cout << "failed to add " << station->getInfo() << endl;
+    }
+
+    for(auto reservoirData: reservoirs){
+        Reservoir* reservoir = new Reservoir(reservoirData[0], reservoirData[1], stoi(reservoirData[2]), reservoirData[3], stoi(reservoirData[4]));
+        cout << reservoir->getInfo() << (reservoir->isVisited() ? " " : " not ") << "visited!" << endl;
+
+        if(!g.addVertex(reservoir)) cout << "failed to add " << reservoir->getInfo() << endl;
+    }
+ 
+    for(auto pipeData: pipes){
+        
+        string source = pipeData[0];
+        string destination = pipeData[1];
+        int capacity = stoi(pipeData[2]);
+        bool bidirectional = !(bool)stoi(pipeData[3]);
+
+        if(bidirectional) g.addBidirectionalEdge(source, destination, capacity);
+        else g.addEdge(source, destination, capacity);
+    }   
 
 }
     
 
 int main() {
 
-    Graph<int> g;
+    Graph<string> g;
 
     parse_data(g);
+    
+    auto test = g.getVertexSet();
+    
+    cout << "test.size: " << test.size() << endl;
 
-    menu();
+    for(auto v: test){
+        cout << "vertex " << v->getInfo() << endl;
+    }
+
+    //menu();
 
     return 0;
 }
