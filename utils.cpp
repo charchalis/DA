@@ -106,5 +106,14 @@ void populate_graph(Graph<T> &g){
         if(bidirectional) g.addBidirectionalEdge(source, destination, capacity);
         else g.addEdge(source, destination, capacity);
     }   
+    
+    //set flow of edges to zero
+    auto verti = g.getVertexSet();
+    for(auto v: verti){
+        auto edges = v->getAdj();
+        for(auto e: edges){
+            e->setFlow(0);
+        }
+    }
 
 }
