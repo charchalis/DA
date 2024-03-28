@@ -16,16 +16,17 @@ int NUM_OPTIONS = 5;
 Graph<string> g;
 
 void menu_option_1(){
-    cout << "city code(type 'none' if you want every city): ";
+    cout << "city code(type 'all' if you want every city): ";
 
     string userInput;
     cin >> userInput;
 
-    if(userInput == "none") edmonds_karp(g);
-    else while(!edmonds_karp(g, userInput)){
-        cout << "city code(type 'none' if you want every city): ";
+    while(!validCity(g, userInput)){
+        cout << "invalid city. Try again" << endl;
+        cout << "city code(type 'all' if you want every city): ";
         cin >> userInput;
-    };
+    }
+    T2_1(g,userInput);
 }
 
 void menu_option_2(){

@@ -131,3 +131,10 @@ void printGraph(Graph<T> &g){
     }
     cout << endl;
 }
+
+template <class T>
+bool validCity(Graph<T> &g, string city){
+    if(city == "all") return true;
+
+    return g.findVertex(city);
+}
