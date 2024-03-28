@@ -3,12 +3,14 @@
 
 #ifndef DA_TP_CLASSES_GRAPH
 #define DA_TP_CLASSES_GRAPH
+using namespace std;
 
 #include <iostream>
 #include <vector>
 #include <queue>
 #include <limits>
 #include <algorithm>
+#include <map>
 #include "../data_structures/MutablePriorityQueue.h"
 
 template <class T>
@@ -126,7 +128,7 @@ public:
     std:: vector<T> dfs() const;
     std:: vector<T> dfs(const T & source) const;
     void dfsVisit(Vertex<T> *v,  std::vector<T> & res) const;
-    std::vector<T> bfs(const T & source) const;
+    std::vector<T> bfs(const T & source, std::map<T,Edge<T>*>& discoveryMap) const;
 
     bool isDAG() const;
     bool dfsIsDAG(Vertex<T> *v) const;
@@ -481,7 +483,7 @@ std::vector<T> Graph<T>::dfs() const {
  */
 template <class T>
 std::vector<T> Graph<T>::dfs(const T & source) const {
-    std::vector<int> res;
+    std::vector<T> res;
     // Get the source vertex
     auto s = findVertex(source);
     if (s == nullptr) {
@@ -520,8 +522,9 @@ void Graph<T>::dfsVisit(Vertex<T> *v, std::vector<T> & res) const {
  * Returns a vector with the contents of the vertices by bfs order.
  */
 template <class T>
-std::vector<T> Graph<T>::bfs(const T & source) const {
-    std::vector<int> res;
+std::vector<T> Graph<T>::bfs(const T & source, std::map<T,Edge<T>*>& discoveryMap) const {
+    std::vector<T> res;
+    
     // Get the source vertex
     auto s = findVertex(source);
     if (s == nullptr) {
@@ -543,12 +546,15 @@ std::vector<T> Graph<T>::bfs(const T & source) const {
         res.push_back(v->getInfo());
         for (auto & e : v->getAdj()) {
             auto w = e->getDest();
-            if ( ! w->isVisited()) {
+            if ( ! w->isVisited() && e->getFlow() < e->getWeight()) {
                 q.push(w);
                 w->setVisited(true);
+                discoveryMap[w->getInfo()] = e;
+
             }
         }
     }
+    
     return res;
 }
 

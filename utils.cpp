@@ -106,5 +106,35 @@ void populate_graph(Graph<T> &g){
         if(bidirectional) g.addBidirectionalEdge(source, destination, capacity);
         else g.addEdge(source, destination, capacity);
     }   
+    
+    //set flow of edges to zero
+    auto verti = g.getVertexSet();
+    for(auto v: verti){
+        auto edges = v->getAdj();
+        for(auto e: edges){
+            e->setFlow(0);
+        }
+    }
 
+}
+
+//print edges and corresponding flow
+template <class T>
+void printGraph(Graph<T> &g){
+    cout << endl << "FINAL RESULT: " << endl << endl;;
+    auto verti = g.getVertexSet();
+    for(auto v: verti){
+        auto edges = v->getAdj();
+        for(auto e: edges){
+            cout << "edge: " << e->getOrig()->getInfo() << "-" << e->getDest()->getInfo() << "  \tflow: " << e->getFlow() << endl;
+        }
+    }
+    cout << endl;
+}
+
+template <class T>
+bool validCity(Graph<T> &g, string city){
+    if(city == "all") return true;
+
+    return g.findVertex(city);
 }

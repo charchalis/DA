@@ -13,16 +13,20 @@ using namespace std;
 
 int NUM_OPTIONS = 5;
 
-
+Graph<string> g;
 
 void menu_option_1(){
-    cout << "city(type 'none' if you want every city): ";
+    cout << "city code(type 'all' if you want every city): ";
 
     string userInput;
     cin >> userInput;
 
-    if(userInput == "none") edmonds_karp();
-    else edmonds_karp(userInput);
+    while(!validCity(g, userInput)){
+        cout << "invalid city. Try again" << endl;
+        cout << "city code(type 'all' if you want every city): ";
+        cin >> userInput;
+    }
+    T2_1(g,userInput);
 }
 
 void menu_option_2(){
@@ -64,7 +68,7 @@ void menu(){
 
     cout << "menu:" << endl;
     
-    cout << "\t1) maximum amount of water to a/each city (T2.1)" << endl;
+    cout << "\t1) maximum amount of water to a/each city (T2.1) and cities deficit (T2.2)" << endl;
     cout << "\t2) can all the water reservoirs supply enough water to all its delivery sites? (T2.2 and T2.3)" << endl;
     cout << "\t3) remove a reservoir and list the affected cities (T3.1)" << endl;
     cout << "\t4) Can any pumping station be temporarily taken out of service without affecting the delivery capacity to all the cities?(T3.2)" << endl;
@@ -97,8 +101,6 @@ void menu(){
     
 
 int main() {
-
-    Graph<string> g;
 
     populate_graph(g); //populate graph
     
