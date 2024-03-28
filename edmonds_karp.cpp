@@ -103,9 +103,6 @@ bool edmonds_karp(Graph<string> &g, string city){
         cout << "\t(flow: " << maxFlow << ")" << endl;
 
 
-
-
-        
         //set flow of path
         Vertex<string>* node = graph.findVertex("source");
         while(node->getInfo() != "sink"){
@@ -114,29 +111,11 @@ bool edmonds_karp(Graph<string> &g, string city){
             node = edge->getDest();
         }
 
-        //print graph with flow
-        /*verti = graph.getVertexSet();
-        for(auto v: verti){
-            auto edges = v->getAdj();
-            for(auto e: edges){
-                cout << e->getOrig()->getInfo() << "-" << e->getDest()->getInfo() << " -> " << e->getFlow() << endl;
-            }
-        }*/
+        //printGraph(graph);
 
     }
 
-    //print graph with flow
-    cout << endl;
-    verti = graph.getVertexSet();
-    for(auto v: verti){
-        auto edges = v->getAdj();
-        for(auto e: edges){
-            cout << e->getOrig()->getInfo() << "-" << e->getDest()->getInfo() << " -> " << e->getFlow() << endl;
-        }
-    }
-
-
-
+    printGraph(graph);
     
     return true;
 }

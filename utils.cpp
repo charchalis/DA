@@ -117,3 +117,17 @@ void populate_graph(Graph<T> &g){
     }
 
 }
+
+//print edges and corresponding flow
+template <class T>
+void printGraph(Graph<T> &g){
+    cout << endl << "FINAL RESULT: " << endl << endl;;
+    auto verti = g.getVertexSet();
+    for(auto v: verti){
+        auto edges = v->getAdj();
+        for(auto e: edges){
+            cout << "edge: " << e->getOrig()->getInfo() << "-" << e->getDest()->getInfo() << "  \tflow: " << e->getFlow() << endl;
+        }
+    }
+    cout << endl;
+}
