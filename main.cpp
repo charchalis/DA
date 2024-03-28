@@ -68,7 +68,7 @@ void menu(){
 
     cout << "menu:" << endl;
     
-    cout << "\t1) maximum amount of water to a/each city (T2.1)" << endl;
+    cout << "\t1) maximum amount of water to a/each city (T2.1) and cities deficit (T2.2)" << endl;
     cout << "\t2) can all the water reservoirs supply enough water to all its delivery sites? (T2.2 and T2.3)" << endl;
     cout << "\t3) remove a reservoir and list the affected cities (T3.1)" << endl;
     cout << "\t4) Can any pumping station be temporarily taken out of service without affecting the delivery capacity to all the cities?(T3.2)" << endl;
