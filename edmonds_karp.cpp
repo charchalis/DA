@@ -113,7 +113,7 @@ string default_graph_setup_sink(Graph<string> &graph, vector<string> destination
 
 
 //T2.2
-void list_affected_cities(Graph<string> &graph, string city) {
+void list_affected_cities(Graph<string> &graph, string city, map<string,double> *pumpingMap) {
     cout << endl << "DEFICITS:" << endl << endl;
 
     //check if all cities have full incoming edges
@@ -124,31 +124,45 @@ void list_affected_cities(Graph<string> &graph, string city) {
         sinks.push_back(graph.findVertex(city));
     }
 
-    bool foundDeficit = false;
-
     for (auto vertex : sinks) {
         //if vertex is a city check if it has full incoming edges
         if (vertex->getInfo()[0] == 'C') {
+            
+            float demand = vertex->getDemand();
+            double flow = 0;
+
             auto incoming = vertex->getIncoming();
-
-            double deficit = 0;
             for (auto e : incoming) {
-                double flow = e->getFlow();
-                double capacity = e->getWeight();
+                flow += e->getFlow();
+            }
+            
+            if(flow < demand){
+                cout << "\tcity: " << vertex->getInfo() << "\tdeficit: " << demand-flow;
+            }else continue;
 
-                deficit += capacity - flow;
+            if(pumpingMap == nullptr){
+                cout << endl;
+                continue;
             }
-            if (deficit > 0) {
-                foundDeficit = true;
-                cout << "\t" << vertex->getInfo() << " deficit: " << deficit << endl;
+
+            string addon = "";
+            double deficit = demand - flow;
+
+            string name = vertex->getInfo();
+            
+            auto it = pumpingMap->find(name);
+            if(it != pumpingMap->end()){
+                addon = "(";
+                double extra = deficit - it->second;
+                if(extra>0) addon += "+";
+                addon += to_string((int)extra) + ")";
+                cout << "(" << (extra > 0 ? "+" : "") << to_string((int)extra) << ")";
             }
+            cout << endl;
+
         }
     }
-    if (!foundDeficit) {
-        cout << "\tNo deficit found!" << endl;
-    }
 }
-
 
 void T2_1(Graph<string> &g, string city){
 
@@ -176,7 +190,7 @@ void T2_1(Graph<string> &g, string city){
     printGraph(graph);
 
     //2.2
-    list_affected_cities(graph, city);
+    list_affected_cities(graph, city,nullptr);
 
     return;
 }
@@ -209,7 +223,7 @@ bool T3_1(Graph<string> g, string waterReservoir){
     printGraph(graph);
 
     //Lists the affected cities 
-    list_affected_cities(graph, "all"); 
+    list_affected_cities(graph, "all",nullptr); 
 
     return true; 
 }
@@ -226,6 +240,7 @@ map<string,double> getStockDeficits(Graph<string> g){
 
     //Runs Edmonds Karp on the graph 
     edmonds_karp(graph, "source", sink);
+    list_affected_cities(g,"all", nullptr);
 
     //Measure the stock deficits of the cities (With all the Pumping stations)
     auto verti = graph.getVertexSet(); 
@@ -237,16 +252,14 @@ map<string,double> getStockDeficits(Graph<string> g){
         if (name[0] == 'C') {
             auto incoming = vertex->getIncoming();
 
-            double deficit = 0;
+            double flow = 0;
+            float demand = vertex->getDemand();
             for (auto e : incoming) {
-                double flow = e->getFlow();
-                double capacity = e->getWeight();
-
-                deficit += capacity - flow;
+                flow += e->getFlow();
             }
             //There is a deficit -> It is worth to be added to the map
-            if (deficit > 0){
-                pumping_map.insert({name, deficit}); 
+            if (demand > flow){
+                pumping_map.insert({name, demand - flow}); 
             }
         }
     }
@@ -259,17 +272,26 @@ bool T3_2(Graph<string> g, string pumpingStation){
 
     if(pumpingStation.empty())
         return false; 
-
+    
     map<string, double> pumping_map = getStockDeficits(g); //Computes the defices of the stock graph
                                                         //And inserts them into the map
+                                                        //
+    for(auto v: g.getVertexSet()){
+        for(auto e: v->getAdj()){
+            e->setFlow(0);
+        }
+        for(auto e: v->getIncoming()){
+            e->setFlow(0);
+        }
+    }
 
-    cout << "DEBUGGING -------------- " << endl; 
+    cout << endl << "DEBUGGING -------------- " << endl; 
     cout << "VALUES IN THE MAP : " << endl; 
     for (const auto& pair : pumping_map) {
         std::cout << pair.second << std::endl;
     }
 
-    //Removes the Vertex from the Graph 
+    //Removes the Vertex from the Graph
     if(g.removeVertex(pumpingStation)) 
         std::cout << "Pumping Station " << pumpingStation << " Removed Succesfully" << std::endl; 
     else{
@@ -285,11 +307,12 @@ bool T3_2(Graph<string> g, string pumpingStation){
 
     //Runs Edmonds Karp on the graph with modified the pumping stations
     edmonds_karp(graph, "source", sink);
+    list_affected_cities(g,"all",&pumping_map);
 
     //Check the one without the pumping station
     auto verti = graph.getVertexSet();
 
-    std::cout << "Cities affected by the removal of the pumping station: " <<  pumpingStation << endl;
+    std::cout << endl << "Cities affected by the removal of the pumping station: " <<  pumpingStation << endl;
 
     for (auto v : verti) {
 
@@ -297,14 +320,13 @@ bool T3_2(Graph<string> g, string pumpingStation){
         if (name[0] == 'C') {
             auto incoming = v->getIncoming();
 
-            double deficit = 0;
+            float demand = v->getDemand();
+            double flow = 0;
             for (auto e : incoming) {
-                double flow = e->getFlow();
-                double capacity = e->getWeight();
-
-                deficit += capacity - flow;
+                flow += e->getFlow();
             }
-            if(deficit > 0){
+            double deficit = demand - flow;
+            if(demand > flow){
                 // Element was found and has worse metrics 
                 auto it = pumping_map.find(name);
                 if(it != pumping_map.end()){
