@@ -145,20 +145,16 @@ void list_affected_cities(Graph<string> &graph, string city, map<string,double> 
                 continue;
             }
 
-            string addon = "";
             double deficit = demand - flow;
 
             string name = vertex->getInfo();
             
             auto it = pumpingMap->find(name);
+            double extra = deficit;
             if(it != pumpingMap->end()){
-                addon = "(";
-                double extra = deficit - it->second;
-                if(extra>0) addon += "+";
-                addon += to_string((int)extra) + ")";
-                cout << "(" << (extra > 0 ? "+" : "") << to_string((int)extra) << ")";
+                extra -= it->second;
             }
-            cout << endl;
+            cout << "(" << (extra > 0 ? "+" : "") << to_string((int)extra) << ")" << endl;
 
         }
     }
@@ -285,17 +281,11 @@ bool T3_2(Graph<string> g, string pumpingStation){
         }
     }
 
-    cout << endl << "DEBUGGING -------------- " << endl; 
-    cout << "VALUES IN THE MAP : " << endl; 
-    for (const auto& pair : pumping_map) {
-        std::cout << pair.second << std::endl;
-    }
-
     //Removes the Vertex from the Graph
     if(g.removeVertex(pumpingStation)) 
-        std::cout << "Pumping Station " << pumpingStation << " Removed Succesfully" << std::endl; 
+        std::cout << endl << "Pumping Station " << pumpingStation << " Removed Succesfully" << std::endl; 
     else{
-        std::cout << "Pumping Station Not Found" << std::endl;
+        std::cout << endl << "Pumping Station Not Found" << std::endl;
         return false; 
     } 
 
