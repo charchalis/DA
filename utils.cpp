@@ -115,18 +115,18 @@ void populate_graph(Graph<T> &g){
             e->setFlow(0);
         }
     }
-
+    
 }
 
 //print edges and corresponding flow
 template <class T>
 void printGraph(Graph<T> &g){
-    cout << endl << "FINAL RESULT: " << endl << endl;;
+    cout << endl << "FINAL RESULT: " << endl << endl;
     auto verti = g.getVertexSet();
     for(auto v: verti){
         auto edges = v->getAdj();
         for(auto e: edges){
-            cout << "edge: " << e->getOrig()->getInfo() << "-" << e->getDest()->getInfo() << "  \tflow: " << e->getFlow() << endl;
+            cout << "edge: " << e->getOrig()->getInfo() << "-" << e->getDest()->getInfo() << "  \tflow: " << e->getFlow() << "/" << (e->getWeight() == 1000000000 ? "inf" : to_string((int)e->getWeight())) <<  endl;
         }
     }
     cout << endl;

@@ -10,7 +10,12 @@ class City: public Vertex<string> {
         int population;
     public:
 	    City(string city, int id, string code, float demand, int population)
-            : Vertex(code), city(city), id(id), code(code), demand(demand), population(population){}
+            : Vertex(code), city(city), id(id), code(code), demand(demand), population(population){
+
+            this->setDemand(demand);
+        }
+        
+        
     
 };
 

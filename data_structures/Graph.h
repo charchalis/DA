@@ -44,6 +44,9 @@ public:
     Edge<T> * addEdge(Vertex<T> *dest, double w);
     bool removeEdge(T in);
     void removeOutgoingEdges();
+    
+    void setDemand(float demand); //for cities
+    float getDemand(); //for cities
 
     friend class MutablePriorityQueue<Vertex>;
 protected:
@@ -56,6 +59,7 @@ protected:
     unsigned int indegree; // used by topsort
     double dist = 0;
     Edge<T> *path = nullptr;
+    float demand = -1; //for cities
 
     std::vector<Edge<T> *> incoming; // incoming edges
 
@@ -678,5 +682,10 @@ Graph<T>::~Graph() {
     deleteMatrix(distMatrix, vertexSet.size());
     deleteMatrix(pathMatrix, vertexSet.size());
 }
+
+template <class T>
+void Vertex<T>::setDemand(float demand){this->demand = demand;} 
+template <class T>
+float Vertex<T>::getDemand(){return demand;}
 
 #endif /* DA_TP_CLASSES_GRAPH */
