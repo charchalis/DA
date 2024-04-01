@@ -29,27 +29,104 @@ void menu_option_1(){
     T2_1(g,userInput);
 }
 
+/*
+void balance_load() {
+    // Compute initial metrics
+    vector<int> differences;
+    int totalDifference = 0;
+    int maxDifference = 0;
+
+    for (const auto& pipe : g.getEdges()) {
+        int difference = pipe.getCapacity() - pipe.getFlow();
+        differences.push_back(difference);
+        totalDifference += difference;
+        maxDifference = max(maxDifference, difference);
+    }
+
+    double averageDifference = static_cast<double>(totalDifference) / differences.size();
+
+    // Load balancing algorithm
+    for (auto& pipe : g.getEdges()) {
+        int difference = pipe.getCapacity() - pipe.getFlow();
+        double adjustment = (difference - averageDifference) / maxDifference;
+        pipe.setFlow(pipe.getFlow() + adjustment * pipe.getCapacity());
+    }
+
+    // Recalculate metrics after load balancing
+    differences.clear();
+    totalDifference = 0;
+    maxDifference = 0;
+
+    for (const auto& pipe : g.getEdges()) {
+        int difference = pipe.getCapacity() - pipe.getFlow();
+        differences.push_back(difference);
+        totalDifference += difference;
+        maxDifference = max(maxDifference, difference);
+    }
+
+    double newAverageDifference = static_cast<double>(totalDifference) / differences.size();
+
+    // Print the metrics
+    cout << "Initial Metrics:" << endl;
+    cout << "Average Difference: " << averageDifference << endl;
+    cout << "Variance: " << calculateVariance(differences) << endl;
+    cout << "Max Difference: " << maxDifference << endl;
+
+    cout << "Metrics after Load Balancing:" << endl;
+    cout << "Average Difference: " << newAverageDifference << endl;
+    cout << "Variance: " << calculateVariance(differences) << endl;
+    cout << "Max Difference: " << maxDifference << endl;
+}
+*/
+
+
 void menu_option_2(){
+
+   //T2_3(g); 
+
     return;
 }
 
 void menu_option_3(){
-    cout << "reservoir: ";
+    std::cout << "reservoir: ";
 
-    string userInput;
-    cin >> userInput;
+    std::string userInput;
+    std::cin >> userInput;
 
-    cout << "removing reservoir "<< userInput << endl;
+    std::cout << "removing reservoir "<< userInput << std::endl;
 
-    //TODO: call function
+    if(!T3_1(g, userInput)){
+        menu_option_3(); //retry
+    }
 }
 
 void menu_option_4(){
+
+
+    // This automatic cycle is not working
+    // auto verti = g.getVertexSet(); 
+
+    // // Cycle through every pump station
+    // for (auto vertex : verti) {
+    //     if (vertex->getInfo()[0] == 'P' && vertex->getInfo()[1] == 'S') { // Is a pumping station
+    //         std::cout << "removing pumping station " << vertex->getInfo() << " ..." << std::endl;  
+    //         if(!T3_2(g, vertex->getInfo())) {
+    //             std::cout << "An error occurred with this pumping station ... Skipping" << std::endl; 
+    //             continue; 
+    //         }
+    //     }
+    // }
+
+    //This approach is working tho 
+    std::cout << "pumping station: "; 
+    std::string userInput; 
+    std::cin >> userInput; 
+
+    cout << "removing pumping station " << userInput << endl; 
     
-    //TODO: call function
+    T3_2(g, userInput); 
 
-    //can_be_out_of_service() ???
-
+    
     return;
 }
 
