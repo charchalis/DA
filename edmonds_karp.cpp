@@ -64,6 +64,7 @@ Graph<string> default_graph_setup_general(Graph<string> g,vector<string> sources
 
         //add reservoirs to sources and add cities to destinations
         string vertexCode = vertex->getInfo();
+        std :: cout << "INFO: " << vertexCode << endl; 
         char vertexType = vertexCode[0];
 
         if(vertexType == 'R') sources.push_back(vertexCode);
@@ -338,9 +339,37 @@ bool T3_2(Graph<string> g, string pumpingStation){
 
 }
 
-    
+double compute_metrics(Graph<string> g){
 
-/*
+    // Get the initial metrics without heuristics, that will aid is in improving the results
+    vector<int> differences;
+    int totalDifference = 0;
+    int numPipes = 0; 
+    int maxDifference = 0; 
+
+    auto vertexSet = g.getVertexSet(); 
+
+    for (auto v : vertexSet) {
+        for (auto e : v->getAdj()) {
+            if(e->getWeight() > 99999) //Ignore edges linking to super sources or super sinks
+                continue; 
+            int difference = e->getWeight() - e->getFlow();
+            totalDifference += difference;
+            differences.push_back(difference);
+            numPipes++;
+            if(difference > maxDifference) 
+                maxDifference = difference; 
+        }
+    }
+
+    double averageDifference = static_cast<double>(totalDifference) / numPipes;
+    cout << "Average Difference without balancing: " << averageDifference << endl;
+    cout << "Max Difference between Weight and Flow without balancing: " << maxDifference << endl;
+
+    return averageDifference; 
+}
+
+    
 void T2_3(Graph<string> g){
 
     vector<string> sources;
@@ -351,37 +380,77 @@ void T2_3(Graph<string> g){
     string sink = default_graph_setup_sink(graph, destinations); 
 
     //Create two copies of the original graph
-    Graph<string> g_without_heuristics = graph; 
-    Graph<string> g_with_heuristics = graph;
+    Graph<string> g_without_heuristics = graph;
 
     //Without using heuristics
     edmonds_karp(g_without_heuristics, "source", sink); 
+    compute_metrics(g_without_heuristics); 
 
-    // Get the initial metrics without heuristics, that will aid is in improving the results
-    vector<int> differences;
-    int totalDifference = 0;
 
-    auto vertexSet = graph.getVertexSet(); 
+    //Using heuristics
+    //Get the max an min capacity of the edges 
+    int maxEdgeCapacity = 0; 
+    int minEdgeCapacity = 999999; 
+    auto verti = g_without_heuristics.getVertexSet();
 
-    for (auto v : vertexSet) {
+    for (auto v : verti) {
         for (auto e : v->getAdj()) {
-            int difference = e->getCapacity() - e->getWeight();
-            totalDifference += difference;
-            differences.push_back(difference);
-            numPipes++;
+            if(e->getWeight() > 99999) //Ignore edges linking to super sources or super sinks
+                continue; 
+            if(e->getWeight() > maxEdgeCapacity)
+                maxEdgeCapacity = e->getWeight();
+                
+            if(e->getWeight() < minEdgeCapacity)
+                minEdgeCapacity = e->getWeight(); 
         }
     }
 
-    double averageDifference = static_cast<double>(totalDifference) / numPipes;
-    int maxDifference = 
+    //Compute n times the edmonds_karp algorithm modifying the max capacity of the vertexes 
+    int incremental_factor = 0; // Initialize the incremental factor with a default value
 
-    // Adjust the flow of each pipe to match the average capacity
-        //This Adjustement is done based on the difference from the average difference
-    for (auto v : vertexSet) {
-        for (auto e : v->getAdj()) {
-            int difference = e->getCapacity() - e->getWeight();
-            double adjustment = (difference - averageDifference) / maxDifference;
-            e->setWeight(e->getWeight() + adjustment * e->getCapacity());
+    // Determine the size of the graph
+    int graphSize = g.getVertexSet().size();
+
+    // Adjust the incremental factor based on the graph size
+    if (graphSize <= 100) {
+        incremental_factor = 1; // For small datasets, set a smaller incremental factor
+    } else if (graphSize <= 1000) {
+        incremental_factor = 10; // For medium-sized datasets, set a moderate incremental factor
+    } else {
+        incremental_factor = 100; // For large datasets, set a larger incremental factor
+    }
+
+    double metrics_arr[maxEdgeCapacity-minEdgeCapacity]; 
+    int metrics_cntr = 0; 
+
+    for(int i = minEdgeCapacity; i < maxEdgeCapacity; i=i+incremental_factor){
+        //Resets the Graph on each iteration
+        Graph<string> gra; 
+        populate_graph(gra); 
+        //General Graph Setup
+        Graph<string> gr = default_graph_setup_general(gra, sources, destinations);
+        string sink = default_graph_setup_sink(gr, destinations); 
+
+        //Sets the maximum capacity of the edges to i 
+        auto vertexes = gr.getVertexSet();
+        for(auto v: vertexes){
+            for(auto e: v->getAdj()){
+                if(e->getWeight() > 99999) //Ignore edges linking to super sources or super sinks
+                    continue; 
+                e->setWeight(i); 
+            }
         }
+
+        //Compute edmonds karp with the modified edge capacities
+        edmonds_karp(gr, "source", sink); 
+        //Compute the metrics of the graph
+        metrics_arr[metrics_cntr++] = compute_metrics(gr);
+    }
+
+    for(int i = 0; i < metrics_cntr; i++){
+        cout << "Average Difference with balancing: " << metrics_arr[i] << endl;
+    }
+
+    cout << "Fodasi: " << metrics_cntr; 
+    
 }
-*/

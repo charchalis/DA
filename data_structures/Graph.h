@@ -77,6 +77,7 @@ public:
 
     Vertex<T> * getDest() const;
     double getWeight() const;
+    void setWeight(double w);
     bool isSelected() const;
     Vertex<T> * getOrig() const;
     Edge<T> *getReverse() const;
@@ -310,6 +311,11 @@ Vertex<T> * Edge<T>::getDest() const {
 template <class T>
 double Edge<T>::getWeight() const {
     return this->weight;
+}
+
+template <class T>
+void Edge<T>::setWeight(double w) {
+    this->weight = w; 
 }
 
 template <class T>
