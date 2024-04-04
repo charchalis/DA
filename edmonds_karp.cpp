@@ -376,11 +376,8 @@ void T2_3(Graph<string> g){
     vector<string> destinations;
 
     //General Graph Setup
-    Graph<string> graph = default_graph_setup_general(g, sources, destinations);
-    string sink = default_graph_setup_sink(graph, destinations); 
-
-    //Create two copies of the original graph
-    Graph<string> g_without_heuristics = graph;
+    Graph<string> g_without_heuristics = default_graph_setup_general(g, sources, destinations);
+    string sink = default_graph_setup_sink(g_without_heuristics, destinations); 
 
     //Without using heuristics
     edmonds_karp(g_without_heuristics, "source", sink); 
