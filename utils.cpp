@@ -57,7 +57,24 @@ vector<vector<string>> parseCSV(const string& filename) {
 }
 
 
+string bigOrSmall(){
 
+    string userInput;
+
+    while(userInput != "big" && userInput != "small"){
+	
+	    cout << "choose dataset (type 'big' or 'small'): ";
+	    cin >> userInput;
+
+	    if(userInput != "big" && userInput != "small") cout << "invalid input, try again" << endl;
+
+	    cin.clear(); // Clear the fail state
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+    }
+
+    return userInput == "big" ? "Project1LargeDataSet" : "Project1DataSetSmall";
+
+}
 
 
 template <class T>
@@ -65,10 +82,12 @@ void populate_graph(Graph<T> &g){
 
     cout << "parsing data..." << endl << endl;
 
-    auto cities = parseCSV("./Project1DataSetSmall/Cities_Madeira.csv");
-    auto stations = parseCSV("./Project1DataSetSmall/Stations_Madeira.csv");
-    auto reservoirs = parseCSV("./Project1DataSetSmall/Reservoirs_Madeira.csv");
-    auto pipes = parseCSV("./Project1DataSetSmall/Pipes_Madeira.csv");
+    string dataset = bigOrSmall();
+
+    auto cities = parseCSV("./" + dataset + "/Cities.csv");
+    auto stations = parseCSV("./" + dataset + "/Stations.csv");
+    auto reservoirs = parseCSV("./" + dataset + "/Reservoirs.csv");
+    auto pipes = parseCSV("./" + dataset + "/Pipes.csv");
     
     //add cities to graph
     for(auto cityData: cities){
