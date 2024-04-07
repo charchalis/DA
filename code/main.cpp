@@ -104,7 +104,7 @@ void menu_option_5(string dataset){
 
 void menu(string dataset){
 
-    cout << "menu:" << endl;
+    cout << endl << endl << "menu:" << endl;
     
     cout << "\t1) maximum amount of water to a/each city (T2.1) and cities deficit (T2.2)" << endl;
     cout << "\t2) can all the water reservoirs supply enough water to all its delivery sites? (T2.2 and T2.3)" << endl;
@@ -141,7 +141,9 @@ int main() {
 
     string dataset = populate_graph(g); //populate graph
     
-    menu(dataset);
+    while(true){
+        menu(dataset);
+    }
 
     return 0;
 }
