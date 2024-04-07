@@ -61,14 +61,15 @@ vector<vector<string>> parseCSV(const string& filename) {
 
 
 template <class T>
-void populate_graph(Graph<T> &g){
+void populate_graph(Graph<T> &g, int data_set){
 
     cout << "parsing data..." << endl << endl;
 
-    auto cities = parseCSV("./Project1DataSetSmall/Cities_Madeira.csv");
-    auto stations = parseCSV("./Project1DataSetSmall/Stations_Madeira.csv");
-    auto reservoirs = parseCSV("./Project1DataSetSmall/Reservoirs_Madeira.csv");
-    auto pipes = parseCSV("./Project1DataSetSmall/Pipes_Madeira.csv");
+    auto cities = parseCSV((data_set == 0 ? "./Project1DataSetSmall/Cities_Madeira.csv" : "./Project1LargeDataSet/Cities.csv"));
+    auto stations = parseCSV((data_set == 0 ? "./Project1DataSetSmall/Stations_Madeira.csv" : "./Project1LargeDataSet/Stations.csv"));
+    auto reservoirs = parseCSV((data_set == 0 ? "./Project1DataSetSmall/Reservoirs_Madeira.csv" : "./Project1LargeDataSet/Reservoir.csv"));
+    auto pipes = parseCSV((data_set == 0 ? "./Project1DataSetSmall/Pipes_Madeira.csv" : "./Project1LargeDataSet/Pipes.csv"));
+
     
     //add cities to graph
     for(auto cityData: cities){

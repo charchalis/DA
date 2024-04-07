@@ -339,13 +339,14 @@ bool T3_2(Graph<string> g, string pumpingStation){
 
 }
 
-double compute_metrics(Graph<string> g){
+double compute_metrics(Graph<string> g, int iternum=0){
 
     // Get the initial metrics without heuristics, that will aid is in improving the results
     vector<int> differences;
     int totalDifference = 0;
     int numPipes = 0; 
     int maxDifference = 0; 
+    Edge<string>* criticalEdge = nullptr;
 
     auto vertexSet = g.getVertexSet(); 
 
@@ -353,27 +354,107 @@ double compute_metrics(Graph<string> g){
         for (auto e : v->getAdj()) {
             if(e->getWeight() > 99999) //Ignore edges linking to super sources or super sinks
                 continue; 
+            if(e->getFlow() == 0) //Ignore edges that were not computed during Edmonds Karp, so they have flow = 0 
+                continue; 
             int difference = e->getWeight() - e->getFlow();
             totalDifference += difference;
             differences.push_back(difference);
             numPipes++;
-            if(difference > maxDifference) 
+            if(difference > maxDifference){
                 maxDifference = difference; 
+                criticalEdge = e;   
+            }
         }
     }
 
     double averageDifference = static_cast<double>(totalDifference) / numPipes;
-    cout << "Average Difference without balancing: " << averageDifference << endl;
-    cout << "Max Difference between Weight and Flow without balancing: " << maxDifference << endl;
+    std::cout << "Average Difference after Edmond's Karp iteration number " << iternum << ": " << averageDifference << std::endl;
+    std::cout << "Max Difference between Weight and Flow after iteration number " << iternum << ": " << maxDifference << " Occurs on edge -> " << criticalEdge->getOrig()->getInfo() << " to " << criticalEdge->getDest()->getInfo() << std::endl;
 
     return averageDifference; 
 }
 
-    
-void T2_3(Graph<string> g){
+map<Edge<string> *, int> get_critical_edges(Graph<string> g, vector<string>& critical_vertexes){
+
+    map<Edge<string> *, int> critical_edges; 
+    auto vertexSet = g.getVertexSet(); 
+
+    int maxCapacity = 0; 
+    int difference = 0; 
+    int maxDifference = 0; 
+    Edge<string>* criticalEdge = nullptr;
+
+    for (auto v : vertexSet) {
+
+        //Verifies if vertex has aready been marked as critical
+            //If it was then the problems have already been solved for this vertex, so we can skip it (in order to avoid infinite loops)
+        int occurences = count(critical_vertexes.begin(), critical_vertexes.end(), v->getInfo());
+
+        if(occurences > 0)
+            continue; 
+
+        //Get Vertex Neighbouring Edges
+        int neighbors_count = 0; 
+        int neighbors_capacity_sum = 0; 
+        double averageCapacity = 0; 
+        maxDifference = 0; 
+        criticalEdge = nullptr;
+        vector<Edge<string> *> neighbors;
+
+        for (auto e : v->getAdj()) {
+            if(e->getWeight() > 99999) //Ignore edges linking to super sources or super sinks
+                continue;
+            //Get the Edges with the highest capacity and the highest difference between weight and flow
+                //Because if we have a high capacity edge with a high flow input we can't consider it a critical edge
+                //However if we have a high capacity with a high difference (very little flow input) we can consider it a critical edge
+                //And, therefore, we need to update its capacity to a more suitable value
+            difference = e->getWeight() - e->getFlow();
+            if(e->getWeight() > maxCapacity && difference > maxDifference){
+                criticalEdge = e;
+                maxCapacity = e->getWeight();
+                maxDifference = difference;
+            }
+            neighbors_count++; 
+            neighbors_capacity_sum += e->getWeight();
+            neighbors.push_back(e);
+        }
+
+        //Get the second biggest capacity neighbor
+        int biggestNeighbor = 0; 
+        for(auto e: neighbors){
+            if(e == criticalEdge)
+                continue;
+            else{
+                if(e->getWeight() > biggestNeighbor)
+                    biggestNeighbor = e->getWeight(); 
+            }
+        }
+
+        //The vertex has more than one neighboring edges and its value is above the average
+        if(neighbors_count > 1){
+            averageCapacity = neighbors_capacity_sum / neighbors_count;
+            if(static_cast<double>(maxCapacity) > averageCapacity && criticalEdge != nullptr){
+                critical_vertexes.push_back(v->getInfo());
+                critical_edges[criticalEdge] = biggestNeighbor;
+            }
+        }
+    }
+
+    return critical_edges; 
+}
+
+
+void T2_3(Graph<string> g, int data_set){
+
 
     vector<string> sources;
     vector<string> destinations;
+    
+    Graph<string> best_graph; 
+    double best_avg = 9999999999; 
+    int best_iter_num = 0; 
+
+    int iter_num = 0; 
 
     //General Graph Setup
     Graph<string> g_without_heuristics = default_graph_setup_general(g, sources, destinations);
@@ -381,73 +462,84 @@ void T2_3(Graph<string> g){
 
     //Without using heuristics
     edmonds_karp(g_without_heuristics, "source", sink); 
-    compute_metrics(g_without_heuristics); 
+    compute_metrics(g_without_heuristics, iter_num); 
 
+    //gets the critical edges, as well as the critical vertexes of the graph after running Edmonds Karp
+    map<Edge <string> *, int> critical_edges; 
+    vector<string> critical_vertexes;
+    critical_edges = get_critical_edges(g_without_heuristics, critical_vertexes);
+ 
+    while(true){
 
-    //Using heuristics
-    //Get the max an min capacity of the edges 
-    int maxEdgeCapacity = 0; 
-    int minEdgeCapacity = 999999; 
-    auto verti = g_without_heuristics.getVertexSet();
+        iter_num++; 
+        int start_critical_vertexes = critical_vertexes.size(); 
 
-    for (auto v : verti) {
-        for (auto e : v->getAdj()) {
-            if(e->getWeight() > 99999) //Ignore edges linking to super sources or super sinks
-                continue; 
-            if(e->getWeight() > maxEdgeCapacity)
-                maxEdgeCapacity = e->getWeight();
-                
-            if(e->getWeight() < minEdgeCapacity)
-                minEdgeCapacity = e->getWeight(); 
-        }
-    }
+        //Creates a graph and fills it with the information needed to run Edmonds Karp (creates super source, super sink, etc)
+        Graph<string> gr; 
+        vector<string> gr_sources;
+        vector<string> gr_dest; 
+        populate_graph(gr, data_set);
+        Graph<string> graph = default_graph_setup_general(gr, gr_sources, gr_dest); 
+        string gr_sink = default_graph_setup_sink(graph, gr_dest); 
 
-    //Compute n times the edmonds_karp algorithm modifying the max capacity of the vertexes 
-    int incremental_factor = 0; // Initialize the incremental factor with a default value
-
-    // Determine the size of the graph
-    int graphSize = g.getVertexSet().size();
-
-    // Adjust the incremental factor based on the graph size
-    if (graphSize <= 100) {
-        incremental_factor = 1; // For small datasets, set a smaller incremental factor
-    } else if (graphSize <= 1000) {
-        incremental_factor = 10; // For medium-sized datasets, set a moderate incremental factor
-    } else {
-        incremental_factor = 100; // For large datasets, set a larger incremental factor
-    }
-
-    double metrics_arr[maxEdgeCapacity-minEdgeCapacity]; 
-    int metrics_cntr = 0; 
-
-    for(int i = minEdgeCapacity; i < maxEdgeCapacity; i=i+incremental_factor){
-        //Resets the Graph on each iteration
-        Graph<string> gra; 
-        populate_graph(gra); 
-        //General Graph Setup
-        Graph<string> gr = default_graph_setup_general(gra, sources, destinations);
-        string sink = default_graph_setup_sink(gr, destinations); 
-
-        //Sets the maximum capacity of the edges to i 
-        auto vertexes = gr.getVertexSet();
-        for(auto v: vertexes){
-            for(auto e: v->getAdj()){
-                if(e->getWeight() > 99999) //Ignore edges linking to super sources or super sinks
-                    continue; 
-                e->setWeight(i); 
+        //Find the critical edges and update the graph with the critical edges
+            //In order to find it we have to compare the edge start and finish point
+        for (auto it = critical_edges.begin(); it != critical_edges.end(); ++it) {
+            //Iterate Through All the edges in the graph
+            for(auto v : graph.getVertexSet()){
+                for(auto e : v->getAdj()){
+                    if(e->getOrig()->getInfo() == it->first->getOrig()->getInfo() && e->getDest()->getInfo() == it->first->getDest()->getInfo()){
+                        e->setWeight(it->second);
+                    }
+                }
             }
         }
 
-        //Compute edmonds karp with the modified edge capacities
-        edmonds_karp(gr, "source", sink); 
-        //Compute the metrics of the graph
-        metrics_arr[metrics_cntr++] = compute_metrics(gr);
+        //Runs Edmonds Karp and computes the metrics on the graph with the updated critical edges
+        edmonds_karp(graph, "source", gr_sink);
+        double avg_diff = compute_metrics(graph, iter_num); 
+
+        if(avg_diff < best_avg){
+            best_graph = graph; 
+            best_avg = avg_diff;
+            best_iter_num = iter_num; 
+        }
+
+        //Gets the critical vertexes of the graph with the we have just updated critical edges and performed edmonds karp in
+        critical_edges = get_critical_edges(graph, critical_vertexes);
+
+        int end_critical_vertexes = critical_vertexes.size(); 
+
+        std::cout << "Critical Vertexes start: " << start_critical_vertexes << " Critical Vertexes end: " << end_critical_vertexes << std::endl;
+
+        //The critical vertexes vector didn't update which means that we have found all the critical vertexes
+        if(start_critical_vertexes == end_critical_vertexes)
+            break; 
+
     }
 
-    for(int i = 0; i < metrics_cntr; i++){
-        cout << "Average Difference with balancing: " << metrics_arr[i] << endl;
-    }
+    //Prints the best graph found
+    std::cout << "The best Average Difference was " << best_avg << " and it was found in iteration number " << best_iter_num << std::endl;
+    std::cout << "Graph :" << std::endl; 
+    printGraph(best_graph);
+    std::cout << "Detailed Metrics: " << std::endl; 
+    compute_metrics(best_graph, best_iter_num);
 
-    cout << "Fodasi: " << metrics_cntr; 
-    
+    //OBJECTIVE: MINIMIZE THE FLOW VS CAPACITY ON EACH EDGE
+    //Smaller Capacity Edges bottleneck the flow of the path
+    //Therefore, edges with higher capacity suffering from neighboring edges with lower capacity will have 
+    //significant capacity-flow >>>> 0 distribution
+    //What can we do:
+        //Locate the neighboring edges(Edges that are connected to the same vertex) and compute their difference 
+        //After that we update the edge with the most critical (flow vs capacity) difference with the capacity of the edge with the second highest difference
+            //By doing this we make sure we are not losing a lot of flow, and we are able to balance out the neighborhood of a node 
+        //Then we mark the edge as critical and we add it to the critical edges vector
+        //After that we update the visited critical nodes vector with the node that is connected to the critical edge, so 
+        //We do not enter in a loop where we try to balance out the same vertex neighborhood multiple times
+        //After that we update the critical edge's capacity and run the algorithm again in order to balance out the graph
+        //We repeat this process until the critical vertexes vector is "full" or there are no more critical edges to be found
+        //Also, this may introduce some stochascity in the results (since we may get different results each time we run the algorithm by modifying 
+        //new edges and running Edmonds Karp again (which outputs new results)) 
+        //So we need to keep track of our best result found so far, so we choose that one instead of the one in the last iteration
+
 }
