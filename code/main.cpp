@@ -141,9 +141,7 @@ int main() {
 
     string dataset = populate_graph(g); //populate graph
     
-    while(true){
-        menu(dataset);
-    }
+    menu(dataset);
 
     return 0;
 }
