@@ -8,7 +8,7 @@
 #include "./data_structures/Graph.h"
 #include "./data_structures/Vertex_children.h"
 #include "./utils.cpp"
-#include "./edmonds_karp.cpp"
+#include "./algorithms.cpp"
 using namespace std;
 
 int NUM_OPTIONS = 5;
