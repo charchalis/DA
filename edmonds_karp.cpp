@@ -448,30 +448,30 @@ void T2_3(Graph<string> g, string dataset){
     int iter_num = 0; 
 
     //General Graph Setup
-    Graph<string> g_without_heuristics = default_graph_setup_general(g, sources, destinations);
-    string sink = default_graph_setup_sink(g_without_heuristics, destinations); 
+    Graph<string> graph = default_graph_setup_general(g, sources, destinations);
+    string sink = default_graph_setup_sink(graph, destinations); 
 
     //Without using heuristics
-    edmonds_karp(g_without_heuristics, "source", sink); 
-    compute_metrics(g_without_heuristics, iter_num); 
+    edmonds_karp(graph, "source", sink); 
+    compute_metrics(graph, iter_num); 
 
     //gets the critical edges, as well as the critical vertexes of the graph after running Edmonds Karp
     map<Edge <string> *, int> critical_edges; 
     vector<string> critical_vertexes;
-    critical_edges = get_critical_edges(g_without_heuristics, critical_vertexes);
+    critical_edges = get_critical_edges(graph, critical_vertexes);
  
     while(true){
 
         iter_num++; 
         int start_critical_vertexes = critical_vertexes.size(); 
 
-        //Creates a graph and fills it with the information needed to run Edmonds Karp (creates super source, super sink, etc)
-        Graph<string> gr; 
-        vector<string> gr_sources;
-        vector<string> gr_dest; 
-        populate_graph(gr, dataset);
-        Graph<string> graph = default_graph_setup_general(gr, gr_sources, gr_dest); 
-        string gr_sink = default_graph_setup_sink(graph, gr_dest); 
+        //Resets the graph by reseting the flow to its original state (0)
+        for(auto v : graph.getVertexSet()){
+            for(auto e : v->getAdj()){
+                e->setFlow(0);
+            }
+        }
+        
 
         //Find the critical edges and update the graph with the critical edges
             //In order to find it we have to compare the edge start and finish point
@@ -486,8 +486,8 @@ void T2_3(Graph<string> g, string dataset){
             }
         }
 
-        //Runs Edmonds Karp and computes the metrics on the graph with the updated critical edges
-        edmonds_karp(graph, "source", gr_sink);
+        //Runs Edmonds Karp again and computes the metrics on the graph with the updated critical edges
+        edmonds_karp(graph, "source", sink);
         double avg_diff = compute_metrics(graph, iter_num); 
 
         if(avg_diff < best_avg){
