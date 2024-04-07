@@ -1,8 +1,8 @@
 \doxysection{algorithms.\+cpp}
-\hypertarget{algorithms_8cpp_source}{}\label{algorithms_8cpp_source}
+\hypertarget{algorithms_8cpp_source}{}\label{algorithms_8cpp_source}\mbox{\hyperlink{algorithms_8cpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
-\DoxyCodeLine{00015\ \textcolor{keywordtype}{void}\ edmonds\_karp(Graph<string>\ \&graph,\ \textcolor{keywordtype}{string}\ source,\ \textcolor{keywordtype}{string}\ sink)\{}
+\DoxyCodeLine{00015\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}{edmonds\_karp}}(Graph<string>\ \&graph,\ \textcolor{keywordtype}{string}\ source,\ \textcolor{keywordtype}{string}\ sink)\{}
 \DoxyCodeLine{00016\ }
 \DoxyCodeLine{00017\ \ \ \ \ cout\ <<\ endl\ <<\ \textcolor{stringliteral}{"{}PATHS:\ "{}}\ <<\ endl\ <<\ endl;}
 \DoxyCodeLine{00018\ \ \ \ \ }
@@ -58,68 +58,68 @@
 \DoxyCodeLine{00068\ }
 \DoxyCodeLine{00069\ \}}
 \DoxyCodeLine{00070\ }
-\DoxyCodeLine{00086\ \textcolor{comment}{//Setup\ the\ graph\ for\ general\ use\ (Without\ excluding\ any\ city)}}
-\DoxyCodeLine{00087\ Graph<string>\ default\_graph\_setup\_general(Graph<string>\ g,vector<string>\ sources,\ vector<string>\ \&destinations)\{}
-\DoxyCodeLine{00088\ \ \ \ }
-\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//General\ Graph\ Setup}}
-\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{auto}\ verti\ =\ g.getVertexSet();}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ vertex:\ verti)\{}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{comment}{//add\ reservoirs\ to\ sources\ and\ add\ cities\ to\ destinations}}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ vertexCode\ =\ vertex-\/>getInfo();}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ std\ ::\ cout\ <<\ \textcolor{stringliteral}{"{}INFO:\ "{}}\ <<\ vertexCode\ <<\ endl;\ }
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ vertexType\ =\ vertexCode[0];}
-\DoxyCodeLine{00098\ }
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(vertexType\ ==\ \textcolor{charliteral}{'R'})\ sources.push\_back(vertexCode);}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(vertexType\ ==\ \textcolor{charliteral}{'C'})\ destinations.push\_back(vertexCode);}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00102\ \ \ \ \ \}}
-\DoxyCodeLine{00103\ }
-\DoxyCodeLine{00104\ \ \ \ \ Graph<string>\ graph\ =\ g;}
-\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00087\ \textcolor{comment}{//Setup\ the\ graph\ for\ general\ use\ (Without\ excluding\ any\ city)}}
+\DoxyCodeLine{00088\ Graph<string>\ \mbox{\hyperlink{algorithms_8cpp_a934a9c5ae3eee7f926be4513327dc330}{default\_graph\_setup\_general}}(Graph<string>\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},vector<string>\ sources,\ vector<string>\ \&destinations)\{}
+\DoxyCodeLine{00089\ \ \ \ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{//General\ Graph\ Setup}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{auto}\ verti\ =\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}.getVertexSet();}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ vertex:\ verti)\{}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{comment}{//add\ reservoirs\ to\ sources\ and\ add\ cities\ to\ destinations}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ vertexCode\ =\ vertex-\/>getInfo();}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ std\ ::\ cout\ <<\ \textcolor{stringliteral}{"{}INFO:\ "{}}\ <<\ vertexCode\ <<\ endl;\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ vertexType\ =\ vertexCode[0];}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(vertexType\ ==\ \textcolor{charliteral}{'R'})\ sources.push\_back(vertexCode);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(vertexType\ ==\ \textcolor{charliteral}{'C'})\ destinations.push\_back(vertexCode);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ Graph<string>\ graph\ =\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}};}
 \DoxyCodeLine{00106\ }
-\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{//create\ a\ super-\/source\ that\ connects\ to\ the\ sources}}
-\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{string}\ source\_name\ =\ \textcolor{stringliteral}{"{}source"{}};}
-\DoxyCodeLine{00109\ \ \ \ \ graph.addVertex(source\_name);}
-\DoxyCodeLine{00110\ \ \ \ \ }
-\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ destination\_name:\ sources)\{}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ graph.addEdge(source\_name,\ destination\_name,\ 1000000000);\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00113\ \ \ \ \ \}}
-\DoxyCodeLine{00114\ }
-\DoxyCodeLine{00115\ \ \ \ \ \textcolor{comment}{//set\ flow\ of\ new\ edges\ to\ 0}}
-\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{auto}\ sourceVertexEdges\ =\ graph.findVertex(\textcolor{stringliteral}{"{}source"{}})-\/>getAdj();}
-\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ sourceVertexEdges)\{}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
-\DoxyCodeLine{00119\ \ \ \ \ \}}
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{return}\ graph;\ }
-\DoxyCodeLine{00122\ \}}
-\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{comment}{//create\ a\ super-\/source\ that\ connects\ to\ the\ sources}}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{string}\ source\_name\ =\ \textcolor{stringliteral}{"{}source"{}};}
+\DoxyCodeLine{00110\ \ \ \ \ graph.addVertex(source\_name);}
+\DoxyCodeLine{00111\ \ \ \ \ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ destination\_name:\ sources)\{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ graph.addEdge(source\_name,\ destination\_name,\ 1000000000);\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00114\ \ \ \ \ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{comment}{//set\ flow\ of\ new\ edges\ to\ 0}}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{auto}\ sourceVertexEdges\ =\ graph.findVertex(\textcolor{stringliteral}{"{}source"{}})-\/>getAdj();}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ sourceVertexEdges)\{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
+\DoxyCodeLine{00120\ \ \ \ \ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{return}\ graph;\ }
+\DoxyCodeLine{00123\ \}}
 \DoxyCodeLine{00124\ }
-\DoxyCodeLine{00138\ \textcolor{keywordtype}{string}\ default\_graph\_setup\_sink(Graph<string>\ \&graph,\ vector<string>\ destinations)\{}
-\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00139\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{algorithms_8cpp_ac52e86010fe22cfa39db2dd2692670ea}{default\_graph\_setup\_sink}}(Graph<string>\ \&graph,\ vector<string>\ destinations)\{}
 \DoxyCodeLine{00140\ }
-\DoxyCodeLine{00141\ \ \ \ \ \textcolor{comment}{//create\ a\ super-\/sink\ that\ the\ sinks\ connect\ to.}}
-\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\_name\ =\ \textcolor{stringliteral}{"{}sink"{}};}
-\DoxyCodeLine{00143\ \ \ \ \ graph.addVertex(sink\_name);}
-\DoxyCodeLine{00144\ \ \ \ \ }
-\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ s:\ destinations)\{}
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ graph.addEdge(s,\ sink\_name,\ 1000000000);\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00147\ \ \ \ \ \}}
-\DoxyCodeLine{00148\ \ \ \ \ }
-\DoxyCodeLine{00149\ \ \ \ \ \textcolor{comment}{//set\ flow\ of\ new\ edges\ that\ connect\ to\ sink\ to\ 0}}
-\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{auto}\ sinkVertexEdges\ =\ graph.findVertex(\textcolor{stringliteral}{"{}sink"{}})-\/>getIncoming();}
-\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ sinkVertexEdges)\{}
-\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
-\DoxyCodeLine{00153\ \ \ \ \ \}}
-\DoxyCodeLine{00154\ }
-\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{return}\ sink\_name;\ }
-\DoxyCodeLine{00156\ \}}
-\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{comment}{//create\ a\ super-\/sink\ that\ the\ sinks\ connect\ to.}}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\_name\ =\ \textcolor{stringliteral}{"{}sink"{}};}
+\DoxyCodeLine{00144\ \ \ \ \ graph.addVertex(sink\_name);}
+\DoxyCodeLine{00145\ \ \ \ \ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ s:\ destinations)\{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ graph.addEdge(s,\ sink\_name,\ 1000000000);\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00148\ \ \ \ \ \}}
+\DoxyCodeLine{00149\ \ \ \ \ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{comment}{//set\ flow\ of\ new\ edges\ that\ connect\ to\ sink\ to\ 0}}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{auto}\ sinkVertexEdges\ =\ graph.findVertex(\textcolor{stringliteral}{"{}sink"{}})-\/>getIncoming();}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ sinkVertexEdges)\{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
+\DoxyCodeLine{00154\ \ \ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordflow}{return}\ sink\_name;\ }
+\DoxyCodeLine{00157\ \}}
 \DoxyCodeLine{00158\ }
 \DoxyCodeLine{00176\ \textcolor{comment}{//T2.2}}
-\DoxyCodeLine{00177\ \textcolor{keywordtype}{void}\ list\_affected\_cities(Graph<string>\ \&graph,\ \textcolor{keywordtype}{string}\ city,\ map<string,double>\ *pumpingMap)\ \{}
+\DoxyCodeLine{00177\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_a20bbab41688cc28992a4c493471933ca}{list\_affected\_cities}}(Graph<string>\ \&graph,\ \textcolor{keywordtype}{string}\ city,\ map<string,double>\ *pumpingMap)\ \{}
 \DoxyCodeLine{00178\ \ \ \ \ cout\ <<\ endl\ <<\ \textcolor{stringliteral}{"{}DEFICITS:"{}}\ <<\ endl\ <<\ endl;}
 \DoxyCodeLine{00179\ }
 \DoxyCodeLine{00180\ \ \ \ \ \textcolor{comment}{//check\ if\ all\ cities\ have\ full\ incoming\ edges}}
@@ -166,498 +166,501 @@
 \DoxyCodeLine{00221\ \ \ \ \ \}}
 \DoxyCodeLine{00222\ \}}
 \DoxyCodeLine{00223\ }
-\DoxyCodeLine{00238\ \textcolor{keywordtype}{void}\ T2\_1(Graph<string>\ \&g,\ \textcolor{keywordtype}{string}\ city)\{}
-\DoxyCodeLine{00239\ }
-\DoxyCodeLine{00240\ \ \ \ \ cout\ <<\ endl\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}}\ <<\ endl\ <<\ endl;}
-\DoxyCodeLine{00241\ \ \ \ \ cout\ <<\ endl\ <<\ \textcolor{stringliteral}{"{}edmonds\ karping,\ having\ every\ reservoir\ as\ source\ and\ having\ "{}}\ <<\ (city\ ==\ \textcolor{stringliteral}{"{}all"{}}\ ?\ \textcolor{stringliteral}{"{}every\ city"{}}\ :\ city)\ <<\ \textcolor{stringliteral}{"{}\ as\ sink"{}}\ <<\ endl\ <<\ endl;}
-\DoxyCodeLine{00242\ \ \ \ \ }
-\DoxyCodeLine{00243\ \ \ \ \ vector<string>\ sources;}
-\DoxyCodeLine{00244\ \ \ \ \ vector<string>\ destinations;\ }
-\DoxyCodeLine{00245\ }
-\DoxyCodeLine{00246\ \ \ \ \ Graph<string>\ graph\ =\ default\_graph\_setup\_general(g,\ sources,\ destinations);}
-\DoxyCodeLine{00247\ }
-\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keywordflow}{if}(city\ !=\ \textcolor{stringliteral}{"{}all"{}})\{}
-\DoxyCodeLine{00249\ }
-\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ edmonds\_karp(graph,\ \textcolor{stringliteral}{"{}source"{}},\ city);}
-\DoxyCodeLine{00251\ }
-\DoxyCodeLine{00252\ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00253\ }
-\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ default\_graph\_setup\_sink(graph,\ destinations);}
-\DoxyCodeLine{00255\ }
-\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ edmonds\_karp(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);\ }
-\DoxyCodeLine{00257\ }
-\DoxyCodeLine{00258\ \ \ \ \ \}}
-\DoxyCodeLine{00259\ }
-\DoxyCodeLine{00260\ \ \ \ \ \textcolor{comment}{//print\ edges\ and\ corresponding\ flow}}
-\DoxyCodeLine{00261\ \ \ \ \ printGraph(graph);}
-\DoxyCodeLine{00262\ }
-\DoxyCodeLine{00263\ \ \ \ \ \textcolor{comment}{//2.2}}
-\DoxyCodeLine{00264\ \ \ \ \ list\_affected\_cities(graph,\ city,\textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00265\ }
-\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00267\ \}}
-\DoxyCodeLine{00268\ }
-\DoxyCodeLine{00287\ \textcolor{keywordtype}{bool}\ T3\_1(Graph<string>\ g,\ \textcolor{keywordtype}{string}\ waterReservoir)\{}
-\DoxyCodeLine{00288\ }
-\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordflow}{if}(waterReservoir.empty())}
-\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ }
-\DoxyCodeLine{00291\ }
-\DoxyCodeLine{00292\ \ \ \ \ \textcolor{comment}{//Removes\ the\ Vertex\ from\ the\ Graph\ }}
-\DoxyCodeLine{00293\ \ \ \ \ \textcolor{keywordflow}{if}(g.removeVertex(waterReservoir))\ }
-\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Water\ Reservatory\ Removed\ Succesfully"{}}\ <<\ std::endl;\ }
-\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Water\ Reservatory\ Not\ Found"{}}\ <<\ std::endl;}
-\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ }
-\DoxyCodeLine{00298\ \ \ \ \ \}}
-\DoxyCodeLine{00299\ \ \ \ \ }
-\DoxyCodeLine{00300\ \ \ \ \ \textcolor{comment}{//Setups\ Edmonds\ Karp\ }}
-\DoxyCodeLine{00301\ \ \ \ \ vector<string>\ sources;}
-\DoxyCodeLine{00302\ \ \ \ \ vector<string>\ destinations;}
-\DoxyCodeLine{00303\ }
-\DoxyCodeLine{00304\ \ \ \ \ Graph<string>\ graph\ =\ default\_graph\_setup\_general(g,\ sources,\ destinations);\ }
-\DoxyCodeLine{00305\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ default\_graph\_setup\_sink(graph,\ destinations);\ \ \ \ }
-\DoxyCodeLine{00306\ }
-\DoxyCodeLine{00307\ \ \ \ \ \textcolor{comment}{//Runs\ Edmonds\ Karp\ on\ the\ graph\ without\ the\ water\ reservoir\ }}
-\DoxyCodeLine{00308\ \ \ \ \ edmonds\_karp(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
-\DoxyCodeLine{00309\ }
-\DoxyCodeLine{00310\ \ \ \ \ \textcolor{comment}{//print\ edges\ and\ corresponding\ flow}}
-\DoxyCodeLine{00311\ \ \ \ \ printGraph(graph);}
-\DoxyCodeLine{00312\ }
-\DoxyCodeLine{00313\ \ \ \ \ \textcolor{comment}{//Lists\ the\ affected\ cities\ }}
-\DoxyCodeLine{00314\ \ \ \ \ list\_affected\_cities(graph,\ \textcolor{stringliteral}{"{}all"{}},\textcolor{keyword}{nullptr});\ }
-\DoxyCodeLine{00315\ }
-\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ }
-\DoxyCodeLine{00317\ \}}
-\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00239\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_a48d229da6e5270f1356c801d6642cf58}{T2\_1}}(Graph<string>\ \&\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ \textcolor{keywordtype}{string}\ city)\{}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ cout\ <<\ endl\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}}\ <<\ endl\ <<\ endl;}
+\DoxyCodeLine{00242\ \ \ \ \ cout\ <<\ endl\ <<\ \textcolor{stringliteral}{"{}edmonds\ karping,\ having\ every\ reservoir\ as\ source\ and\ having\ "{}}\ <<\ (city\ ==\ \textcolor{stringliteral}{"{}all"{}}\ ?\ \textcolor{stringliteral}{"{}every\ city"{}}\ :\ city)\ <<\ \textcolor{stringliteral}{"{}\ as\ sink"{}}\ <<\ endl\ <<\ endl;}
+\DoxyCodeLine{00243\ \ \ \ \ }
+\DoxyCodeLine{00244\ \ \ \ \ vector<string>\ sources;}
+\DoxyCodeLine{00245\ \ \ \ \ vector<string>\ destinations;\ }
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \ \ \ \ Graph<string>\ graph\ =\ \mbox{\hyperlink{algorithms_8cpp_a934a9c5ae3eee7f926be4513327dc330}{default\_graph\_setup\_general}}(\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ sources,\ destinations);}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordflow}{if}(city\ !=\ \textcolor{stringliteral}{"{}all"{}})\{}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}{edmonds\_karp}}(graph,\ \textcolor{stringliteral}{"{}source"{}},\ city);}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ \mbox{\hyperlink{algorithms_8cpp_ac52e86010fe22cfa39db2dd2692670ea}{default\_graph\_setup\_sink}}(graph,\ destinations);}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}{edmonds\_karp}}(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);\ }
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \ \ \ \ \}}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{comment}{//print\ edges\ and\ corresponding\ flow}}
+\DoxyCodeLine{00262\ \ \ \ \ \mbox{\hyperlink{utils_8cpp_a944dda62a3b9f4ed7c9695f57b5ed0c9}{printGraph}}(graph);}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{comment}{//2.2}}
+\DoxyCodeLine{00265\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a20bbab41688cc28992a4c493471933ca}{list\_affected\_cities}}(graph,\ city,\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00268\ \}}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00288\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{algorithms_8cpp_a098d3ea8cd563fb8d8de09c57e78a6fe}{T3\_1}}(Graph<string>\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ \textcolor{keywordtype}{string}\ waterReservoir)\{}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keywordflow}{if}(waterReservoir.empty())}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{comment}{//Removes\ the\ Vertex\ from\ the\ Graph\ }}
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}.removeVertex(waterReservoir))\ }
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Water\ Reservatory\ Removed\ Succesfully"{}}\ <<\ std::endl;\ }
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Water\ Reservatory\ Not\ Found"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00299\ \ \ \ \ \}}
+\DoxyCodeLine{00300\ \ \ \ \ }
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{comment}{//Setups\ Edmonds\ Karp\ }}
+\DoxyCodeLine{00302\ \ \ \ \ vector<string>\ sources;}
+\DoxyCodeLine{00303\ \ \ \ \ vector<string>\ destinations;}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \ \ \ \ Graph<string>\ graph\ =\ \mbox{\hyperlink{algorithms_8cpp_a934a9c5ae3eee7f926be4513327dc330}{default\_graph\_setup\_general}}(\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ sources,\ destinations);\ }
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ \mbox{\hyperlink{algorithms_8cpp_ac52e86010fe22cfa39db2dd2692670ea}{default\_graph\_setup\_sink}}(graph,\ destinations);\ \ \ \ }
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{comment}{//Runs\ Edmonds\ Karp\ on\ the\ graph\ without\ the\ water\ reservoir\ }}
+\DoxyCodeLine{00309\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}{edmonds\_karp}}(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ \ \ \ \ \textcolor{comment}{//print\ edges\ and\ corresponding\ flow}}
+\DoxyCodeLine{00312\ \ \ \ \ \mbox{\hyperlink{utils_8cpp_a944dda62a3b9f4ed7c9695f57b5ed0c9}{printGraph}}(graph);}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ \ \ \ \ \textcolor{comment}{//Lists\ the\ affected\ cities\ }}
+\DoxyCodeLine{00315\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a20bbab41688cc28992a4c493471933ca}{list\_affected\_cities}}(graph,\ \textcolor{stringliteral}{"{}all"{}},\textcolor{keyword}{nullptr});\ }
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ }
+\DoxyCodeLine{00318\ \}}
 \DoxyCodeLine{00319\ }
-\DoxyCodeLine{00334\ \textcolor{comment}{//We\ will\ use\ this\ to\ measure\ the\ stock\ deficits\ of\ the\ cities\ (if\ there\ are\ any)}}
-\DoxyCodeLine{00335\ map<string,double>\ getStockDeficits(Graph<string>\ g)\{}
-\DoxyCodeLine{00336\ }
-\DoxyCodeLine{00337\ \ \ \ \ \textcolor{comment}{//Setups\ Edmonds\ Karp\ }}
-\DoxyCodeLine{00338\ \ \ \ \ vector<string>\ sources;}
-\DoxyCodeLine{00339\ \ \ \ \ vector<string>\ destinations;}
-\DoxyCodeLine{00340\ }
-\DoxyCodeLine{00341\ \ \ \ \ Graph<string>\ graph\ =\ default\_graph\_setup\_general(g,\ sources,\ destinations);\ }
-\DoxyCodeLine{00342\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ default\_graph\_setup\_sink(graph,\ destinations);\ \ \ \ }
-\DoxyCodeLine{00343\ }
-\DoxyCodeLine{00344\ \ \ \ \ \textcolor{comment}{//Runs\ Edmonds\ Karp\ on\ the\ graph\ }}
-\DoxyCodeLine{00345\ \ \ \ \ edmonds\_karp(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
-\DoxyCodeLine{00346\ \ \ \ \ list\_affected\_cities(g,\textcolor{stringliteral}{"{}all"{}},\ \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00347\ }
-\DoxyCodeLine{00348\ \ \ \ \ \textcolor{comment}{//Measure\ the\ stock\ deficits\ of\ the\ cities\ (With\ all\ the\ Pumping\ stations)}}
-\DoxyCodeLine{00349\ \ \ \ \ \textcolor{keyword}{auto}\ verti\ =\ graph.getVertexSet();\ }
-\DoxyCodeLine{00350\ }
-\DoxyCodeLine{00351\ \ \ \ \ map<string,\ double>\ pumping\_map;}
-\DoxyCodeLine{00352\ }
-\DoxyCodeLine{00353\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ vertex\ :\ verti)\ \{}
-\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name\ =\ vertex-\/>getInfo();}
-\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (name[0]\ ==\ \textcolor{charliteral}{'C'})\ \{}
-\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ incoming\ =\ vertex-\/>getIncoming();}
-\DoxyCodeLine{00357\ }
-\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ flow\ =\ 0;}
-\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ demand\ =\ vertex-\/>getDemand();}
-\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ e\ :\ incoming)\ \{}
-\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flow\ +=\ e-\/>getFlow();}
-\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//There\ is\ a\ deficit\ -\/>\ It\ is\ worth\ to\ be\ added\ to\ the\ map}}
-\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (demand\ >\ flow)\{}
-\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pumping\_map.insert(\{name,\ demand\ -\/\ flow\});\ }
-\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00368\ \ \ \ \ \}}
-\DoxyCodeLine{00369\ }
-\DoxyCodeLine{00370\ \ \ \ \ \textcolor{keywordflow}{return}\ pumping\_map;}
-\DoxyCodeLine{00371\ }
-\DoxyCodeLine{00372\ \}}
-\DoxyCodeLine{00373\ }
-\DoxyCodeLine{00392\ \textcolor{keywordtype}{bool}\ T3\_2(Graph<string>\ g,\ \textcolor{keywordtype}{string}\ pumpingStation,\ map<string,\ double>\ pumping\_map)\{}
-\DoxyCodeLine{00393\ }
-\DoxyCodeLine{00394\ \ \ \ \ \textcolor{keywordtype}{bool}\ found\_deficit\ =\ \textcolor{keyword}{false};\ }
-\DoxyCodeLine{00395\ }
-\DoxyCodeLine{00396\ \ \ \ \ \textcolor{comment}{//Makes\ sure\ all\ the\ flows\ are\ set\ to\ 0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00397\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v:\ g.getVertexSet())\{}
-\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ v-\/>getAdj())\{}
-\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
-\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ v-\/>getIncoming())\{}
-\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
-\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00404\ \ \ \ \ \}}
-\DoxyCodeLine{00405\ }
-\DoxyCodeLine{00406\ \ \ \ \ vector<string>\ sources;\ }
-\DoxyCodeLine{00407\ \ \ \ \ vector<string>\ destinations;\ }
-\DoxyCodeLine{00408\ \ \ \ \ }
-\DoxyCodeLine{00409\ \ \ \ \ Graph<string>\ graph\ =\ default\_graph\_setup\_general(g,\ sources,\ destinations);}
-\DoxyCodeLine{00410\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ default\_graph\_setup\_sink(graph,\ destinations);\ \ }
-\DoxyCodeLine{00411\ }
-\DoxyCodeLine{00412\ \ \ \ \ \textcolor{comment}{//Runs\ Edmonds\ Karp\ on\ the\ graph\ with\ modified\ the\ pumping\ stations}}
-\DoxyCodeLine{00413\ \ \ \ \ edmonds\_karp(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
-\DoxyCodeLine{00414\ \ \ \ \ list\_affected\_cities(g,\textcolor{stringliteral}{"{}all"{}},\&pumping\_map);}
-\DoxyCodeLine{00415\ }
-\DoxyCodeLine{00416\ \ \ \ \ \textcolor{comment}{//Check\ the\ one\ without\ the\ pumping\ station}}
-\DoxyCodeLine{00417\ \ \ \ \ \textcolor{keyword}{auto}\ verti\ =\ graph.getVertexSet();}
-\DoxyCodeLine{00418\ }
-\DoxyCodeLine{00419\ \ \ \ \ std::cout\ <<\ endl\ <<\ \textcolor{stringliteral}{"{}Cities\ affected\ by\ the\ removal\ of\ the\ pumping\ station:\ "{}}\ <<\ \ pumpingStation\ <<\ endl;}
-\DoxyCodeLine{00420\ }
-\DoxyCodeLine{00421\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ v\ :\ verti)\ \{}
-\DoxyCodeLine{00422\ }
-\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name\ =\ v-\/>getInfo();\ }
-\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (name[0]\ ==\ \textcolor{charliteral}{'C'})\ \{}
-\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ incoming\ =\ v-\/>getIncoming();}
-\DoxyCodeLine{00426\ }
-\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ demand\ =\ v-\/>getDemand();}
-\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ flow\ =\ 0;}
-\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ e\ :\ incoming)\ \{}
-\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flow\ +=\ e-\/>getFlow();}
-\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ deficit\ =\ demand\ -\/\ flow;}
-\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(demand\ >\ flow)\{}
-\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Element\ was\ found\ and\ has\ worse\ metrics\ }}
-\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ pumping\_map.find(name);}
-\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(it\ !=\ pumping\_map.end())\{}
-\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ old\_deficit\ =\ it-\/>second;\ }
-\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(old\_deficit\ <\ deficit)\{}
-\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ new\_deficit\ =\ deficit-\/old\_deficit;}
-\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ name\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ \textcolor{stringliteral}{"{}new\ deficit\ after\ removing\ "{}}\ <<\ pumpingStation\ <<\ \textcolor{stringliteral}{"{}\ :"{}}\ <<\ new\_deficit\ <<\ endl;\ }
-\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ found\_deficit\ =\ \textcolor{keyword}{true};\ }
-\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Element\ was\ not\ found,\ therefore\ a\ deficit\ did\ not\ exist}}
-\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ name\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ \textcolor{stringliteral}{"{}new\ deficit\ after\ removing\ "{}}\ <<\ pumpingStation\ <<\ \textcolor{stringliteral}{"{}\ :"{}}\ <<\ deficit\ <<\ endl;\ }
-\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ found\_deficit\ =\ \textcolor{keyword}{true};\ }
-\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ }
-\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00451\ \ \ \ \ \}}
-\DoxyCodeLine{00452\ }
-\DoxyCodeLine{00453\ \ \ \ \ \textcolor{keywordflow}{return}\ found\_deficit;\ }
-\DoxyCodeLine{00454\ }
-\DoxyCodeLine{00455\ \}}
-\DoxyCodeLine{00456\ }
-\DoxyCodeLine{00470\ \textcolor{keywordtype}{double}\ compute\_metrics(Graph<string>\ g,\ \textcolor{keywordtype}{int}\ iternum=0)\{}
-\DoxyCodeLine{00471\ }
-\DoxyCodeLine{00472\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ initial\ metrics\ without\ heuristics,\ that\ will\ aid\ is\ in\ improving\ the\ results}}
-\DoxyCodeLine{00473\ \ \ \ \ vector<int>\ differences;}
-\DoxyCodeLine{00474\ \ \ \ \ \textcolor{keywordtype}{int}\ totalDifference\ =\ 0;}
-\DoxyCodeLine{00475\ \ \ \ \ \textcolor{keywordtype}{int}\ numPipes\ =\ 0;\ }
-\DoxyCodeLine{00476\ \ \ \ \ \textcolor{keywordtype}{int}\ maxDifference\ =\ 0;\ }
-\DoxyCodeLine{00477\ \ \ \ \ Edge<string>*\ criticalEdge\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00478\ }
-\DoxyCodeLine{00479\ \ \ \ \ \textcolor{keyword}{auto}\ vertexSet\ =\ g.getVertexSet();\ }
-\DoxyCodeLine{00480\ }
-\DoxyCodeLine{00481\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ v\ :\ vertexSet)\ \{}
-\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ e\ :\ v-\/>getAdj())\ \{}
-\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getWeight()\ >\ 99999)\ \textcolor{comment}{//Ignore\ edges\ linking\ to\ super\ sources\ or\ super\ sinks}}
-\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ }
-\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getFlow()\ ==\ 0)\ \textcolor{comment}{//Ignore\ edges\ that\ were\ not\ computed\ during\ Edmonds\ Karp,\ so\ they\ have\ flow\ =\ 0\ }}
-\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ }
-\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ difference\ =\ e-\/>getWeight()\ -\/\ e-\/>getFlow();}
-\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ totalDifference\ +=\ difference;}
-\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ differences.push\_back(difference);}
-\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \ \ \ \ numPipes++;}
-\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(difference\ >\ maxDifference)\{}
-\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ maxDifference\ =\ difference;\ }
-\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ criticalEdge\ =\ e;\ \ \ }
-\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00496\ \ \ \ \ \}}
-\DoxyCodeLine{00497\ }
-\DoxyCodeLine{00498\ \ \ \ \ \textcolor{keywordtype}{double}\ averageDifference\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(totalDifference)\ /\ numPipes;}
-\DoxyCodeLine{00499\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Average\ Difference\ after\ Edmond's\ Karp\ iteration\ number\ "{}}\ <<\ iternum\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ averageDifference\ <<\ std::endl;}
-\DoxyCodeLine{00500\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Max\ Difference\ between\ Weight\ and\ Flow\ after\ iteration\ number\ "{}}\ <<\ iternum\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ maxDifference\ <<\ \textcolor{stringliteral}{"{}\ Occurs\ on\ edge\ -\/>\ "{}}\ <<\ criticalEdge-\/>getOrig()-\/>getInfo()\ <<\ \textcolor{stringliteral}{"{}\ to\ "{}}\ <<\ criticalEdge-\/>getDest()-\/>getInfo()\ <<\ std::endl;}
-\DoxyCodeLine{00501\ }
-\DoxyCodeLine{00502\ \ \ \ \ \textcolor{keywordflow}{return}\ averageDifference;\ }
-\DoxyCodeLine{00503\ \}}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00335\ \textcolor{comment}{//We\ will\ use\ this\ to\ measure\ the\ stock\ deficits\ of\ the\ cities\ (if\ there\ are\ any)}}
+\DoxyCodeLine{00336\ map<string,double>\ \mbox{\hyperlink{algorithms_8cpp_a486e202dc5f3e7817a23c6efff320c94}{getStockDeficits}}(Graph<string>\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}})\{}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{comment}{//Setups\ Edmonds\ Karp\ }}
+\DoxyCodeLine{00339\ \ \ \ \ vector<string>\ sources;}
+\DoxyCodeLine{00340\ \ \ \ \ vector<string>\ destinations;}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \ \ \ \ Graph<string>\ graph\ =\ \mbox{\hyperlink{algorithms_8cpp_a934a9c5ae3eee7f926be4513327dc330}{default\_graph\_setup\_general}}(\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ sources,\ destinations);\ }
+\DoxyCodeLine{00343\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ \mbox{\hyperlink{algorithms_8cpp_ac52e86010fe22cfa39db2dd2692670ea}{default\_graph\_setup\_sink}}(graph,\ destinations);\ \ \ \ }
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00345\ \ \ \ \ \textcolor{comment}{//Runs\ Edmonds\ Karp\ on\ the\ graph\ }}
+\DoxyCodeLine{00346\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}{edmonds\_karp}}(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
+\DoxyCodeLine{00347\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a20bbab41688cc28992a4c493471933ca}{list\_affected\_cities}}(\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\textcolor{stringliteral}{"{}all"{}},\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \ \ \ \ \textcolor{comment}{//Measure\ the\ stock\ deficits\ of\ the\ cities\ (With\ all\ the\ Pumping\ stations)}}
+\DoxyCodeLine{00350\ \ \ \ \ \textcolor{keyword}{auto}\ verti\ =\ graph.getVertexSet();\ }
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00352\ \ \ \ \ map<string,\ double>\ pumping\_map;}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ vertex\ :\ verti)\ \{}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name\ =\ vertex-\/>getInfo();}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (name[0]\ ==\ \textcolor{charliteral}{'C'})\ \{}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ incoming\ =\ vertex-\/>getIncoming();}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ flow\ =\ 0;}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ demand\ =\ vertex-\/>getDemand();}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ e\ :\ incoming)\ \{}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flow\ +=\ e-\/>getFlow();}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//There\ is\ a\ deficit\ -\/>\ It\ is\ worth\ to\ be\ added\ to\ the\ map}}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (demand\ >\ flow)\{}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pumping\_map.insert(\{name,\ demand\ -\/\ flow\});\ }
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00369\ \ \ \ \ \}}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \ \ \ \ \textcolor{keywordflow}{return}\ pumping\_map;}
+\DoxyCodeLine{00372\ }
+\DoxyCodeLine{00373\ \}}
+\DoxyCodeLine{00374\ }
+\DoxyCodeLine{00393\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{algorithms_8cpp_acafff9747f381c2d9a56391d051d0fb5}{T3\_2}}(Graph<string>\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ \textcolor{keywordtype}{string}\ pumpingStation,\ map<string,\ double>\ pumping\_map)\{}
+\DoxyCodeLine{00394\ }
+\DoxyCodeLine{00395\ \ \ \ \ \textcolor{keywordtype}{bool}\ found\_deficit\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \ \ \ \ \textcolor{comment}{//Makes\ sure\ all\ the\ flows\ are\ set\ to\ 0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00398\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v:\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}.getVertexSet())\{}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ v-\/>getAdj())\{}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ v-\/>getIncoming())\{}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00405\ \ \ \ \ \}}
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00407\ \ \ \ \ vector<string>\ sources;\ }
+\DoxyCodeLine{00408\ \ \ \ \ vector<string>\ destinations;\ }
+\DoxyCodeLine{00409\ \ \ \ \ }
+\DoxyCodeLine{00410\ \ \ \ \ Graph<string>\ graph\ =\ \mbox{\hyperlink{algorithms_8cpp_a934a9c5ae3eee7f926be4513327dc330}{default\_graph\_setup\_general}}(\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ sources,\ destinations);}
+\DoxyCodeLine{00411\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ \mbox{\hyperlink{algorithms_8cpp_ac52e86010fe22cfa39db2dd2692670ea}{default\_graph\_setup\_sink}}(graph,\ destinations);\ \ }
+\DoxyCodeLine{00412\ }
+\DoxyCodeLine{00413\ \ \ \ \ \textcolor{comment}{//Runs\ Edmonds\ Karp\ on\ the\ graph\ with\ modified\ the\ pumping\ stations}}
+\DoxyCodeLine{00414\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}{edmonds\_karp}}(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
+\DoxyCodeLine{00415\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a20bbab41688cc28992a4c493471933ca}{list\_affected\_cities}}(\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\textcolor{stringliteral}{"{}all"{}},\&pumping\_map);}
+\DoxyCodeLine{00416\ }
+\DoxyCodeLine{00417\ \ \ \ \ \textcolor{comment}{//Check\ the\ one\ without\ the\ pumping\ station}}
+\DoxyCodeLine{00418\ \ \ \ \ \textcolor{keyword}{auto}\ verti\ =\ graph.getVertexSet();}
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00420\ \ \ \ \ std::cout\ <<\ endl\ <<\ \textcolor{stringliteral}{"{}Cities\ affected\ by\ the\ removal\ of\ the\ pumping\ station:\ "{}}\ <<\ \ pumpingStation\ <<\ endl;}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00422\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ v\ :\ verti)\ \{}
+\DoxyCodeLine{00423\ }
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name\ =\ v-\/>getInfo();\ }
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (name[0]\ ==\ \textcolor{charliteral}{'C'})\ \{}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ incoming\ =\ v-\/>getIncoming();}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ demand\ =\ v-\/>getDemand();}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ flow\ =\ 0;}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ e\ :\ incoming)\ \{}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flow\ +=\ e-\/>getFlow();}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ deficit\ =\ demand\ -\/\ flow;}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(demand\ >\ flow)\{}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Element\ was\ found\ and\ has\ worse\ metrics\ }}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ pumping\_map.find(name);}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(it\ !=\ pumping\_map.end())\{}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ old\_deficit\ =\ it-\/>second;\ }
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(old\_deficit\ <\ deficit)\{}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ new\_deficit\ =\ deficit-\/old\_deficit;}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ name\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ \textcolor{stringliteral}{"{}new\ deficit\ after\ removing\ "{}}\ <<\ pumpingStation\ <<\ \textcolor{stringliteral}{"{}\ :"{}}\ <<\ new\_deficit\ <<\ endl;\ }
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ found\_deficit\ =\ \textcolor{keyword}{true};\ }
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Element\ was\ not\ found,\ therefore\ a\ deficit\ did\ not\ exist}}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ name\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ \textcolor{stringliteral}{"{}new\ deficit\ after\ removing\ "{}}\ <<\ pumpingStation\ <<\ \textcolor{stringliteral}{"{}\ :"{}}\ <<\ deficit\ <<\ endl;\ }
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ found\_deficit\ =\ \textcolor{keyword}{true};\ }
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00452\ \ \ \ \ \}}
+\DoxyCodeLine{00453\ }
+\DoxyCodeLine{00454\ \ \ \ \ \textcolor{keywordflow}{return}\ found\_deficit;\ }
+\DoxyCodeLine{00455\ }
+\DoxyCodeLine{00456\ \}}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ }
+\DoxyCodeLine{00459\ }
+\DoxyCodeLine{00473\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{algorithms_8cpp_afe6902f8e2efb6f5f8d88f47c220c8df}{compute\_metrics}}(Graph<string>\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ \textcolor{keywordtype}{int}\ iternum=0)\{}
+\DoxyCodeLine{00474\ }
+\DoxyCodeLine{00475\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ initial\ metrics\ without\ heuristics,\ that\ will\ aid\ is\ in\ improving\ the\ results}}
+\DoxyCodeLine{00476\ \ \ \ \ vector<int>\ differences;}
+\DoxyCodeLine{00477\ \ \ \ \ \textcolor{keywordtype}{int}\ totalDifference\ =\ 0;}
+\DoxyCodeLine{00478\ \ \ \ \ \textcolor{keywordtype}{int}\ numPipes\ =\ 0;\ }
+\DoxyCodeLine{00479\ \ \ \ \ \textcolor{keywordtype}{int}\ maxDifference\ =\ 0;\ }
+\DoxyCodeLine{00480\ \ \ \ \ Edge<string>*\ criticalEdge\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00481\ }
+\DoxyCodeLine{00482\ \ \ \ \ \textcolor{keyword}{auto}\ vertexSet\ =\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}.getVertexSet();\ }
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00484\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ v\ :\ vertexSet)\ \{}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ e\ :\ v-\/>getAdj())\ \{}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getWeight()\ >\ 99999)\ \textcolor{comment}{//Ignore\ edges\ linking\ to\ super\ sources\ or\ super\ sinks}}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ }
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getFlow()\ ==\ 0)\ \textcolor{comment}{//Ignore\ edges\ that\ were\ not\ computed\ during\ Edmonds\ Karp,\ so\ they\ have\ flow\ =\ 0\ }}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ }
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ difference\ =\ e-\/>getWeight()\ -\/\ e-\/>getFlow();}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \ \ \ \ totalDifference\ +=\ difference;}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \ \ \ \ differences.push\_back(difference);}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ numPipes++;}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(difference\ >\ maxDifference)\{}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ maxDifference\ =\ difference;\ }
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ criticalEdge\ =\ e;\ \ \ }
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00499\ \ \ \ \ \}}
+\DoxyCodeLine{00500\ }
+\DoxyCodeLine{00501\ \ \ \ \ \textcolor{keywordtype}{double}\ averageDifference\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(totalDifference)\ /\ numPipes;}
+\DoxyCodeLine{00502\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Average\ Difference\ after\ Edmond's\ Karp\ iteration\ number\ "{}}\ <<\ iternum\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ averageDifference\ <<\ std::endl;}
+\DoxyCodeLine{00503\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Max\ Difference\ between\ Weight\ and\ Flow\ after\ iteration\ number\ "{}}\ <<\ iternum\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ maxDifference\ <<\ \textcolor{stringliteral}{"{}\ Occurs\ on\ edge\ -\/>\ "{}}\ <<\ criticalEdge-\/>getOrig()-\/>getInfo()\ <<\ \textcolor{stringliteral}{"{}\ to\ "{}}\ <<\ criticalEdge-\/>getDest()-\/>getInfo()\ <<\ std::endl;}
 \DoxyCodeLine{00504\ }
-\DoxyCodeLine{00520\ map<Edge<string>\ *,\ \textcolor{keywordtype}{int}>\ get\_critical\_edges(Graph<string>\ g,\ vector<string>\&\ critical\_vertexes)\{}
-\DoxyCodeLine{00521\ }
-\DoxyCodeLine{00522\ \ \ \ \ map<Edge<string>\ *,\ \textcolor{keywordtype}{int}>\ critical\_edges;\ }
-\DoxyCodeLine{00523\ \ \ \ \ \textcolor{keyword}{auto}\ vertexSet\ =\ g.getVertexSet();\ }
+\DoxyCodeLine{00505\ \ \ \ \ \textcolor{keywordflow}{return}\ averageDifference;\ }
+\DoxyCodeLine{00506\ \}}
+\DoxyCodeLine{00507\ }
+\DoxyCodeLine{00523\ map<Edge<string>\ *,\ \textcolor{keywordtype}{int}>\ \mbox{\hyperlink{algorithms_8cpp_aca8ef5908df2113771c10fd339d61414}{get\_critical\_edges}}(Graph<string>\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ vector<string>\&\ critical\_vertexes)\{}
 \DoxyCodeLine{00524\ }
-\DoxyCodeLine{00525\ \ \ \ \ \textcolor{keywordtype}{int}\ maxCapacity\ =\ 0;\ }
-\DoxyCodeLine{00526\ \ \ \ \ \textcolor{keywordtype}{int}\ difference\ =\ 0;\ }
-\DoxyCodeLine{00527\ \ \ \ \ \textcolor{keywordtype}{int}\ maxDifference\ =\ 0;\ }
-\DoxyCodeLine{00528\ \ \ \ \ Edge<string>*\ criticalEdge\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00529\ }
-\DoxyCodeLine{00530\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ v\ :\ vertexSet)\ \{}
-\DoxyCodeLine{00531\ }
-\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Verifies\ if\ vertex\ has\ aready\ been\ marked\ as\ critical}}
-\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ it\ was\ then\ the\ problems\ have\ already\ been\ solved\ for\ this\ vertex,\ so\ we\ can\ skip\ it\ (in\ order\ to\ avoid\ infinite\ loops)}}
-\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ occurences\ =\ count(critical\_vertexes.begin(),\ critical\_vertexes.end(),\ v-\/>getInfo());}
-\DoxyCodeLine{00535\ }
-\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(occurences\ >\ 0)}
-\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ }
+\DoxyCodeLine{00525\ \ \ \ \ map<Edge<string>\ *,\ \textcolor{keywordtype}{int}>\ critical\_edges;\ }
+\DoxyCodeLine{00526\ \ \ \ \ \textcolor{keyword}{auto}\ vertexSet\ =\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}.getVertexSet();\ }
+\DoxyCodeLine{00527\ }
+\DoxyCodeLine{00528\ \ \ \ \ \textcolor{keywordtype}{int}\ maxCapacity\ =\ 0;\ }
+\DoxyCodeLine{00529\ \ \ \ \ \textcolor{keywordtype}{int}\ difference\ =\ 0;\ }
+\DoxyCodeLine{00530\ \ \ \ \ \textcolor{keywordtype}{int}\ maxDifference\ =\ 0;\ }
+\DoxyCodeLine{00531\ \ \ \ \ Edge<string>*\ criticalEdge\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00532\ }
+\DoxyCodeLine{00533\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ v\ :\ vertexSet)\ \{}
+\DoxyCodeLine{00534\ }
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Verifies\ if\ vertex\ has\ aready\ been\ marked\ as\ critical}}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ it\ was\ then\ the\ problems\ have\ already\ been\ solved\ for\ this\ vertex,\ so\ we\ can\ skip\ it\ (in\ order\ to\ avoid\ infinite\ loops)}}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ occurences\ =\ count(critical\_vertexes.begin(),\ critical\_vertexes.end(),\ v-\/>getInfo());}
 \DoxyCodeLine{00538\ }
-\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ Vertex\ Neighbouring\ Edges}}
-\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ neighbors\_count\ =\ 0;\ }
-\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ neighbors\_capacity\_sum\ =\ 0;\ }
-\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ averageCapacity\ =\ 0;\ }
-\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ maxDifference\ =\ 0;\ }
-\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ criticalEdge\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ vector<Edge<string>\ *>\ neighbors;}
-\DoxyCodeLine{00546\ }
-\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ e\ :\ v-\/>getAdj())\ \{}
-\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getWeight()\ >\ 99999)\ \textcolor{comment}{//Ignore\ edges\ linking\ to\ super\ sources\ or\ super\ sinks}}
-\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ Edges\ with\ the\ highest\ capacity\ and\ the\ highest\ difference\ between\ weight\ and\ flow}}
-\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Because\ if\ we\ have\ a\ high\ capacity\ edge\ with\ a\ high\ flow\ input\ we\ can't\ consider\ it\ a\ critical\ edge}}
-\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//However\ if\ we\ have\ a\ high\ capacity\ with\ a\ high\ difference\ (very\ little\ flow\ input)\ we\ can\ consider\ it\ a\ critical\ edge}}
-\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//And,\ therefore,\ we\ need\ to\ update\ its\ capacity\ to\ a\ more\ suitable\ value}}
-\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ difference\ =\ e-\/>getWeight()\ -\/\ e-\/>getFlow();}
-\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getWeight()\ >\ maxCapacity\ \&\&\ difference\ >\ maxDifference)\{}
-\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ criticalEdge\ =\ e;}
-\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ maxCapacity\ =\ e-\/>getWeight();}
-\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ maxDifference\ =\ difference;}
-\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ \ \ \ neighbors\_count++;\ }
-\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \ \ \ \ neighbors\_capacity\_sum\ +=\ e-\/>getWeight();}
-\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ neighbors.push\_back(e);}
-\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00564\ }
-\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ second\ biggest\ capacity\ neighbor}}
-\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ biggestNeighbor\ =\ 0;\ }
-\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ neighbors)\{}
-\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e\ ==\ criticalEdge)}
-\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getWeight()\ >\ biggestNeighbor)}
-\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ biggestNeighbor\ =\ e-\/>getWeight();\ }
-\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00575\ }
-\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \textcolor{comment}{//The\ vertex\ has\ more\ than\ one\ neighboring\ edges\ and\ its\ value\ is\ above\ the\ average}}
-\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(neighbors\_count\ >\ 1)\{}
-\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ averageCapacity\ =\ neighbors\_capacity\_sum\ /\ neighbors\_count;}
-\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(maxCapacity)\ >\ averageCapacity\ \&\&\ criticalEdge\ !=\ \textcolor{keyword}{nullptr})\{}
-\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ critical\_vertexes.push\_back(v-\/>getInfo());}
-\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ critical\_edges[criticalEdge]\ =\ biggestNeighbor;}
-\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00584\ \ \ \ \ \}}
-\DoxyCodeLine{00585\ }
-\DoxyCodeLine{00586\ \ \ \ \ \textcolor{keywordflow}{return}\ critical\_edges;\ }
-\DoxyCodeLine{00587\ \}}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(occurences\ >\ 0)}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ }
+\DoxyCodeLine{00541\ }
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ Vertex\ Neighbouring\ Edges}}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ neighbors\_count\ =\ 0;\ }
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ neighbors\_capacity\_sum\ =\ 0;\ }
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ averageCapacity\ =\ 0;\ }
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ maxDifference\ =\ 0;\ }
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ criticalEdge\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ vector<Edge<string>\ *>\ neighbors;}
+\DoxyCodeLine{00549\ }
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ e\ :\ v-\/>getAdj())\ \{}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getWeight()\ >\ 99999)\ \textcolor{comment}{//Ignore\ edges\ linking\ to\ super\ sources\ or\ super\ sinks}}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ Edges\ with\ the\ highest\ capacity\ and\ the\ highest\ difference\ between\ weight\ and\ flow}}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Because\ if\ we\ have\ a\ high\ capacity\ edge\ with\ a\ high\ flow\ input\ we\ can't\ consider\ it\ a\ critical\ edge}}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//However\ if\ we\ have\ a\ high\ capacity\ with\ a\ high\ difference\ (very\ little\ flow\ input)\ we\ can\ consider\ it\ a\ critical\ edge}}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//And,\ therefore,\ we\ need\ to\ update\ its\ capacity\ to\ a\ more\ suitable\ value}}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ difference\ =\ e-\/>getWeight()\ -\/\ e-\/>getFlow();}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getWeight()\ >\ maxCapacity\ \&\&\ difference\ >\ maxDifference)\{}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ criticalEdge\ =\ e;}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ maxCapacity\ =\ e-\/>getWeight();}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ maxDifference\ =\ difference;}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \ \ \ \ neighbors\_count++;\ }
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \ \ \ \ neighbors\_capacity\_sum\ +=\ e-\/>getWeight();}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \ \ \ \ neighbors.push\_back(e);}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00567\ }
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ second\ biggest\ capacity\ neighbor}}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ biggestNeighbor\ =\ 0;\ }
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ neighbors)\{}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e\ ==\ criticalEdge)}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getWeight()\ >\ biggestNeighbor)}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ biggestNeighbor\ =\ e-\/>getWeight();\ }
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00578\ }
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \textcolor{comment}{//The\ vertex\ has\ more\ than\ one\ neighboring\ edges\ and\ its\ value\ is\ above\ the\ average}}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(neighbors\_count\ >\ 1)\{}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ averageCapacity\ =\ neighbors\_capacity\_sum\ /\ neighbors\_count;}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(maxCapacity)\ >\ averageCapacity\ \&\&\ criticalEdge\ !=\ \textcolor{keyword}{nullptr})\{}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ critical\_vertexes.push\_back(v-\/>getInfo());}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ critical\_edges[criticalEdge]\ =\ biggestNeighbor;}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00587\ \ \ \ \ \}}
 \DoxyCodeLine{00588\ }
-\DoxyCodeLine{00604\ \textcolor{keywordtype}{void}\ T2\_3(Graph<string>\ g,\ \textcolor{keywordtype}{string}\ dataset)\{}
-\DoxyCodeLine{00605\ }
-\DoxyCodeLine{00606\ }
-\DoxyCodeLine{00607\ \ \ \ \ vector<string>\ sources;}
-\DoxyCodeLine{00608\ \ \ \ \ vector<string>\ destinations;}
-\DoxyCodeLine{00609\ \ \ \ \ }
-\DoxyCodeLine{00610\ \ \ \ \ Graph<string>\ best\_graph;\ }
-\DoxyCodeLine{00611\ \ \ \ \ \textcolor{keywordtype}{double}\ best\_avg\ =\ 9999999999;\ }
-\DoxyCodeLine{00612\ \ \ \ \ \textcolor{keywordtype}{int}\ best\_iter\_num\ =\ 0;\ }
-\DoxyCodeLine{00613\ }
-\DoxyCodeLine{00614\ \ \ \ \ \textcolor{keywordtype}{int}\ iter\_num\ =\ 0;\ }
-\DoxyCodeLine{00615\ }
-\DoxyCodeLine{00616\ \ \ \ \ \textcolor{comment}{//General\ Graph\ Setup}}
-\DoxyCodeLine{00617\ \ \ \ \ Graph<string>\ graph\ =\ default\_graph\_setup\_general(g,\ sources,\ destinations);}
-\DoxyCodeLine{00618\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ default\_graph\_setup\_sink(graph,\ destinations);\ }
-\DoxyCodeLine{00619\ }
-\DoxyCodeLine{00620\ \ \ \ \ \textcolor{comment}{//Without\ using\ heuristics}}
-\DoxyCodeLine{00621\ \ \ \ \ edmonds\_karp(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);\ }
-\DoxyCodeLine{00622\ \ \ \ \ compute\_metrics(graph,\ iter\_num);\ }
-\DoxyCodeLine{00623\ }
-\DoxyCodeLine{00624\ \ \ \ \ \textcolor{comment}{//gets\ the\ critical\ edges,\ as\ well\ as\ the\ critical\ vertexes\ of\ the\ graph\ after\ running\ Edmonds\ Karp}}
-\DoxyCodeLine{00625\ \ \ \ \ map<Edge\ <string>\ *,\ \textcolor{keywordtype}{int}>\ critical\_edges;\ }
-\DoxyCodeLine{00626\ \ \ \ \ vector<string>\ critical\_vertexes;}
-\DoxyCodeLine{00627\ \ \ \ \ critical\_edges\ =\ get\_critical\_edges(graph,\ critical\_vertexes);}
-\DoxyCodeLine{00628\ \ }
-\DoxyCodeLine{00629\ \ \ \ \ \textcolor{keywordflow}{while}(\textcolor{keyword}{true})\{}
-\DoxyCodeLine{00630\ }
-\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ iter\_num++;\ }
-\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ start\_critical\_vertexes\ =\ critical\_vertexes.size();\ }
+\DoxyCodeLine{00589\ \ \ \ \ \textcolor{keywordflow}{return}\ critical\_edges;\ }
+\DoxyCodeLine{00590\ \}}
+\DoxyCodeLine{00591\ }
+\DoxyCodeLine{00607\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_a6087c93bfe7298ea591055b13efc884b}{T2\_3}}(Graph<string>\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ \textcolor{keywordtype}{string}\ dataset)\{}
+\DoxyCodeLine{00608\ }
+\DoxyCodeLine{00609\ }
+\DoxyCodeLine{00610\ \ \ \ \ vector<string>\ sources;}
+\DoxyCodeLine{00611\ \ \ \ \ vector<string>\ destinations;}
+\DoxyCodeLine{00612\ \ \ \ \ }
+\DoxyCodeLine{00613\ \ \ \ \ Graph<string>\ best\_graph;\ }
+\DoxyCodeLine{00614\ \ \ \ \ \textcolor{keywordtype}{double}\ best\_avg\ =\ 9999999999;\ }
+\DoxyCodeLine{00615\ \ \ \ \ \textcolor{keywordtype}{int}\ best\_iter\_num\ =\ 0;\ }
+\DoxyCodeLine{00616\ }
+\DoxyCodeLine{00617\ \ \ \ \ \textcolor{keywordtype}{int}\ iter\_num\ =\ 0;\ }
+\DoxyCodeLine{00618\ }
+\DoxyCodeLine{00619\ \ \ \ \ \textcolor{comment}{//General\ Graph\ Setup}}
+\DoxyCodeLine{00620\ \ \ \ \ Graph<string>\ graph\ =\ \mbox{\hyperlink{algorithms_8cpp_a934a9c5ae3eee7f926be4513327dc330}{default\_graph\_setup\_general}}(\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ sources,\ destinations);}
+\DoxyCodeLine{00621\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ \mbox{\hyperlink{algorithms_8cpp_ac52e86010fe22cfa39db2dd2692670ea}{default\_graph\_setup\_sink}}(graph,\ destinations);\ }
+\DoxyCodeLine{00622\ }
+\DoxyCodeLine{00623\ \ \ \ \ \textcolor{comment}{//Without\ using\ heuristics}}
+\DoxyCodeLine{00624\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}{edmonds\_karp}}(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);\ }
+\DoxyCodeLine{00625\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_afe6902f8e2efb6f5f8d88f47c220c8df}{compute\_metrics}}(graph,\ iter\_num);\ }
+\DoxyCodeLine{00626\ }
+\DoxyCodeLine{00627\ \ \ \ \ \textcolor{comment}{//gets\ the\ critical\ edges,\ as\ well\ as\ the\ critical\ vertexes\ of\ the\ graph\ after\ running\ Edmonds\ Karp}}
+\DoxyCodeLine{00628\ \ \ \ \ map<Edge\ <string>\ *,\ \textcolor{keywordtype}{int}>\ critical\_edges;\ }
+\DoxyCodeLine{00629\ \ \ \ \ vector<string>\ critical\_vertexes;}
+\DoxyCodeLine{00630\ \ \ \ \ critical\_edges\ =\ \mbox{\hyperlink{algorithms_8cpp_aca8ef5908df2113771c10fd339d61414}{get\_critical\_edges}}(graph,\ critical\_vertexes);}
+\DoxyCodeLine{00631\ \ }
+\DoxyCodeLine{00632\ \ \ \ \ \textcolor{keywordflow}{while}(\textcolor{keyword}{true})\{}
 \DoxyCodeLine{00633\ }
-\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Resets\ the\ graph\ by\ reseting\ the\ flow\ to\ its\ original\ state\ (0)}}
-\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\{}
-\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e\ :\ v-\/>getAdj())\{}
-\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
-\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00641\ }
-\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Find\ the\ critical\ edges\ and\ update\ the\ graph\ with\ the\ critical\ edges}}
-\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//In\ order\ to\ find\ it\ we\ have\ to\ compare\ the\ edge\ start\ and\ finish\ point}}
-\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ it\ =\ critical\_edges.begin();\ it\ !=\ critical\_edges.end();\ ++it)\ \{}
-\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Iterate\ Through\ All\ the\ edges\ in\ the\ graph}}
-\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\{}
-\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e\ :\ v-\/>getAdj())\{}
-\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getOrig()-\/>getInfo()\ ==\ it-\/>first-\/>getOrig()-\/>getInfo()\ \&\&\ e-\/>getDest()-\/>getInfo()\ ==\ it-\/>first-\/>getDest()-\/>getInfo())\{}
-\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setWeight(it-\/>second);}
-\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00653\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00654\ }
-\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Runs\ Edmonds\ Karp\ again\ and\ computes\ the\ metrics\ on\ the\ graph\ with\ the\ updated\ critical\ edges}}
-\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ edmonds\_karp(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
-\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ avg\_diff\ =\ compute\_metrics(graph,\ iter\_num);\ }
-\DoxyCodeLine{00658\ }
-\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(avg\_diff\ <\ best\_avg)\{}
-\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \ \ \ \ best\_graph\ =\ graph;\ }
-\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ \ \ \ \ best\_avg\ =\ avg\_diff;}
-\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \ \ \ \ best\_iter\_num\ =\ iter\_num;\ }
-\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00664\ }
-\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Gets\ the\ critical\ vertexes\ of\ the\ graph\ with\ the\ we\ have\ just\ updated\ critical\ edges\ and\ performed\ edmonds\ karp\ in}}
-\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ critical\_edges\ =\ get\_critical\_edges(graph,\ critical\_vertexes);}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ iter\_num++;\ }
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ start\_critical\_vertexes\ =\ critical\_vertexes.size();\ }
+\DoxyCodeLine{00636\ }
+\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Resets\ the\ graph\ by\ reseting\ the\ flow\ to\ its\ original\ state\ (0)}}
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\{}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e\ :\ v-\/>getAdj())\{}
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00644\ }
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Find\ the\ critical\ edges\ and\ update\ the\ graph\ with\ the\ critical\ edges}}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//In\ order\ to\ find\ it\ we\ have\ to\ compare\ the\ edge\ start\ and\ finish\ point}}
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ it\ =\ critical\_edges.begin();\ it\ !=\ critical\_edges.end();\ ++it)\ \{}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Iterate\ Through\ All\ the\ edges\ in\ the\ graph}}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\{}
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e\ :\ v-\/>getAdj())\{}
+\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getOrig()-\/>getInfo()\ ==\ it-\/>first-\/>getOrig()-\/>getInfo()\ \&\&\ e-\/>getDest()-\/>getInfo()\ ==\ it-\/>first-\/>getDest()-\/>getInfo())\{}
+\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setWeight(it-\/>second);}
+\DoxyCodeLine{00653\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00657\ }
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Runs\ Edmonds\ Karp\ again\ and\ computes\ the\ metrics\ on\ the\ graph\ with\ the\ updated\ critical\ edges}}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}{edmonds\_karp}}(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ avg\_diff\ =\ \mbox{\hyperlink{algorithms_8cpp_afe6902f8e2efb6f5f8d88f47c220c8df}{compute\_metrics}}(graph,\ iter\_num);\ }
+\DoxyCodeLine{00661\ }
+\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(avg\_diff\ <\ best\_avg)\{}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \ \ \ \ best\_graph\ =\ graph;\ }
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ \ \ \ \ best\_avg\ =\ avg\_diff;}
+\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ \ \ \ \ best\_iter\_num\ =\ iter\_num;\ }
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00667\ }
-\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ end\_critical\_vertexes\ =\ critical\_vertexes.size();\ }
-\DoxyCodeLine{00669\ }
-\DoxyCodeLine{00670\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Critical\ Vertexes\ start:\ "{}}\ <<\ start\_critical\_vertexes\ <<\ \textcolor{stringliteral}{"{}\ Critical\ Vertexes\ end:\ "{}}\ <<\ end\_critical\_vertexes\ <<\ std::endl;}
-\DoxyCodeLine{00671\ }
-\DoxyCodeLine{00672\ \ \ \ \ \ \ \ \ \textcolor{comment}{//The\ critical\ vertexes\ vector\ didn't\ update\ which\ means\ that\ we\ have\ found\ all\ the\ critical\ vertexes}}
-\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(start\_critical\_vertexes\ ==\ end\_critical\_vertexes)}
-\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};\ }
-\DoxyCodeLine{00675\ }
-\DoxyCodeLine{00676\ \ \ \ \ \}}
-\DoxyCodeLine{00677\ }
-\DoxyCodeLine{00678\ \ \ \ \ \textcolor{comment}{//Prints\ the\ best\ graph\ found}}
-\DoxyCodeLine{00679\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}The\ best\ Average\ Difference\ was\ "{}}\ <<\ best\_avg\ <<\ \textcolor{stringliteral}{"{}\ and\ it\ was\ found\ in\ iteration\ number\ "{}}\ <<\ best\_iter\_num\ <<\ std::endl;}
-\DoxyCodeLine{00680\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Graph\ :"{}}\ <<\ std::endl;\ }
-\DoxyCodeLine{00681\ \ \ \ \ printGraph(best\_graph);}
-\DoxyCodeLine{00682\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Detailed\ Metrics:\ "{}}\ <<\ std::endl;\ }
-\DoxyCodeLine{00683\ \ \ \ \ compute\_metrics(best\_graph,\ best\_iter\_num);}
-\DoxyCodeLine{00684\ }
-\DoxyCodeLine{00685\ \ \ \ \ \textcolor{comment}{//OBJECTIVE:\ MINIMIZE\ THE\ FLOW\ VS\ CAPACITY\ ON\ EACH\ EDGE}}
-\DoxyCodeLine{00686\ \ \ \ \ \textcolor{comment}{//Smaller\ Capacity\ Edges\ bottleneck\ the\ flow\ of\ the\ path}}
-\DoxyCodeLine{00687\ \ \ \ \ \textcolor{comment}{//Therefore,\ edges\ with\ higher\ capacity\ suffering\ from\ neighboring\ edges\ with\ lower\ capacity\ will\ have\ }}
-\DoxyCodeLine{00688\ \ \ \ \ \textcolor{comment}{//significant\ capacity-\/flow\ >>>>\ 0\ distribution}}
-\DoxyCodeLine{00689\ \ \ \ \ \textcolor{comment}{//What\ can\ we\ do:}}
-\DoxyCodeLine{00690\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Locate\ the\ neighboring\ edges(Edges\ that\ are\ connected\ to\ the\ same\ vertex)\ and\ compute\ their\ difference\ }}
-\DoxyCodeLine{00691\ \ \ \ \ \ \ \ \ \textcolor{comment}{//After\ that\ we\ update\ the\ edge\ with\ the\ most\ critical\ (flow\ vs\ capacity)\ difference\ with\ the\ capacity\ of\ the\ edge\ with\ the\ second\ highest\ difference}}
-\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//By\ doing\ this\ we\ make\ sure\ we\ are\ not\ losing\ a\ lot\ of\ flow,\ and\ we\ are\ able\ to\ balance\ out\ the\ neighborhood\ of\ a\ node\ }}
-\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Then\ we\ mark\ the\ edge\ as\ critical\ and\ we\ add\ it\ to\ the\ critical\ edges\ vector}}
-\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ \textcolor{comment}{//After\ that\ we\ update\ the\ visited\ critical\ nodes\ vector\ with\ the\ node\ that\ is\ connected\ to\ the\ critical\ edge,\ so\ }}
-\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ do\ not\ enter\ in\ a\ loop\ where\ we\ try\ to\ balance\ out\ the\ same\ vertex\ neighborhood\ multiple\ times}}
-\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \textcolor{comment}{//After\ that\ we\ update\ the\ critical\ edge's\ capacity\ and\ run\ the\ algorithm\ again\ in\ order\ to\ balance\ out\ the\ graph}}
-\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ repeat\ this\ process\ until\ the\ critical\ vertexes\ vector\ is\ "{}full"{}\ or\ there\ are\ no\ more\ critical\ edges\ to\ be\ found}}
-\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Also,\ this\ may\ introduce\ some\ stochascity\ in\ the\ results\ (since\ we\ may\ get\ different\ results\ each\ time\ we\ run\ the\ algorithm\ by\ modifying\ }}
-\DoxyCodeLine{00699\ \ \ \ \ \ \ \ \ \textcolor{comment}{//new\ edges\ and\ running\ Edmonds\ Karp\ again\ (which\ outputs\ new\ results))\ }}
-\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \ \textcolor{comment}{//So\ we\ need\ to\ keep\ track\ of\ our\ best\ result\ found\ so\ far,\ so\ we\ choose\ that\ one\ instead\ of\ the\ one\ in\ the\ last\ iteration}}
-\DoxyCodeLine{00701\ }
-\DoxyCodeLine{00702\ \}}
-\DoxyCodeLine{00703\ }
+\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Gets\ the\ critical\ vertexes\ of\ the\ graph\ with\ the\ we\ have\ just\ updated\ critical\ edges\ and\ performed\ edmonds\ karp\ in}}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ critical\_edges\ =\ \mbox{\hyperlink{algorithms_8cpp_aca8ef5908df2113771c10fd339d61414}{get\_critical\_edges}}(graph,\ critical\_vertexes);}
+\DoxyCodeLine{00670\ }
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ end\_critical\_vertexes\ =\ critical\_vertexes.size();\ }
+\DoxyCodeLine{00672\ }
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Critical\ Vertexes\ start:\ "{}}\ <<\ start\_critical\_vertexes\ <<\ \textcolor{stringliteral}{"{}\ Critical\ Vertexes\ end:\ "{}}\ <<\ end\_critical\_vertexes\ <<\ std::endl;}
+\DoxyCodeLine{00674\ }
+\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ \textcolor{comment}{//The\ critical\ vertexes\ vector\ didn't\ update\ which\ means\ that\ we\ have\ found\ all\ the\ critical\ vertexes}}
+\DoxyCodeLine{00676\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(start\_critical\_vertexes\ ==\ end\_critical\_vertexes)}
+\DoxyCodeLine{00677\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};\ }
+\DoxyCodeLine{00678\ }
+\DoxyCodeLine{00679\ \ \ \ \ \}}
+\DoxyCodeLine{00680\ }
+\DoxyCodeLine{00681\ \ \ \ \ \textcolor{comment}{//Prints\ the\ best\ graph\ found}}
+\DoxyCodeLine{00682\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}The\ best\ Average\ Difference\ was\ "{}}\ <<\ best\_avg\ <<\ \textcolor{stringliteral}{"{}\ and\ it\ was\ found\ in\ iteration\ number\ "{}}\ <<\ best\_iter\_num\ <<\ std::endl;}
+\DoxyCodeLine{00683\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Graph\ :"{}}\ <<\ std::endl;\ }
+\DoxyCodeLine{00684\ \ \ \ \ \mbox{\hyperlink{utils_8cpp_a944dda62a3b9f4ed7c9695f57b5ed0c9}{printGraph}}(best\_graph);}
+\DoxyCodeLine{00685\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Detailed\ Metrics:\ "{}}\ <<\ std::endl;\ }
+\DoxyCodeLine{00686\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_afe6902f8e2efb6f5f8d88f47c220c8df}{compute\_metrics}}(best\_graph,\ best\_iter\_num);}
+\DoxyCodeLine{00687\ }
+\DoxyCodeLine{00688\ \ \ \ \ \textcolor{comment}{//OBJECTIVE:\ MINIMIZE\ THE\ FLOW\ VS\ CAPACITY\ ON\ EACH\ EDGE}}
+\DoxyCodeLine{00689\ \ \ \ \ \textcolor{comment}{//Smaller\ Capacity\ Edges\ bottleneck\ the\ flow\ of\ the\ path}}
+\DoxyCodeLine{00690\ \ \ \ \ \textcolor{comment}{//Therefore,\ edges\ with\ higher\ capacity\ suffering\ from\ neighboring\ edges\ with\ lower\ capacity\ will\ have\ }}
+\DoxyCodeLine{00691\ \ \ \ \ \textcolor{comment}{//significant\ capacity-\/flow\ >>>>\ 0\ distribution}}
+\DoxyCodeLine{00692\ \ \ \ \ \textcolor{comment}{//What\ can\ we\ do:}}
+\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Locate\ the\ neighboring\ edges(Edges\ that\ are\ connected\ to\ the\ same\ vertex)\ and\ compute\ their\ difference\ }}
+\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ \textcolor{comment}{//After\ that\ we\ update\ the\ edge\ with\ the\ most\ critical\ (flow\ vs\ capacity)\ difference\ with\ the\ capacity\ of\ the\ edge\ with\ the\ second\ highest\ difference}}
+\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//By\ doing\ this\ we\ make\ sure\ we\ are\ not\ losing\ a\ lot\ of\ flow,\ and\ we\ are\ able\ to\ balance\ out\ the\ neighborhood\ of\ a\ node\ }}
+\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Then\ we\ mark\ the\ edge\ as\ critical\ and\ we\ add\ it\ to\ the\ critical\ edges\ vector}}
+\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \textcolor{comment}{//After\ that\ we\ update\ the\ visited\ critical\ nodes\ vector\ with\ the\ node\ that\ is\ connected\ to\ the\ critical\ edge,\ so\ }}
+\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ do\ not\ enter\ in\ a\ loop\ where\ we\ try\ to\ balance\ out\ the\ same\ vertex\ neighborhood\ multiple\ times}}
+\DoxyCodeLine{00699\ \ \ \ \ \ \ \ \ \textcolor{comment}{//After\ that\ we\ update\ the\ critical\ edge's\ capacity\ and\ run\ the\ algorithm\ again\ in\ order\ to\ balance\ out\ the\ graph}}
+\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ repeat\ this\ process\ until\ the\ critical\ vertexes\ vector\ is\ "{}full"{}\ or\ there\ are\ no\ more\ critical\ edges\ to\ be\ found}}
+\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Also,\ this\ may\ introduce\ some\ stochascity\ in\ the\ results\ (since\ we\ may\ get\ different\ results\ each\ time\ we\ run\ the\ algorithm\ by\ modifying\ }}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ \textcolor{comment}{//new\ edges\ and\ running\ Edmonds\ Karp\ again\ (which\ outputs\ new\ results))\ }}
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \textcolor{comment}{//So\ we\ need\ to\ keep\ track\ of\ our\ best\ result\ found\ so\ far,\ so\ we\ choose\ that\ one\ instead\ of\ the\ one\ in\ the\ last\ iteration}}
 \DoxyCodeLine{00704\ }
-\DoxyCodeLine{00718\ \textcolor{keywordtype}{void}\ T3\_3(Graph<string>\ g,\ \textcolor{keywordtype}{string}\ dataset)\{}
-\DoxyCodeLine{00719\ }
-\DoxyCodeLine{00720\ \ \ \ \ \textcolor{comment}{//Setups\ the\ Edmonds\ Karp\ of\ the\ default\ graph}}
-\DoxyCodeLine{00721\ \ \ \ \ vector<string>\ sources;\ }
-\DoxyCodeLine{00722\ \ \ \ \ vector<string>\ destinations;\ }
-\DoxyCodeLine{00723\ \ \ \ \ Graph<string>\ graph\ =\ default\_graph\_setup\_general(g,\ sources,\ destinations);}
-\DoxyCodeLine{00724\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ default\_graph\_setup\_sink(graph,\ destinations);}
-\DoxyCodeLine{00725\ }
-\DoxyCodeLine{00726\ \ \ \ \ \textcolor{comment}{//Performs\ Edmonds\ Karp\ without\ removing\ any\ vertexes\ for\ metrics\ purposes}}
-\DoxyCodeLine{00727\ \ \ \ \ edmonds\_karp(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
+\DoxyCodeLine{00705\ \}}
+\DoxyCodeLine{00706\ }
+\DoxyCodeLine{00707\ }
+\DoxyCodeLine{00721\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_a0e5006b0a788ed61a76e234818626c28}{T3\_3}}(Graph<string>\ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ \textcolor{keywordtype}{string}\ dataset)\{}
+\DoxyCodeLine{00722\ }
+\DoxyCodeLine{00723\ \ \ \ \ \textcolor{comment}{//Setups\ the\ Edmonds\ Karp\ of\ the\ default\ graph}}
+\DoxyCodeLine{00724\ \ \ \ \ vector<string>\ sources;\ }
+\DoxyCodeLine{00725\ \ \ \ \ vector<string>\ destinations;\ }
+\DoxyCodeLine{00726\ \ \ \ \ Graph<string>\ graph\ =\ \mbox{\hyperlink{algorithms_8cpp_a934a9c5ae3eee7f926be4513327dc330}{default\_graph\_setup\_general}}(\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}},\ sources,\ destinations);}
+\DoxyCodeLine{00727\ \ \ \ \ \textcolor{keywordtype}{string}\ sink\ =\ \mbox{\hyperlink{algorithms_8cpp_ac52e86010fe22cfa39db2dd2692670ea}{default\_graph\_setup\_sink}}(graph,\ destinations);}
 \DoxyCodeLine{00728\ }
-\DoxyCodeLine{00729\ \ \ \ \ vector<string>\ not\_meet\_demand;}
-\DoxyCodeLine{00730\ }
-\DoxyCodeLine{00731\ \ \ \ \ \textcolor{comment}{//Check\ which\ cities\ do\ not\ meet\ their\ demand\ by\ default}}
-\DoxyCodeLine{00732\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\{}
-\DoxyCodeLine{00733\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(v-\/>getInfo()[0]\ ==\ \textcolor{charliteral}{'C'})\{}
-\DoxyCodeLine{00734\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ incoming\ =\ v-\/>getIncoming();}
-\DoxyCodeLine{00735\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ demand\ =\ v-\/>getDemand();}
-\DoxyCodeLine{00736\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ flow\ =\ 0;}
-\DoxyCodeLine{00737\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ incoming)\{}
-\DoxyCodeLine{00738\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flow\ +=\ e-\/>getFlow();}
-\DoxyCodeLine{00739\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00740\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(flow\ <\ demand)\{}
-\DoxyCodeLine{00741\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ not\_meet\_demand.push\_back(v-\/>getInfo());}
+\DoxyCodeLine{00729\ \ \ \ \ \textcolor{comment}{//Performs\ Edmonds\ Karp\ without\ removing\ any\ vertexes\ for\ metrics\ purposes}}
+\DoxyCodeLine{00730\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}{edmonds\_karp}}(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
+\DoxyCodeLine{00731\ }
+\DoxyCodeLine{00732\ \ \ \ \ vector<string>\ not\_meet\_demand;}
+\DoxyCodeLine{00733\ }
+\DoxyCodeLine{00734\ \ \ \ \ \textcolor{comment}{//Check\ which\ cities\ do\ not\ meet\ their\ demand\ by\ default}}
+\DoxyCodeLine{00735\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\{}
+\DoxyCodeLine{00736\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(v-\/>getInfo()[0]\ ==\ \textcolor{charliteral}{'C'})\{}
+\DoxyCodeLine{00737\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ incoming\ =\ v-\/>getIncoming();}
+\DoxyCodeLine{00738\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ demand\ =\ v-\/>getDemand();}
+\DoxyCodeLine{00739\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ flow\ =\ 0;}
+\DoxyCodeLine{00740\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ incoming)\{}
+\DoxyCodeLine{00741\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flow\ +=\ e-\/>getFlow();}
 \DoxyCodeLine{00742\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00743\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00744\ \ \ \ \ \}}
-\DoxyCodeLine{00745\ }
-\DoxyCodeLine{00746\ }
-\DoxyCodeLine{00747\ \ \ \ \ map<string,\ string>\ affected\_cities;\ \textcolor{comment}{//Cities\ Affected\ by\ a\ given\ pipeline\ }}
-\DoxyCodeLine{00748\ \ \ \ \ map<string,\ double>\ pipe\_deficits;\ \textcolor{comment}{//The\ defices\ provoked\ by\ a\ pipeline}}
+\DoxyCodeLine{00743\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(flow\ <\ demand)\{}
+\DoxyCodeLine{00744\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ not\_meet\_demand.push\_back(v-\/>getInfo());}
+\DoxyCodeLine{00745\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00746\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00747\ \ \ \ \ \}}
+\DoxyCodeLine{00748\ }
 \DoxyCodeLine{00749\ }
-\DoxyCodeLine{00750\ \ \ \ \ \textcolor{comment}{//Iterate\ through\ every\ edge\ }}
-\DoxyCodeLine{00751\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\{}
-\DoxyCodeLine{00752\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ v-\/>getAdj())\{}
-\DoxyCodeLine{00753\ }
-\DoxyCodeLine{00754\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Ignore\ the\ edges\ that\ are\ connected\ to\ the\ super\ source\ or\ to\ the\ super\ sink}}
-\DoxyCodeLine{00755\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getDest()-\/>getInfo()\ ==\ \textcolor{stringliteral}{"{}sink"{}}\ ||\ e-\/>getOrig()-\/>getInfo()\ ==\ \textcolor{stringliteral}{"{}sink"{}}\ ||\ e-\/>getOrig()-\/>getInfo()\ ==\ \textcolor{stringliteral}{"{}source"{}}\ ||\ e-\/>getDest()-\/>getInfo()\ ==\ \textcolor{stringliteral}{"{}source"{}})}
-\DoxyCodeLine{00756\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{00757\ }
-\DoxyCodeLine{00758\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Reset\ All\ Edges\ Flow\ }}
-\DoxyCodeLine{00759\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v:\ graph.getVertexSet())\{}
-\DoxyCodeLine{00760\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ v-\/>getAdj())\{}
-\DoxyCodeLine{00761\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
-\DoxyCodeLine{00762\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00763\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00764\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00765\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Temporarily\ set\ its\ capacity\ to\ zero\ (simulate\ the\ rupture/failure)}}
-\DoxyCodeLine{00766\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ original\_capacity\ =\ e-\/>getWeight();}
-\DoxyCodeLine{00767\ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setWeight(0);\ }
-\DoxyCodeLine{00768\ }
-\DoxyCodeLine{00769\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Runs\ Edmonds\ Karp\ for\ the\ given\ "{}ruptured"{}\ edge\ }}
-\DoxyCodeLine{00770\ \ \ \ \ \ \ \ \ \ \ \ \ edmonds\_karp(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
+\DoxyCodeLine{00750\ \ \ \ \ map<string,\ string>\ affected\_cities;\ \textcolor{comment}{//Cities\ Affected\ by\ a\ given\ pipeline\ }}
+\DoxyCodeLine{00751\ \ \ \ \ map<string,\ double>\ pipe\_deficits;\ \textcolor{comment}{//The\ defices\ provoked\ by\ a\ pipeline}}
+\DoxyCodeLine{00752\ }
+\DoxyCodeLine{00753\ \ \ \ \ \textcolor{comment}{//Iterate\ through\ every\ edge\ }}
+\DoxyCodeLine{00754\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\{}
+\DoxyCodeLine{00755\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ v-\/>getAdj())\{}
+\DoxyCodeLine{00756\ }
+\DoxyCodeLine{00757\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Ignore\ the\ edges\ that\ are\ connected\ to\ the\ super\ source\ or\ to\ the\ super\ sink}}
+\DoxyCodeLine{00758\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(e-\/>getDest()-\/>getInfo()\ ==\ \textcolor{stringliteral}{"{}sink"{}}\ ||\ e-\/>getOrig()-\/>getInfo()\ ==\ \textcolor{stringliteral}{"{}sink"{}}\ ||\ e-\/>getOrig()-\/>getInfo()\ ==\ \textcolor{stringliteral}{"{}source"{}}\ ||\ e-\/>getDest()-\/>getInfo()\ ==\ \textcolor{stringliteral}{"{}source"{}})}
+\DoxyCodeLine{00759\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00760\ }
+\DoxyCodeLine{00761\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Reset\ All\ Edges\ Flow\ }}
+\DoxyCodeLine{00762\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v:\ graph.getVertexSet())\{}
+\DoxyCodeLine{00763\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ v-\/>getAdj())\{}
+\DoxyCodeLine{00764\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setFlow(0);}
+\DoxyCodeLine{00765\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00766\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00767\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00768\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Temporarily\ set\ its\ capacity\ to\ zero\ (simulate\ the\ rupture/failure)}}
+\DoxyCodeLine{00769\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ original\_capacity\ =\ e-\/>getWeight();}
+\DoxyCodeLine{00770\ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setWeight(0);\ }
 \DoxyCodeLine{00771\ }
-\DoxyCodeLine{00772\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Check\ what\ cities\ got\ their\ demand\ affected\ (can\ no\ longer\ supply\ the\ ammount\ of\ water\ they\ need)}}
-\DoxyCodeLine{00773\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\ \{}
+\DoxyCodeLine{00772\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Runs\ Edmonds\ Karp\ for\ the\ given\ "{}ruptured"{}\ edge\ }}
+\DoxyCodeLine{00773\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}{edmonds\_karp}}(graph,\ \textcolor{stringliteral}{"{}source"{}},\ sink);}
 \DoxyCodeLine{00774\ }
-\DoxyCodeLine{00775\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (v-\/>getInfo()[0]\ ==\ \textcolor{charliteral}{'C'})\ \{}
-\DoxyCodeLine{00776\ }
-\DoxyCodeLine{00777\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ this\ city\ already\ has\ a\ deficit,\ we\ can\ skip\ the\ next\ computations}}
-\DoxyCodeLine{00778\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Since\ this\ city\ already\ has\ a\ deficit\ by\ default\ }}
-\DoxyCodeLine{00779\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ occurences\ =\ count(not\_meet\_demand.begin(),\ not\_meet\_demand.end(),\ v-\/>getInfo());}
-\DoxyCodeLine{00780\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(occurences\ >\ 0)}
-\DoxyCodeLine{00781\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ \ \ }
-\DoxyCodeLine{00782\ }
-\DoxyCodeLine{00783\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ incoming\ =\ v-\/>getIncoming();}
-\DoxyCodeLine{00784\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ demand\ =\ v-\/>getDemand();}
+\DoxyCodeLine{00775\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Check\ what\ cities\ got\ their\ demand\ affected\ (can\ no\ longer\ supply\ the\ ammount\ of\ water\ they\ need)}}
+\DoxyCodeLine{00776\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\ \{}
+\DoxyCodeLine{00777\ }
+\DoxyCodeLine{00778\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (v-\/>getInfo()[0]\ ==\ \textcolor{charliteral}{'C'})\ \{}
+\DoxyCodeLine{00779\ }
+\DoxyCodeLine{00780\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ this\ city\ already\ has\ a\ deficit,\ we\ can\ skip\ the\ next\ computations}}
+\DoxyCodeLine{00781\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Since\ this\ city\ already\ has\ a\ deficit\ by\ default\ }}
+\DoxyCodeLine{00782\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ occurences\ =\ count(not\_meet\_demand.begin(),\ not\_meet\_demand.end(),\ v-\/>getInfo());}
+\DoxyCodeLine{00783\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(occurences\ >\ 0)}
+\DoxyCodeLine{00784\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ \ \ }
 \DoxyCodeLine{00785\ }
-\DoxyCodeLine{00786\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ there\ are\ no\ incoming\ edges,\ the\ we\ can\ ignore\ the\ next\ computations\ and\ jump\ right\ into\ }}
-\DoxyCodeLine{00787\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ saying\ that\ deficit\ =\ demand}}
-\DoxyCodeLine{00788\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(incoming.empty())\{}
-\DoxyCodeLine{00789\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ affected\_cities.insert(\{e-\/>getOrig()-\/>getInfo()+\textcolor{stringliteral}{"{}-\/>"{}}+e-\/>getDest()-\/>getInfo(),\ v-\/>getInfo()\});}
-\DoxyCodeLine{00790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pipe\_deficits.insert(\{e-\/>getOrig()-\/>getInfo()+\textcolor{stringliteral}{"{}-\/>"{}}+e-\/>getDest()-\/>getInfo(),\ demand\});\ }
-\DoxyCodeLine{00791\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ }
-\DoxyCodeLine{00792\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00793\ }
-\DoxyCodeLine{00794\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ city's\ flow\ }}
-\DoxyCodeLine{00795\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ flow\ =\ 0;}
-\DoxyCodeLine{00796\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ e\ :\ incoming)\ \{}
-\DoxyCodeLine{00797\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flow\ +=\ e-\/>getFlow();}
-\DoxyCodeLine{00798\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00799\ }
-\DoxyCodeLine{00800\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ deficit\ =\ demand\ -\/\ flow;\ }
-\DoxyCodeLine{00801\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(deficit\ >\ 0)\{}
-\DoxyCodeLine{00802\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ affected\_cities.insert(\{e-\/>getOrig()-\/>getInfo()+\textcolor{stringliteral}{"{}-\/>"{}}+e-\/>getDest()-\/>getInfo(),\ v-\/>getInfo()\});}
-\DoxyCodeLine{00803\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pipe\_deficits.insert(\{e-\/>getOrig()-\/>getInfo()+\textcolor{stringliteral}{"{}-\/>"{}}+e-\/>getDest()-\/>getInfo(),\ deficit\});\ }
-\DoxyCodeLine{00804\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ }
-\DoxyCodeLine{00805\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00806\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00807\ }
-\DoxyCodeLine{00808\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ edge's\ capacity\ back\ to\ its\ original\ value}}
-\DoxyCodeLine{00809\ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setWeight(original\_capacity);}
-\DoxyCodeLine{00810\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00811\ \ \ \ \ \}}
-\DoxyCodeLine{00812\ }
-\DoxyCodeLine{00813\ \ \ \ \ \textcolor{comment}{/*\ }}
-\DoxyCodeLine{00814\ \textcolor{comment}{\ \ \ \ \ \ \ \ SOLUTION\ OUTPUT}}
-\DoxyCodeLine{00815\ \textcolor{comment}{\ \ \ \ */}}
-\DoxyCodeLine{00816\ }
-\DoxyCodeLine{00817\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ SORTED\ BY\ PIPELINE\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}}\ <<\ std::endl;}
-\DoxyCodeLine{00818\ \ \ \ \ \textcolor{comment}{//Print\ the\ cities\ a\ pipeline\ affects\ as\ well\ as\ the\ deficit\ provoked\ by\ the\ pipeline}}
-\DoxyCodeLine{00819\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ it\ =\ affected\_cities.begin();\ it\ !=\ affected\_cities.end();\ ++it)\{}
-\DoxyCodeLine{00820\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Pipeline:\ "{}}\ <<\ it-\/>first\ <<\ \textcolor{stringliteral}{"{}\ Affected\ City:\ "{}}\ <<\ it-\/>second\ <<\ \textcolor{stringliteral}{"{}\ Deficit:\ "{}}\ <<\ pipe\_deficits[it-\/>first]\ <<\ std::endl;\ }
-\DoxyCodeLine{00821\ \ \ \ \ \}\ \ \ }
-\DoxyCodeLine{00822\ }
-\DoxyCodeLine{00823\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ SORTED\ BY\ CITY\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}}\ <<\ std::endl;}
-\DoxyCodeLine{00824\ \ \ \ \ \textcolor{comment}{//Print\ the\ pipelins\ that\ affect\ a\ city\ }}
-\DoxyCodeLine{00825\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\{}
-\DoxyCodeLine{00826\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(v-\/>getInfo()[0]\ ==\ \textcolor{charliteral}{'C'})\{}
-\DoxyCodeLine{00827\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ city\ =\ v-\/>getInfo();}
-\DoxyCodeLine{00828\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ it\ =\ affected\_cities.begin();\ it\ !=\ affected\_cities.end();\ ++it)\{}
-\DoxyCodeLine{00829\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(it-\/>second\ ==\ city)\{}
-\DoxyCodeLine{00830\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}City:\ "{}}\ <<\ city\ <<\ \textcolor{stringliteral}{"{}\ Affected\ by\ pipeline:\ "{}}\ <<\ it-\/>first\ <<\ std::endl;}
-\DoxyCodeLine{00831\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00832\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ }
-\DoxyCodeLine{00833\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00834\ \ \ \ \ \}}
-\DoxyCodeLine{00835\ \ \ \ \ }
-\DoxyCodeLine{00836\ \}}
+\DoxyCodeLine{00786\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ incoming\ =\ v-\/>getIncoming();}
+\DoxyCodeLine{00787\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ demand\ =\ v-\/>getDemand();}
+\DoxyCodeLine{00788\ }
+\DoxyCodeLine{00789\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ there\ are\ no\ incoming\ edges,\ the\ we\ can\ ignore\ the\ next\ computations\ and\ jump\ right\ into\ }}
+\DoxyCodeLine{00790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ saying\ that\ deficit\ =\ demand}}
+\DoxyCodeLine{00791\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(incoming.empty())\{}
+\DoxyCodeLine{00792\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ affected\_cities.insert(\{e-\/>getOrig()-\/>getInfo()+\textcolor{stringliteral}{"{}-\/>"{}}+e-\/>getDest()-\/>getInfo(),\ v-\/>getInfo()\});}
+\DoxyCodeLine{00793\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pipe\_deficits.insert(\{e-\/>getOrig()-\/>getInfo()+\textcolor{stringliteral}{"{}-\/>"{}}+e-\/>getDest()-\/>getInfo(),\ demand\});\ }
+\DoxyCodeLine{00794\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ }
+\DoxyCodeLine{00795\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00796\ }
+\DoxyCodeLine{00797\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ city's\ flow\ }}
+\DoxyCodeLine{00798\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ flow\ =\ 0;}
+\DoxyCodeLine{00799\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ e\ :\ incoming)\ \{}
+\DoxyCodeLine{00800\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flow\ +=\ e-\/>getFlow();}
+\DoxyCodeLine{00801\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00802\ }
+\DoxyCodeLine{00803\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ deficit\ =\ demand\ -\/\ flow;\ }
+\DoxyCodeLine{00804\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(deficit\ >\ 0)\{}
+\DoxyCodeLine{00805\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ affected\_cities.insert(\{e-\/>getOrig()-\/>getInfo()+\textcolor{stringliteral}{"{}-\/>"{}}+e-\/>getDest()-\/>getInfo(),\ v-\/>getInfo()\});}
+\DoxyCodeLine{00806\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pipe\_deficits.insert(\{e-\/>getOrig()-\/>getInfo()+\textcolor{stringliteral}{"{}-\/>"{}}+e-\/>getDest()-\/>getInfo(),\ deficit\});\ }
+\DoxyCodeLine{00807\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{00808\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00809\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00810\ }
+\DoxyCodeLine{00811\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ edge's\ capacity\ back\ to\ its\ original\ value}}
+\DoxyCodeLine{00812\ \ \ \ \ \ \ \ \ \ \ \ \ e-\/>setWeight(original\_capacity);}
+\DoxyCodeLine{00813\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00814\ \ \ \ \ \}}
+\DoxyCodeLine{00815\ }
+\DoxyCodeLine{00816\ \ \ \ \ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00817\ \textcolor{comment}{\ \ \ \ \ \ \ \ SOLUTION\ OUTPUT}}
+\DoxyCodeLine{00818\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00819\ }
+\DoxyCodeLine{00820\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ SORTED\ BY\ PIPELINE\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00821\ \ \ \ \ \textcolor{comment}{//Print\ the\ cities\ a\ pipeline\ affects\ as\ well\ as\ the\ deficit\ provoked\ by\ the\ pipeline}}
+\DoxyCodeLine{00822\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ it\ =\ affected\_cities.begin();\ it\ !=\ affected\_cities.end();\ ++it)\{}
+\DoxyCodeLine{00823\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Pipeline:\ "{}}\ <<\ it-\/>first\ <<\ \textcolor{stringliteral}{"{}\ Affected\ City:\ "{}}\ <<\ it-\/>second\ <<\ \textcolor{stringliteral}{"{}\ Deficit:\ "{}}\ <<\ pipe\_deficits[it-\/>first]\ <<\ std::endl;\ }
+\DoxyCodeLine{00824\ \ \ \ \ \}\ \ \ }
+\DoxyCodeLine{00825\ }
+\DoxyCodeLine{00826\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ SORTED\ BY\ CITY\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00827\ \ \ \ \ \textcolor{comment}{//Print\ the\ pipelins\ that\ affect\ a\ city\ }}
+\DoxyCodeLine{00828\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v\ :\ graph.getVertexSet())\{}
+\DoxyCodeLine{00829\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(v-\/>getInfo()[0]\ ==\ \textcolor{charliteral}{'C'})\{}
+\DoxyCodeLine{00830\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ city\ =\ v-\/>getInfo();}
+\DoxyCodeLine{00831\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ it\ =\ affected\_cities.begin();\ it\ !=\ affected\_cities.end();\ ++it)\{}
+\DoxyCodeLine{00832\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(it-\/>second\ ==\ city)\{}
+\DoxyCodeLine{00833\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}City:\ "{}}\ <<\ city\ <<\ \textcolor{stringliteral}{"{}\ Affected\ by\ pipeline:\ "{}}\ <<\ it-\/>first\ <<\ std::endl;}
+\DoxyCodeLine{00834\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00835\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ }
+\DoxyCodeLine{00836\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00837\ \ \ \ \ \}}
+\DoxyCodeLine{00838\ \ \ \ \ }
+\DoxyCodeLine{00839\ \}}
 
 \end{DoxyCode}

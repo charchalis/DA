@@ -1,0 +1,288 @@
+\doxysection{algorithms.\+cpp File Reference}
+\hypertarget{algorithms_8cpp}{}\label{algorithms_8cpp}\index{algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}{edmonds\+\_\+karp}} (Graph$<$ string $>$ \&graph, string source, string sink)
+\begin{DoxyCompactList}\small\item\em Executa o algoritmo de Edmonds-\/\+Karp para encontrar o fluxo máximo no grafo. \end{DoxyCompactList}\item 
+Graph$<$ string $>$ \mbox{\hyperlink{algorithms_8cpp_a934a9c5ae3eee7f926be4513327dc330}{default\+\_\+graph\+\_\+setup\+\_\+general}} (Graph$<$ string $>$ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}, vector$<$ string $>$ sources, vector$<$ string $>$ \&destinations)
+\begin{DoxyCompactList}\small\item\em Configura o grafo para uso geral sem excluir nenhuma cidade específica. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{algorithms_8cpp_ac52e86010fe22cfa39db2dd2692670ea}{default\+\_\+graph\+\_\+setup\+\_\+sink}} (Graph$<$ string $>$ \&graph, vector$<$ string $>$ destinations)
+\begin{DoxyCompactList}\small\item\em Configura o grafo adicionando um super-\/sorvedouro ao qual os destinos se conectam. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{algorithms_8cpp_a20bbab41688cc28992a4c493471933ca}{list\+\_\+affected\+\_\+cities}} (Graph$<$ string $>$ \&graph, string city, map$<$ string, double $>$ \texorpdfstring{$\ast$}{*}pumping\+Map)
+\begin{DoxyCompactList}\small\item\em Lista as cidades afetadas pelo déficit de abastecimento de água. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{algorithms_8cpp_a48d229da6e5270f1356c801d6642cf58}{T2\+\_\+1}} (Graph$<$ string $>$ \&\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}, string city)
+\begin{DoxyCompactList}\small\item\em Executa o algoritmo de Edmonds-\/\+Karp em um grafo de rede de abastecimento de água. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{algorithms_8cpp_a098d3ea8cd563fb8d8de09c57e78a6fe}{T3\+\_\+1}} (Graph$<$ string $>$ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}, string water\+Reservoir)
+\begin{DoxyCompactList}\small\item\em Remove um reservatório de água do grafo e executa o algoritmo de Edmonds-\/\+Karp no grafo resultante. \end{DoxyCompactList}\item 
+map$<$ string, double $>$ \mbox{\hyperlink{algorithms_8cpp_a486e202dc5f3e7817a23c6efff320c94}{get\+Stock\+Deficits}} (Graph$<$ string $>$ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}})
+\begin{DoxyCompactList}\small\item\em Mede os déficits de estoque das cidades na rede de abastecimento de água. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{algorithms_8cpp_acafff9747f381c2d9a56391d051d0fb5}{T3\+\_\+2}} (Graph$<$ string $>$ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}, string pumping\+Station, map$<$ string, double $>$ pumping\+\_\+map)
+\begin{DoxyCompactList}\small\item\em Verifica se a remoção de uma estação de bombeamento afeta o abastecimento de água das cidades na rede. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{algorithms_8cpp_afe6902f8e2efb6f5f8d88f47c220c8df}{compute\+\_\+metrics}} (Graph$<$ string $>$ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}, int iternum=0)
+\begin{DoxyCompactList}\small\item\em Calcula métricas relacionadas ao grafo, como diferenças entre pesos e fluxos. \end{DoxyCompactList}\item 
+map$<$ Edge$<$ string $>$ \texorpdfstring{$\ast$}{*}, int $>$ \mbox{\hyperlink{algorithms_8cpp_aca8ef5908df2113771c10fd339d61414}{get\+\_\+critical\+\_\+edges}} (Graph$<$ string $>$ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}, vector$<$ string $>$ \&critical\+\_\+vertexes)
+\begin{DoxyCompactList}\small\item\em Obtém as arestas críticas do grafo, considerando vértices críticos. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{algorithms_8cpp_a6087c93bfe7298ea591055b13efc884b}{T2\+\_\+3}} (Graph$<$ string $>$ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}, string dataset)
+\begin{DoxyCompactList}\small\item\em Realiza a execução do algoritmo T2\+\_\+3 para otimização do fluxo no grafo. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{algorithms_8cpp_a0e5006b0a788ed61a76e234818626c28}{T3\+\_\+3}} (Graph$<$ string $>$ \mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}, string dataset)
+\begin{DoxyCompactList}\small\item\em Realiza a execução do algoritmo T3\+\_\+3 para análise do impacto de falhas em pipelines. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{algorithms_8cpp_afe6902f8e2efb6f5f8d88f47c220c8df}\label{algorithms_8cpp_afe6902f8e2efb6f5f8d88f47c220c8df} 
+\index{algorithms.cpp@{algorithms.cpp}!compute\_metrics@{compute\_metrics}}
+\index{compute\_metrics@{compute\_metrics}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{compute\_metrics()}{compute\_metrics()}}
+{\footnotesize\ttfamily double compute\+\_\+metrics (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{int}]{iternum = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Calcula métricas relacionadas ao grafo, como diferenças entre pesos e fluxos. 
+
+Esta função calcula métricas relacionadas ao grafo, como a diferença média entre o peso das arestas e o fluxo nelas, bem como a maior diferença encontrada e a aresta correspondente.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo para o qual as métricas serão calculadas. \\
+\hline
+{\em iternum} & O número da iteração de Edmonds-\/\+Karp (padrão é 0). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A diferença média entre peso e fluxo das arestas.
+\end{DoxyReturn}
+@complexity O(\+V \texorpdfstring{$\ast$}{*} E), onde V é o número de vértices e E é o número de arestas do grafo, pois percorre todas as arestas do grafo uma vez. \Hypertarget{algorithms_8cpp_a934a9c5ae3eee7f926be4513327dc330}\label{algorithms_8cpp_a934a9c5ae3eee7f926be4513327dc330} 
+\index{algorithms.cpp@{algorithms.cpp}!default\_graph\_setup\_general@{default\_graph\_setup\_general}}
+\index{default\_graph\_setup\_general@{default\_graph\_setup\_general}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{default\_graph\_setup\_general()}{default\_graph\_setup\_general()}}
+{\footnotesize\ttfamily Graph$<$ string $>$ default\+\_\+graph\+\_\+setup\+\_\+general (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{vector$<$ string $>$}]{sources,  }\item[{vector$<$ string $>$ \&}]{destinations }\end{DoxyParamCaption})}
+
+
+
+Configura o grafo para uso geral sem excluir nenhuma cidade específica. 
+
+Esta função configura o grafo para uso geral, identificando os reservatórios como fontes e as cidades como destinos. Em seguida, cria um superorigem que se conecta às fontes do grafo.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo original a ser configurado. \\
+\hline
+{\em sources} & Um vetor que será preenchido com os códigos das fontes identificadas no grafo. \\
+\hline
+{\em destinations} & Um vetor que será preenchido com os códigos dos destinos identificados no grafo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Um novo grafo configurado para uso geral.
+\end{DoxyReturn}
+@complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo original, pois a função percorre todos os vértices do grafo original para identificar as fontes e os destinos, adiciona uma superorigem e as arestas correspondentes, e inicializa o fluxo das novas arestas. \Hypertarget{algorithms_8cpp_ac52e86010fe22cfa39db2dd2692670ea}\label{algorithms_8cpp_ac52e86010fe22cfa39db2dd2692670ea} 
+\index{algorithms.cpp@{algorithms.cpp}!default\_graph\_setup\_sink@{default\_graph\_setup\_sink}}
+\index{default\_graph\_setup\_sink@{default\_graph\_setup\_sink}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{default\_graph\_setup\_sink()}{default\_graph\_setup\_sink()}}
+{\footnotesize\ttfamily string default\+\_\+graph\+\_\+setup\+\_\+sink (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{graph,  }\item[{vector$<$ string $>$}]{destinations }\end{DoxyParamCaption})}
+
+
+
+Configura o grafo adicionando um super-\/sorvedouro ao qual os destinos se conectam. 
+
+Esta função cria um super-\/sorvedouro no grafo fornecido e conecta todos os destinos a ele. Em seguida, inicializa o fluxo das novas arestas que conectam aos destinos ao super-\/sorvedouro.
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & O grafo ao qual o super-\/sorvedouro será adicionado e ao qual os destinos serão conectados. \\
+\hline
+{\em destinations} & Um vetor contendo os códigos dos destinos a serem conectados ao super-\/sorvedouro. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+O nome do super-\/sorvedouro adicionado ao grafo.
+\end{DoxyReturn}
+@complexity O(\+D), onde D é o número de destinos, pois a função percorre os destinos para criar as arestas entre eles e o super-\/sorvedouro e inicializa o fluxo dessas novas arestas. \Hypertarget{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0}\label{algorithms_8cpp_a5af878f89353df53766ed45bd9325af0} 
+\index{algorithms.cpp@{algorithms.cpp}!edmonds\_karp@{edmonds\_karp}}
+\index{edmonds\_karp@{edmonds\_karp}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{edmonds\_karp()}{edmonds\_karp()}}
+{\footnotesize\ttfamily void edmonds\+\_\+karp (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{graph,  }\item[{string}]{source,  }\item[{string}]{sink }\end{DoxyParamCaption})}
+
+
+
+Executa o algoritmo de Edmonds-\/\+Karp para encontrar o fluxo máximo no grafo. 
+
+Este algoritmo implementa o método de Edmonds-\/\+Karp para encontrar o fluxo máximo de uma fonte para um sorvedouro em um grafo. Ele encontra caminhos aumentadores usando uma busca em largura (BFS) e atualiza o fluxo ao longo desses caminhos até que não seja possível encontrar mais caminhos aumentadores.
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & O grafo no qual o algoritmo será executado. O grafo será modificado para refletir o fluxo máximo. \\
+\hline
+{\em source} & O vértice de origem do fluxo. \\
+\hline
+{\em sink} & O vértice de destino do fluxo.\\
+\hline
+\end{DoxyParams}
+@complexity O(\+V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2), onde V é o número de vértices e E é o número de arestas do grafo, pois o algoritmo executa uma busca em largura (BFS) para encontrar caminhos aumentadores e atualiza o fluxo ao longo desses caminhos. \Hypertarget{algorithms_8cpp_aca8ef5908df2113771c10fd339d61414}\label{algorithms_8cpp_aca8ef5908df2113771c10fd339d61414} 
+\index{algorithms.cpp@{algorithms.cpp}!get\_critical\_edges@{get\_critical\_edges}}
+\index{get\_critical\_edges@{get\_critical\_edges}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_critical\_edges()}{get\_critical\_edges()}}
+{\footnotesize\ttfamily map$<$ Edge$<$ string $>$ \texorpdfstring{$\ast$}{*}, int $>$ get\+\_\+critical\+\_\+edges (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{vector$<$ string $>$ \&}]{critical\+\_\+vertexes }\end{DoxyParamCaption})}
+
+
+
+Obtém as arestas críticas do grafo, considerando vértices críticos. 
+
+Esta função calcula as arestas críticas do grafo com base nos vértices críticos fornecidos. Uma aresta é considerada crítica se sua capacidade for significativamente maior do que a média das capacidades das arestas vizinhas, e se sua capacidade for maior do que a segunda maior capacidade entre as arestas vizinhas.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo para o qual as arestas críticas serão obtidas. \\
+\hline
+{\em critical\+\_\+vertexes} & Os vértices críticos já identificados no grafo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Um mapa contendo as arestas críticas e suas capacidades correspondentes.
+\end{DoxyReturn}
+@complexity O(\+V \texorpdfstring{$\ast$}{*} E), onde V é o número de vértices e E é o número de arestas do grafo, pois percorre todos os vértices e, para cada vértice, percorre todas as suas arestas adjacentes uma vez. \Hypertarget{algorithms_8cpp_a486e202dc5f3e7817a23c6efff320c94}\label{algorithms_8cpp_a486e202dc5f3e7817a23c6efff320c94} 
+\index{algorithms.cpp@{algorithms.cpp}!getStockDeficits@{getStockDeficits}}
+\index{getStockDeficits@{getStockDeficits}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{getStockDeficits()}{getStockDeficits()}}
+{\footnotesize\ttfamily map$<$ string, double $>$ get\+Stock\+Deficits (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g }\end{DoxyParamCaption})}
+
+
+
+Mede os déficits de estoque das cidades na rede de abastecimento de água. 
+
+Esta função configura o grafo fornecido para execução do algoritmo de Edmonds-\/\+Karp e, em seguida, executa o algoritmo para calcular o fluxo de água na rede. Em seguida, mede os déficits de estoque de cada cidade com base na demanda e no fluxo de água recebido. Os déficits são armazenados em um mapa que mapeia o nome de cada cidade para seu déficit de estoque.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo representando a rede de abastecimento de água. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Um mapa que mapeia o nome de cada cidade para seu déficit de estoque.
+\end{DoxyReturn}
+@complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo, pois a função executa operações de configuração do grafo e executa o algoritmo de Edmonds-\/\+Karp, que tem complexidade O(V + E). \Hypertarget{algorithms_8cpp_a20bbab41688cc28992a4c493471933ca}\label{algorithms_8cpp_a20bbab41688cc28992a4c493471933ca} 
+\index{algorithms.cpp@{algorithms.cpp}!list\_affected\_cities@{list\_affected\_cities}}
+\index{list\_affected\_cities@{list\_affected\_cities}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{list\_affected\_cities()}{list\_affected\_cities()}}
+{\footnotesize\ttfamily void list\+\_\+affected\+\_\+cities (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{graph,  }\item[{string}]{city,  }\item[{map$<$ string, double $>$ \texorpdfstring{$\ast$}{*}}]{pumping\+Map }\end{DoxyParamCaption})}
+
+
+
+Lista as cidades afetadas pelo déficit de abastecimento de água. 
+
+Esta função verifica se todas as cidades têm arestas de entrada completas de água. Se a cidade especificada for "{}all"{}, verifica todas as cidades; caso contrário, verifica apenas a cidade especificada. Em seguida, para cada cidade verificada, calcula o déficit entre a demanda e o fluxo de água recebido. Se o déficit for positivo, indica que a cidade está com falta de água. Além disso, se um mapa de bombeamento for fornecido, ajusta o déficit com base no bombeamento disponível.
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & O grafo representando a rede de abastecimento de água. \\
+\hline
+{\em city} & A cidade específica a ser verificada, ou "{}all"{} para verificar todas as cidades. \\
+\hline
+{\em pumping\+Map} & Um ponteiro para um mapa que contém informações sobre o bombeamento de água disponível para cada cidade. Se nenhum mapa for fornecido, isso será tratado como nulo.\\
+\hline
+\end{DoxyParams}
+@complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo, pois a função percorre todos os vértices e arestas relevantes para calcular o déficit de cada cidade. \Hypertarget{algorithms_8cpp_a48d229da6e5270f1356c801d6642cf58}\label{algorithms_8cpp_a48d229da6e5270f1356c801d6642cf58} 
+\index{algorithms.cpp@{algorithms.cpp}!T2\_1@{T2\_1}}
+\index{T2\_1@{T2\_1}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{T2\_1()}{T2\_1()}}
+{\footnotesize\ttfamily void T2\+\_\+1 (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{g,  }\item[{string}]{city }\end{DoxyParamCaption})}
+
+
+
+Executa o algoritmo de Edmonds-\/\+Karp em um grafo de rede de abastecimento de água. 
+
+Esta função executa o algoritmo de Edmonds-\/\+Karp no grafo fornecido, configurando os reservatórios como fontes e a cidade especificada (ou todas as cidades, se "{}all"{} for fornecido) como o sorvedouro. Em seguida, imprime as arestas do grafo com o fluxo correspondente e lista as cidades afetadas pelo déficit de abastecimento de água.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo representando a rede de abastecimento de água. \\
+\hline
+{\em city} & A cidade específica a ser considerada como sorvedouro, ou "{}all"{} para considerar todas as cidades.\\
+\hline
+\end{DoxyParams}
+@complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo, pois a função chama outras funções como {\ttfamily default\+\_\+graph\+\_\+setup\+\_\+general}, {\ttfamily default\+\_\+graph\+\_\+setup\+\_\+sink}, {\ttfamily edmonds\+\_\+karp} e {\ttfamily list\+\_\+affected\+\_\+cities}, que têm complexidades lineares ou sub-\/lineares em relação ao número de vértices e arestas do grafo. \Hypertarget{algorithms_8cpp_a6087c93bfe7298ea591055b13efc884b}\label{algorithms_8cpp_a6087c93bfe7298ea591055b13efc884b} 
+\index{algorithms.cpp@{algorithms.cpp}!T2\_3@{T2\_3}}
+\index{T2\_3@{T2\_3}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{T2\_3()}{T2\_3()}}
+{\footnotesize\ttfamily void T2\+\_\+3 (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{string}]{dataset }\end{DoxyParamCaption})}
+
+
+
+Realiza a execução do algoritmo T2\+\_\+3 para otimização do fluxo no grafo. 
+
+Este algoritmo utiliza uma abordagem baseada em heurísticas para otimizar o fluxo em um grafo. Ele identifica arestas críticas com base nas diferenças entre capacidade e fluxo, e ajusta as capacidades dessas arestas para melhorar o balanceamento do fluxo.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo no qual o algoritmo será executado. \\
+\hline
+{\em dataset} & O conjunto de dados associado ao grafo.\\
+\hline
+\end{DoxyParams}
+@complexity O(\+V\texorpdfstring{$^\wedge$}{\string^}2 \texorpdfstring{$\ast$}{*} E \texorpdfstring{$\ast$}{*} n), onde V é o número de vértices, E é o número de arestas, e n é o número de iterações necessárias até que todas as arestas críticas sejam identificadas e otimizações aplicadas, pois a função executa Edmonds-\/\+Karp e computa métricas em cada iteração, além de realizar diversas operações em grafos e vetores. \Hypertarget{algorithms_8cpp_a098d3ea8cd563fb8d8de09c57e78a6fe}\label{algorithms_8cpp_a098d3ea8cd563fb8d8de09c57e78a6fe} 
+\index{algorithms.cpp@{algorithms.cpp}!T3\_1@{T3\_1}}
+\index{T3\_1@{T3\_1}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{T3\_1()}{T3\_1()}}
+{\footnotesize\ttfamily bool T3\+\_\+1 (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{string}]{water\+Reservoir }\end{DoxyParamCaption})}
+
+
+
+Remove um reservatório de água do grafo e executa o algoritmo de Edmonds-\/\+Karp no grafo resultante. 
+
+Esta função remove o vértice representando o reservatório de água especificado do grafo fornecido. Em seguida, configura o grafo para execução do algoritmo de Edmonds-\/\+Karp, considerando os novos vértices fonte e sorvedouro após a remoção do reservatório. Após a execução do algoritmo de Edmonds-\/\+Karp, imprime as arestas do grafo com o fluxo correspondente e lista as cidades afetadas pelo déficit de abastecimento de água.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo representando a rede de abastecimento de água. \\
+\hline
+{\em water\+Reservoir} & O nome do reservatório de água a ser removido do grafo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Verdadeiro se o reservatório foi removido com sucesso e falso caso contrário.
+\end{DoxyReturn}
+@complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo, pois a função executa operações de remoção de vértices que têm complexidade O(V + E), além de chamar outras funções como {\ttfamily default\+\_\+graph\+\_\+setup\+\_\+general}, {\ttfamily default\+\_\+graph\+\_\+setup\+\_\+sink}, {\ttfamily edmonds\+\_\+karp} e {\ttfamily list\+\_\+affected\+\_\+cities}, que têm complexidades lineares ou sub-\/lineares em relação ao número de vértices e arestas do grafo. \Hypertarget{algorithms_8cpp_acafff9747f381c2d9a56391d051d0fb5}\label{algorithms_8cpp_acafff9747f381c2d9a56391d051d0fb5} 
+\index{algorithms.cpp@{algorithms.cpp}!T3\_2@{T3\_2}}
+\index{T3\_2@{T3\_2}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{T3\_2()}{T3\_2()}}
+{\footnotesize\ttfamily bool T3\+\_\+2 (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{string}]{pumping\+Station,  }\item[{map$<$ string, double $>$}]{pumping\+\_\+map }\end{DoxyParamCaption})}
+
+
+
+Verifica se a remoção de uma estação de bombeamento afeta o abastecimento de água das cidades na rede. 
+
+Esta função configura o grafo fornecido para execução do algoritmo de Edmonds-\/\+Karp e, em seguida, executa o algoritmo para calcular o fluxo de água na rede. Em seguida, verifica como a remoção da estação de bombeamento especificada afeta o abastecimento de água das cidades na rede. Se a remoção da estação de bombeamento resultar em um aumento do déficit de estoque de qualquer cidade, a função imprime o novo déficit de estoque e retorna verdadeiro. Caso contrário, retorna falso.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo representando a rede de abastecimento de água. \\
+\hline
+{\em pumping\+Station} & O nome da estação de bombeamento a ser removida da rede. \\
+\hline
+{\em pumping\+\_\+map} & Um mapa que mapeia o nome de cada cidade para seu déficit de estoque antes da remoção da estação de bombeamento. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Verdadeiro se a remoção da estação de bombeamento resultar em um aumento do déficit de estoque de qualquer cidade, caso contrário, falso.
+\end{DoxyReturn}
+@complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo, pois a função executa operações de configuração do grafo e executa o algoritmo de Edmonds-\/\+Karp, que tem complexidade O(V + E). \Hypertarget{algorithms_8cpp_a0e5006b0a788ed61a76e234818626c28}\label{algorithms_8cpp_a0e5006b0a788ed61a76e234818626c28} 
+\index{algorithms.cpp@{algorithms.cpp}!T3\_3@{T3\_3}}
+\index{T3\_3@{T3\_3}!algorithms.cpp@{algorithms.cpp}}
+\doxysubsubsection{\texorpdfstring{T3\_3()}{T3\_3()}}
+{\footnotesize\ttfamily void T3\+\_\+3 (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{string}]{dataset }\end{DoxyParamCaption})}
+
+
+
+Realiza a execução do algoritmo T3\+\_\+3 para análise do impacto de falhas em pipelines. 
+
+Este algoritmo analisa o impacto de falhas em pipelines em um grafo de fluxo. Ele identifica cidades afetadas por uma falha em um pipeline específico e calcula o déficit de abastecimento de água resultante.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo representando a rede de pipelines. \\
+\hline
+{\em dataset} & O conjunto de dados associado ao grafo.\\
+\hline
+\end{DoxyParams}
+@complexity O(\+V\texorpdfstring{$^\wedge$}{\string^}3 \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2), onde V é o número de vértices e E é o número de arestas do grafo, pois realiza uma série de operações em grafos, incluindo a execução de Edmonds-\/\+Karp várias vezes com diferentes conjuntos de arestas desativadas. 

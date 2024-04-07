@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: utils.cpp Source File</title>
+<title>Portugal Water Management: utils.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,8 +23,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">My Project
+   <div id="projectname">Portugal Water Management<span id="projectnumber">&#160;DA</span>
    </div>
+   <div id="projectbrief">G09_2</div>
   </td>
  </tr>
  </tbody>
@@ -79,8 +80,9 @@ $(function() { codefold.init(0); });
   <div class="headertitle"><div class="title">utils.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>vector&lt;vector&lt;string&gt;&gt; parseCSV(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; filename) {</div>
+<a href="utils_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="utils_8cpp.html#a2e05f3eea61c181394c204b93d0d50fb">   14</a></span>vector&lt;vector&lt;string&gt;&gt; <a class="code hl_function" href="utils_8cpp.html#a2e05f3eea61c181394c204b93d0d50fb">parseCSV</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; filename) {</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    vector&lt;vector&lt;string&gt;&gt; data;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    ifstream file(filename);</div>
@@ -137,8 +139,10 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    file.close();</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">return</span> data;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
+</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keywordtype">string</span> bigOrSmall(<span class="keywordtype">string</span> dataset=<span class="stringliteral">&quot;&quot;</span>){</div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="utils_8cpp.html#a9cb99bfa5e0cbfbd364bc92665f29467">   85</a></span><span class="keywordtype">string</span> <a class="code hl_function" href="utils_8cpp.html#a9cb99bfa5e0cbfbd364bc92665f29467">bigOrSmall</a>(<span class="keywordtype">string</span> dataset=<span class="stringliteral">&quot;&quot;</span>){</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">if</span>(!dataset.empty()) <span class="keywordflow">return</span> dataset; <span class="comment">//For cases like T2_3 where we call multiple times the populate_graph function</span></div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
@@ -158,24 +162,26 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">return</span> userInput == <span class="stringliteral">&quot;big&quot;</span> ? <span class="stringliteral">&quot;Project1LargeDataSet&quot;</span> : <span class="stringliteral">&quot;Project1DataSetSmall&quot;</span>;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
+</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="keywordtype">string</span> populate_graph(Graph&lt;T&gt; &amp;g, <span class="keywordtype">string</span> dataset=<span class="stringliteral">&quot;&quot;</span>){</div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="utils_8cpp.html#a72d8ec0e99d0ae595c4ba84d21784c30">  122</a></span><span class="keywordtype">string</span> <a class="code hl_function" href="utils_8cpp.html#a72d8ec0e99d0ae595c4ba84d21784c30">populate_graph</a>(Graph&lt;T&gt; &amp;<a class="code hl_variable" href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a>, <span class="keywordtype">string</span> dataset=<span class="stringliteral">&quot;&quot;</span>){</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    cout &lt;&lt; <span class="stringliteral">&quot;parsing data...&quot;</span> &lt;&lt; endl &lt;&lt; endl;</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">if</span>(dataset.empty()) dataset = bigOrSmall();</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">if</span>(dataset.empty()) dataset = <a class="code hl_function" href="utils_8cpp.html#a9cb99bfa5e0cbfbd364bc92665f29467">bigOrSmall</a>();</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keyword">auto</span> cities = parseCSV(<span class="stringliteral">&quot;./&quot;</span> + dataset + <span class="stringliteral">&quot;/Cities.csv&quot;</span>);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keyword">auto</span> stations = parseCSV(<span class="stringliteral">&quot;./&quot;</span> + dataset + <span class="stringliteral">&quot;/Stations.csv&quot;</span>);</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keyword">auto</span> reservoirs = parseCSV(<span class="stringliteral">&quot;./&quot;</span> + dataset + <span class="stringliteral">&quot;/Reservoirs.csv&quot;</span>);</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">auto</span> pipes = parseCSV(<span class="stringliteral">&quot;./&quot;</span> + dataset + <span class="stringliteral">&quot;/Pipes.csv&quot;</span>);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keyword">auto</span> cities = <a class="code hl_function" href="utils_8cpp.html#a2e05f3eea61c181394c204b93d0d50fb">parseCSV</a>(<span class="stringliteral">&quot;./&quot;</span> + dataset + <span class="stringliteral">&quot;/Cities.csv&quot;</span>);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keyword">auto</span> stations = <a class="code hl_function" href="utils_8cpp.html#a2e05f3eea61c181394c204b93d0d50fb">parseCSV</a>(<span class="stringliteral">&quot;./&quot;</span> + dataset + <span class="stringliteral">&quot;/Stations.csv&quot;</span>);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keyword">auto</span> reservoirs = <a class="code hl_function" href="utils_8cpp.html#a2e05f3eea61c181394c204b93d0d50fb">parseCSV</a>(<span class="stringliteral">&quot;./&quot;</span> + dataset + <span class="stringliteral">&quot;/Reservoirs.csv&quot;</span>);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">auto</span> pipes = <a class="code hl_function" href="utils_8cpp.html#a2e05f3eea61c181394c204b93d0d50fb">parseCSV</a>(<span class="stringliteral">&quot;./&quot;</span> + dataset + <span class="stringliteral">&quot;/Pipes.csv&quot;</span>);</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    </div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="comment">//add cities to graph</span></div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> cityData: cities){</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        cout &lt;&lt; <span class="stringliteral">&quot;\t- adding city &quot;</span> &lt;&lt; cityData[2] &lt;&lt; <span class="stringliteral">&quot; (&quot;</span> &lt;&lt; cityData[0] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        City* city = <span class="keyword">new</span> City(cityData[0], stoi(cityData[1]), cityData[2], stof(cityData[3]), stoi(cityData[4]));</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">if</span>(!g.addVertex(city)) cout &lt;&lt; <span class="stringliteral">&quot;\t- failed to add &quot;</span> &lt;&lt; city-&gt;getInfo() &lt;&lt; endl;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">if</span>(!<a class="code hl_variable" href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a>.addVertex(city)) cout &lt;&lt; <span class="stringliteral">&quot;\t- failed to add &quot;</span> &lt;&lt; city-&gt;getInfo() &lt;&lt; endl;</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    }</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    </div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="comment">//add stations to graph</span></div>
@@ -183,7 +189,7 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        cout &lt;&lt; <span class="stringliteral">&quot;\t- adding pumping station &quot;</span> &lt;&lt; stationData[1] &lt;&lt; endl;</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        Station* station = <span class="keyword">new</span> Station(stoi(stationData[0]), stationData[1]);</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">if</span>(!g.addVertex(station)) cout &lt;&lt; <span class="stringliteral">&quot;\t- failed to add &quot;</span> &lt;&lt; station-&gt;getInfo() &lt;&lt; endl;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">if</span>(!<a class="code hl_variable" href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a>.addVertex(station)) cout &lt;&lt; <span class="stringliteral">&quot;\t- failed to add &quot;</span> &lt;&lt; station-&gt;getInfo() &lt;&lt; endl;</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="comment">//add reservoirs to graph</span></div>
@@ -191,7 +197,7 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        cout &lt;&lt; <span class="stringliteral">&quot;\t- adding reservoir &quot;</span> &lt;&lt; reservoirData[3] &lt;&lt; <span class="stringliteral">&quot; (&quot;</span> &lt;&lt; reservoirData[1] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        Reservoir* reservoir = <span class="keyword">new</span> Reservoir(reservoirData[0], reservoirData[1], stoi(reservoirData[2]), reservoirData[3], stoi(reservoirData[4]));</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="keywordflow">if</span>(!g.addVertex(reservoir)) cout &lt;&lt; <span class="stringliteral">&quot;\t- failed to add &quot;</span> &lt;&lt; reservoir-&gt;getInfo() &lt;&lt; endl;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="keywordflow">if</span>(!<a class="code hl_variable" href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a>.addVertex(reservoir)) cout &lt;&lt; <span class="stringliteral">&quot;\t- failed to add &quot;</span> &lt;&lt; reservoir-&gt;getInfo() &lt;&lt; endl;</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    }</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="comment">//add pipes to graph</span></div>
@@ -204,12 +210,12 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        </div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        cout &lt;&lt; <span class="stringliteral">&quot;\t -adding &quot;</span> &lt;&lt; (bidirectional ? <span class="stringliteral">&quot;bi&quot;</span> : <span class="stringliteral">&quot;uni&quot;</span>) &lt;&lt; <span class="stringliteral">&quot;directional pipe from &quot;</span> &lt;&lt; source &lt;&lt; <span class="stringliteral">&quot; to &quot;</span> &lt;&lt; destination &lt;&lt; endl;</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordflow">if</span>(bidirectional) g.addBidirectionalEdge(source, destination, capacity);</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <span class="keywordflow">else</span> g.addEdge(source, destination, capacity);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordflow">if</span>(bidirectional) <a class="code hl_variable" href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a>.addBidirectionalEdge(source, destination, capacity);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <span class="keywordflow">else</span> <a class="code hl_variable" href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a>.addEdge(source, destination, capacity);</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    }   </div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    </div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="comment">//set flow of edges to zero</span></div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keyword">auto</span> verti = g.getVertexSet();</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keyword">auto</span> verti = <a class="code hl_variable" href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a>.getVertexSet();</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> v: verti){</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keyword">auto</span> edges = v-&gt;getAdj();</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keywordflow">for</span>(<span class="keyword">auto</span> e: edges){</div>
@@ -220,27 +226,36 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordflow">return</span> dataset; </div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    </div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>}</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">//print edges and corresponding flow</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="keywordtype">void</span> printGraph(Graph&lt;T&gt; &amp;g){</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    cout &lt;&lt; endl &lt;&lt; <span class="stringliteral">&quot;FINAL RESULT: &quot;</span> &lt;&lt; endl &lt;&lt; endl;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keyword">auto</span> verti = g.getVertexSet();</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> v: verti){</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keyword">auto</span> edges = v-&gt;getAdj();</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="keywordflow">for</span>(<span class="keyword">auto</span> e: edges){</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            cout &lt;&lt; <span class="stringliteral">&quot;edge: &quot;</span> &lt;&lt; e-&gt;getOrig()-&gt;getInfo() &lt;&lt; <span class="stringliteral">&quot;-&quot;</span> &lt;&lt; e-&gt;getDest()-&gt;getInfo() &lt;&lt; <span class="stringliteral">&quot;  \tflow: &quot;</span> &lt;&lt; e-&gt;getFlow() &lt;&lt; <span class="stringliteral">&quot;/&quot;</span> &lt;&lt; (e-&gt;getWeight() == 1000000000 ? <span class="stringliteral">&quot;inf&quot;</span> : to_string((<span class="keywordtype">int</span>)e-&gt;getWeight())) &lt;&lt;  endl;</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        }</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    cout &lt;&lt; endl;</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>}</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="keywordtype">bool</span> validCity(Graph&lt;T&gt; &amp;g, <span class="keywordtype">string</span> city){</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordflow">if</span>(city == <span class="stringliteral">&quot;all&quot;</span>) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordflow">return</span> g.findVertex(city);</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>}</div>
+</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">//print edges and corresponding flow</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00195" data-start="{" data-end="}">
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="utils_8cpp.html#a944dda62a3b9f4ed7c9695f57b5ed0c9">  195</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="utils_8cpp.html#a944dda62a3b9f4ed7c9695f57b5ed0c9">printGraph</a>(Graph&lt;T&gt; &amp;<a class="code hl_variable" href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a>){</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    cout &lt;&lt; endl &lt;&lt; <span class="stringliteral">&quot;FINAL RESULT: &quot;</span> &lt;&lt; endl &lt;&lt; endl;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="keyword">auto</span> verti = <a class="code hl_variable" href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a>.getVertexSet();</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> v: verti){</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="keyword">auto</span> edges = v-&gt;getAdj();</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">for</span>(<span class="keyword">auto</span> e: edges){</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            cout &lt;&lt; <span class="stringliteral">&quot;edge: &quot;</span> &lt;&lt; e-&gt;getOrig()-&gt;getInfo() &lt;&lt; <span class="stringliteral">&quot;-&quot;</span> &lt;&lt; e-&gt;getDest()-&gt;getInfo() &lt;&lt; <span class="stringliteral">&quot;  \tflow: &quot;</span> &lt;&lt; e-&gt;getFlow() &lt;&lt; <span class="stringliteral">&quot;/&quot;</span> &lt;&lt; (e-&gt;getWeight() == 1000000000 ? <span class="stringliteral">&quot;inf&quot;</span> : to_string((<span class="keywordtype">int</span>)e-&gt;getWeight())) &lt;&lt;  endl;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        }</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    }</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    cout &lt;&lt; endl;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>}</div>
+</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="foldopen" id="foldopen00221" data-start="{" data-end="}">
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno"><a class="line" href="utils_8cpp.html#acda60f850c411658abd9b86173b60726">  221</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="utils_8cpp.html#acda60f850c411658abd9b86173b60726">validCity</a>(Graph&lt;T&gt; &amp;<a class="code hl_variable" href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a>, <span class="keywordtype">string</span> city){</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordflow">if</span>(city == <span class="stringliteral">&quot;all&quot;</span>) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a>.findVertex(city);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>}</div>
+</div>
+<div class="ttc" id="amain_8cpp_html_a365ea1bb8f38235ada094cc2165391d9"><div class="ttname"><a href="main_8cpp.html#a365ea1bb8f38235ada094cc2165391d9">g</a></div><div class="ttdeci">Graph&lt; string &gt; g</div><div class="ttdef"><b>Definition</b> main.cpp:16</div></div>
+<div class="ttc" id="autils_8cpp_html_a2e05f3eea61c181394c204b93d0d50fb"><div class="ttname"><a href="utils_8cpp.html#a2e05f3eea61c181394c204b93d0d50fb">parseCSV</a></div><div class="ttdeci">vector&lt; vector&lt; string &gt; &gt; parseCSV(const string &amp;filename)</div><div class="ttdoc">Analisa um arquivo CSV e retorna os dados em forma de vetor de vetores de strings.</div><div class="ttdef"><b>Definition</b> utils.cpp:14</div></div>
+<div class="ttc" id="autils_8cpp_html_a72d8ec0e99d0ae595c4ba84d21784c30"><div class="ttname"><a href="utils_8cpp.html#a72d8ec0e99d0ae595c4ba84d21784c30">populate_graph</a></div><div class="ttdeci">string populate_graph(Graph&lt; T &gt; &amp;g, string dataset=&quot;&quot;)</div><div class="ttdoc">Popula o grafo com dados de um conjunto de dados específico ou solicita ao usuário para escolher um c...</div><div class="ttdef"><b>Definition</b> utils.cpp:122</div></div>
+<div class="ttc" id="autils_8cpp_html_a944dda62a3b9f4ed7c9695f57b5ed0c9"><div class="ttname"><a href="utils_8cpp.html#a944dda62a3b9f4ed7c9695f57b5ed0c9">printGraph</a></div><div class="ttdeci">void printGraph(Graph&lt; T &gt; &amp;g)</div><div class="ttdoc">Imprime os vértices e as arestas do grafo junto com o fluxo atual em cada aresta.</div><div class="ttdef"><b>Definition</b> utils.cpp:195</div></div>
+<div class="ttc" id="autils_8cpp_html_a9cb99bfa5e0cbfbd364bc92665f29467"><div class="ttname"><a href="utils_8cpp.html#a9cb99bfa5e0cbfbd364bc92665f29467">bigOrSmall</a></div><div class="ttdeci">string bigOrSmall(string dataset=&quot;&quot;)</div><div class="ttdoc">Retorna o nome do conjunto de dados escolhido pelo usuário.</div><div class="ttdef"><b>Definition</b> utils.cpp:85</div></div>
+<div class="ttc" id="autils_8cpp_html_acda60f850c411658abd9b86173b60726"><div class="ttname"><a href="utils_8cpp.html#acda60f850c411658abd9b86173b60726">validCity</a></div><div class="ttdeci">bool validCity(Graph&lt; T &gt; &amp;g, string city)</div><div class="ttdoc">Verifica se uma cidade é válida em um grafo.</div><div class="ttdef"><b>Definition</b> utils.cpp:221</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
