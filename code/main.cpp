@@ -5,6 +5,7 @@
 #include <limits>
 #include <vector>
 #include <filesystem>
+#include <cstdio>
 #include "./data_structures/Graph.h"
 #include "./data_structures/Vertex_children.h"
 #include "./utils.cpp"
@@ -77,6 +78,9 @@ void menu_option_4(string dataset){
                 critical_pumping_stations.push_back(v->getInfo());
             else
                 non_critical_pumping_stations.push_back(v->getInfo());
+
+            cout << endl << endl << "press any key to continue..." << endl;
+            getchar();
         }
     }
 
