@@ -444,7 +444,7 @@ map<Edge<string> *, int> get_critical_edges(Graph<string> g, vector<string>& cri
 }
 
 
-void T2_3(Graph<string> g, int data_set){
+void T2_3(Graph<string> g){
 
 
     vector<string> sources;
@@ -478,7 +478,7 @@ void T2_3(Graph<string> g, int data_set){
         Graph<string> gr; 
         vector<string> gr_sources;
         vector<string> gr_dest; 
-        populate_graph(gr, data_set);
+        populate_graph(gr);
         Graph<string> graph = default_graph_setup_general(gr, gr_sources, gr_dest); 
         string gr_sink = default_graph_setup_sink(graph, gr_dest); 
 
