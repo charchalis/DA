@@ -538,10 +538,10 @@ void T2_3(Graph<string> g, string dataset){
 void T3_3(Graph<string> g, string dataset){
 
     //Setups the Edmonds Karp of the default graph
-    vector<string> sources_default; 
-    vector<string> destinations_default; 
-    Graph<string> graph = default_graph_setup_general(g, sources_default, destinations_default);
-    string sink = default_graph_setup_sink(graph, destinations_default);
+    vector<string> sources; 
+    vector<string> destinations; 
+    Graph<string> graph = default_graph_setup_general(g, sources, destinations);
+    string sink = default_graph_setup_sink(graph, destinations);
 
     edmonds_karp(graph, "source", sink);
 
@@ -563,31 +563,28 @@ void T3_3(Graph<string> g, string dataset){
 
 
     map<string, string> affected_cities; //Cities Affected by a given pipeline 
-    map<string, double> pipe_deficits; //The Devices provoked by a pipeline
+    map<string, double> pipe_deficits; //The defices provoked by a pipeline
 
     //Iterate through every edge 
     for(auto v : graph.getVertexSet()){
         for(auto e: v->getAdj()){
 
+            //Reset All Edges Flow 
+            for(auto v: graph.getVertexSet()){
+                for(auto e: v->getAdj()){
+                    e->setFlow(0);
+                }
+            }
+            
             //Temporarily set its capacity to zero (simulate the rupture/failure)
             int original_capacity = e->getWeight();
             e->setWeight(0); 
 
-            //Creates a new Graph and populates it 
-            Graph<string> g_new;
-            populate_graph(g_new, dataset);
-
-            //Setups the graph for Edmonds Karp
-            vector<string> sources;
-            vector<string> destinations; 
-            Graph<string> graph_new = default_graph_setup_general(g_new, sources, destinations);
-            string sink = default_graph_setup_sink(graph_new, destinations);
-
             //Runs Edmonds Karp for the given "ruptured" edge 
-            edmonds_karp(graph_new, "source", sink);
+            edmonds_karp(graph, "source", sink);
 
             //Check what cities got their demand affected (can no longer supply the ammount of water they need)
-            for (auto v : graph_new.getVertexSet()) {
+            for (auto v : graph.getVertexSet()) {
 
                 if (v->getInfo()[0] == 'C') {
 
@@ -596,7 +593,6 @@ void T3_3(Graph<string> g, string dataset){
                     int occurences = count(not_meet_demand.begin(), not_meet_demand.end(), v->getInfo());
                     if(occurences > 0)
                         continue;   
-
 
                     auto incoming = v->getIncoming();
                     float demand = v->getDemand();
