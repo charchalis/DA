@@ -14,8 +14,12 @@
  */
 void edmonds_karp(Graph<string> &graph, string source, string sink){
 
+    std::ofstream outFile("edmonds_karp.txt");
+
     cout << endl << "PATHS: " << endl << endl;
-    
+    outFile << endl << "PATHS: " << endl << endl;
+
+
     while(true){
         map<string,Edge<string> *> discoveryMap; //this will tell the path found by the bfs
         auto bfsResult = graph.bfs(source, discoveryMap); //run bfs
@@ -52,7 +56,8 @@ void edmonds_karp(Graph<string> &graph, string source, string sink){
         }
         cout << path;
         cout << "\t(flow: " << maxFlow << ")" << endl;
-
+        outFile << path;
+        outFile << "\t(flow: " << maxFlow << ")" << endl;
 
         //set flow of path
         Vertex<string>* node = graph.findVertex(source);
@@ -93,7 +98,6 @@ Graph<string> default_graph_setup_general(Graph<string> g,vector<string> sources
 
         //add reservoirs to sources and add cities to destinations
         string vertexCode = vertex->getInfo();
-        std :: cout << "INFO: " << vertexCode << endl; 
         char vertexType = vertexCode[0];
 
         if(vertexType == 'R') sources.push_back(vertexCode);

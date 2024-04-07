@@ -1,0 +1,4 @@
+
+PATHS: 
+
+source -> R_1 -> PS_1 -> C_1	(flow: 20)
