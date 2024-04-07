@@ -61,7 +61,8 @@ void menu_option_4(string dataset){
     for(auto v : g.getVertexSet()){
         //Filter the pumping stations
         if(v->getInfo()[0] == 'P' && v->getInfo()[1]=='S'){
-            //Creates a new graph
+            //Creates a new graph (no copies of the original graph are made, so we make sure we are not modifying the original graph
+            //as we are going to remove the pumping station mid iteration)
             Graph<string> g_new; 
             populate_graph(g_new, dataset);
             //Removes the pumping station
@@ -76,9 +77,6 @@ void menu_option_4(string dataset){
                 critical_pumping_stations.push_back(v->getInfo());
             else
                 non_critical_pumping_stations.push_back(v->getInfo());
-
-            //Adds the Pumping Station Back 
-            g_new.addVertex(v->getInfo());
         }
     }
 
