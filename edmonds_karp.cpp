@@ -543,10 +543,12 @@ void T3_3(Graph<string> g, string dataset){
     Graph<string> graph = default_graph_setup_general(g, sources, destinations);
     string sink = default_graph_setup_sink(graph, destinations);
 
+    //Performs Edmonds Karp without removing any vertexes for metrics purposes
     edmonds_karp(graph, "source", sink);
 
-    vector<string> not_meet_demand; //Cities that don't meet their demand by default 
+    vector<string> not_meet_demand;
 
+    //Check which cities do not meet their demand by default
     for(auto v : graph.getVertexSet()){
         if(v->getInfo()[0] == 'C'){
             auto incoming = v->getIncoming();
@@ -568,6 +570,10 @@ void T3_3(Graph<string> g, string dataset){
     //Iterate through every edge 
     for(auto v : graph.getVertexSet()){
         for(auto e: v->getAdj()){
+
+            //Ignore the edges that are connected to the super source or to the super sink
+            if(e->getDest()->getInfo() == "sink" || e->getOrig()->getInfo() == "sink" || e->getOrig()->getInfo() == "source" || e->getDest()->getInfo() == "source")
+                continue;
 
             //Reset All Edges Flow 
             for(auto v: graph.getVertexSet()){
@@ -624,9 +630,27 @@ void T3_3(Graph<string> g, string dataset){
         }
     }
 
+    /* 
+        SOLUTION OUTPUT
+    */
+
+    std::cout << "---------------------- SORTED BY PIPELINE ----------------------" << std::endl;
     //Print the cities a pipeline affects as well as the deficit provoked by the pipeline
     for(auto it = affected_cities.begin(); it != affected_cities.end(); ++it){
         std::cout << "Pipeline: " << it->first << " Affected City: " << it->second << " Deficit: " << pipe_deficits[it->first] << std::endl; 
     }   
 
+    std::cout << "---------------------- SORTED BY CITY ----------------------" << std::endl;
+    //Print the pipelins that affect a city 
+    for(auto v : graph.getVertexSet()){
+        if(v->getInfo()[0] == 'C'){
+            string city = v->getInfo();
+            for(auto it = affected_cities.begin(); it != affected_cities.end(); ++it){
+                if(it->second == city){
+                    std::cout << "City: " << city << " Affected by pipeline: " << it->first << std::endl;
+                }
+            }  
+        }
+    }
+    
 }

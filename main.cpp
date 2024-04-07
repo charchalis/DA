@@ -76,6 +76,9 @@ void menu_option_4(string dataset){
                 critical_pumping_stations.push_back(v->getInfo());
             else
                 non_critical_pumping_stations.push_back(v->getInfo());
+
+            //Adds the Pumping Station Back 
+            g_new.addVertex(v->getInfo());
         }
     }
 
