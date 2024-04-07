@@ -1,0 +1,138 @@
+\doxysection{utils.\+cpp File Reference}
+\hypertarget{utils_8cpp}{}\label{utils_8cpp}\index{utils.cpp@{utils.cpp}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ vector$<$ string $>$ $>$ \mbox{\hyperlink{utils_8cpp_a2e05f3eea61c181394c204b93d0d50fb}{parse\+CSV}} (const string \&filename)
+\begin{DoxyCompactList}\small\item\em Analisa um arquivo CSV e retorna os dados em forma de vetor de vetores de strings. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{utils_8cpp_a9cb99bfa5e0cbfbd364bc92665f29467}{big\+Or\+Small}} (string dataset="{}"{})
+\begin{DoxyCompactList}\small\item\em Retorna o nome do conjunto de dados escolhido pelo usuário. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\string \mbox{\hyperlink{utils_8cpp_a72d8ec0e99d0ae595c4ba84d21784c30}{populate\+\_\+graph}} (Graph$<$ T $>$ \&\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}, string dataset="{}"{})
+\begin{DoxyCompactList}\small\item\em Popula o grafo com dados de um conjunto de dados específico ou solicita ao usuário para escolher um conjunto de dados. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{utils_8cpp_a944dda62a3b9f4ed7c9695f57b5ed0c9}{print\+Graph}} (Graph$<$ T $>$ \&\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}})
+\begin{DoxyCompactList}\small\item\em Imprime os vértices e as arestas do grafo junto com o fluxo atual em cada aresta. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\bool \mbox{\hyperlink{utils_8cpp_acda60f850c411658abd9b86173b60726}{valid\+City}} (Graph$<$ T $>$ \&\mbox{\hyperlink{main_8cpp_a365ea1bb8f38235ada094cc2165391d9}{g}}, string city)
+\begin{DoxyCompactList}\small\item\em Verifica se uma cidade é válida em um grafo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{utils_8cpp_a9cb99bfa5e0cbfbd364bc92665f29467}\label{utils_8cpp_a9cb99bfa5e0cbfbd364bc92665f29467} 
+\index{utils.cpp@{utils.cpp}!bigOrSmall@{bigOrSmall}}
+\index{bigOrSmall@{bigOrSmall}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{bigOrSmall()}{bigOrSmall()}}
+{\footnotesize\ttfamily string big\+Or\+Small (\begin{DoxyParamCaption}\item[{string}]{dataset = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+
+
+
+Retorna o nome do conjunto de dados escolhido pelo usuário. 
+
+Esta função permite que o usuário escolha entre dois conjuntos de dados, "{}big"{} ou "{}small"{}, e retorna o nome do conjunto de dados escolhido. Se um nome de conjunto de dados for fornecido como argumento, essa string será retornada sem solicitar entrada adicional do usuário.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset} & O nome do conjunto de dados fornecido como argumento. Se não for fornecido, o usuário será solicitado a escolher. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+O nome do conjunto de dados escolhido ("{}\+Project1\+Large\+Data\+Set"{} para "{}big"{} ou "{}\+Project1\+Data\+Set\+Small"{} para "{}small"{}).
+\end{DoxyReturn}
+@complexity O(1) se o conjunto de dados já estiver fornecido como argumento, O(\+N) caso contrário, onde N é o número de vezes que o usuário é solicitado a fornecer a entrada correta. \Hypertarget{utils_8cpp_a2e05f3eea61c181394c204b93d0d50fb}\label{utils_8cpp_a2e05f3eea61c181394c204b93d0d50fb} 
+\index{utils.cpp@{utils.cpp}!parseCSV@{parseCSV}}
+\index{parseCSV@{parseCSV}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{parseCSV()}{parseCSV()}}
+{\footnotesize\ttfamily vector$<$ vector$<$ string $>$ $>$ parse\+CSV (\begin{DoxyParamCaption}\item[{const string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Analisa um arquivo CSV e retorna os dados em forma de vetor de vetores de strings. 
+
+Esta função lê um arquivo CSV e retorna os dados em forma de vetor de vetores de strings. Cada vetor interno representa uma linha do arquivo CSV, e cada elemento desse vetor representa uma célula naquela linha.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & O nome do arquivo CSV a ser analisado. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Um vetor de vetores de strings representando os dados do arquivo CSV.
+\end{DoxyReturn}
+@complexity O(\+N\texorpdfstring{$\ast$}{*}\+M), onde N é o número de linhas no arquivo CSV e M é o número máximo de células em uma linha, pois a função percorre cada linha do arquivo e divide as células em cada linha. \Hypertarget{utils_8cpp_a72d8ec0e99d0ae595c4ba84d21784c30}\label{utils_8cpp_a72d8ec0e99d0ae595c4ba84d21784c30} 
+\index{utils.cpp@{utils.cpp}!populate\_graph@{populate\_graph}}
+\index{populate\_graph@{populate\_graph}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{populate\_graph()}{populate\_graph()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+string populate\+\_\+graph (\begin{DoxyParamCaption}\item[{Graph$<$ T $>$ \&}]{g,  }\item[{string}]{dataset = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+
+
+
+Popula o grafo com dados de um conjunto de dados específico ou solicita ao usuário para escolher um conjunto de dados. 
+
+Esta função popula o grafo com dados de um conjunto de dados específico. Se o nome do conjunto de dados não for fornecido, a função solicitará ao usuário que escolha entre os conjuntos de dados "{}big"{} ou "{}small"{}. Os conjuntos de dados são esperados estar em arquivos CSV com os seguintes nomes\+: Cities.\+csv, Stations.\+csv, Reservoirs.\+csv e Pipes.\+csv.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo a ser populado com os dados. \\
+\hline
+{\em dataset} & O nome do conjunto de dados a ser usado. Se não for fornecido, o usuário será solicitado a escolher. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+O nome do conjunto de dados que foi populado no grafo.
+\end{DoxyReturn}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & O tipo de dado dos vértices do grafo.\\
+\hline
+\end{DoxyTemplParams}
+@complexity O(\+N) em que N é o número de linhas nos arquivos CSV de cidades, estações, reservatórios e tubulações. \Hypertarget{utils_8cpp_a944dda62a3b9f4ed7c9695f57b5ed0c9}\label{utils_8cpp_a944dda62a3b9f4ed7c9695f57b5ed0c9} 
+\index{utils.cpp@{utils.cpp}!printGraph@{printGraph}}
+\index{printGraph@{printGraph}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{printGraph()}{printGraph()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void print\+Graph (\begin{DoxyParamCaption}\item[{Graph$<$ T $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Imprime os vértices e as arestas do grafo junto com o fluxo atual em cada aresta. 
+
+Esta função imprime os vértices e as arestas do grafo, juntamente com o fluxo atual em cada aresta.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo a ser impresso.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & O tipo de dado dos vértices do grafo.\\
+\hline
+\end{DoxyTemplParams}
+@complexity O(V + E), onde V é o número de vértices e E é o número de arestas no grafo. \Hypertarget{utils_8cpp_acda60f850c411658abd9b86173b60726}\label{utils_8cpp_acda60f850c411658abd9b86173b60726} 
+\index{utils.cpp@{utils.cpp}!validCity@{validCity}}
+\index{validCity@{validCity}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{validCity()}{validCity()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool valid\+City (\begin{DoxyParamCaption}\item[{Graph$<$ T $>$ \&}]{g,  }\item[{string}]{city }\end{DoxyParamCaption})}
+
+
+
+Verifica se uma cidade é válida em um grafo. 
+
+Esta função verifica se uma cidade especificada é válida em um grafo. Se a cidade for "{}all"{}, ela é considerada válida.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & O grafo onde a cidade será verificada. \\
+\hline
+{\em city} & A cidade a ser verificada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true se a cidade for válida ou se for "{}all"{}, false caso contrário.
+\end{DoxyReturn}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & O tipo de dado dos vértices do grafo.\\
+\hline
+\end{DoxyTemplParams}
+@complexity O(\+V), onde V é o número de vértices no grafo. 

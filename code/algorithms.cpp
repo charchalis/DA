@@ -1,3 +1,17 @@
+/**
+ * @brief Executa o algoritmo de Edmonds-Karp para encontrar o fluxo máximo no grafo.
+ *
+ * Este algoritmo implementa o método de Edmonds-Karp para encontrar o fluxo máximo de uma fonte para um
+ * sorvedouro em um grafo. Ele encontra caminhos aumentadores usando uma busca em largura (BFS) e atualiza
+ * o fluxo ao longo desses caminhos até que não seja possível encontrar mais caminhos aumentadores.
+ *
+ * @param graph O grafo no qual o algoritmo será executado. O grafo será modificado para refletir o fluxo máximo.
+ * @param source O vértice de origem do fluxo.
+ * @param sink O vértice de destino do fluxo.
+ *
+ * @complexity O(V * E^2), onde V é o número de vértices e E é o número de arestas do grafo, pois o algoritmo
+ * executa uma busca em largura (BFS) para encontrar caminhos aumentadores e atualiza o fluxo ao longo desses caminhos.
+ */
 void edmonds_karp(Graph<string> &graph, string source, string sink){
 
     cout << endl << "PATHS: " << endl << endl;
@@ -54,6 +68,21 @@ void edmonds_karp(Graph<string> &graph, string source, string sink){
 
 }
 
+/**
+ * @brief Configura o grafo para uso geral sem excluir nenhuma cidade específica.
+ *
+ * Esta função configura o grafo para uso geral, identificando os reservatórios como fontes e as cidades como destinos.
+ * Em seguida, cria um superorigem que se conecta às fontes do grafo.
+ *
+ * @param g O grafo original a ser configurado.
+ * @param sources Um vetor que será preenchido com os códigos das fontes identificadas no grafo.
+ * @param destinations Um vetor que será preenchido com os códigos dos destinos identificados no grafo.
+ * @return Um novo grafo configurado para uso geral.
+ *
+ * @complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo original, pois a função
+ * percorre todos os vértices do grafo original para identificar as fontes e os destinos, adiciona uma superorigem
+ * e as arestas correspondentes, e inicializa o fluxo das novas arestas.
+ */
 //Setup the graph for general use (Without excluding any city)
 Graph<string> default_graph_setup_general(Graph<string> g,vector<string> sources, vector<string> &destinations){
    
@@ -92,6 +121,20 @@ Graph<string> default_graph_setup_general(Graph<string> g,vector<string> sources
     return graph; 
 }
 
+
+/**
+ * @brief Configura o grafo adicionando um super-sorvedouro ao qual os destinos se conectam.
+ *
+ * Esta função cria um super-sorvedouro no grafo fornecido e conecta todos os destinos a ele.
+ * Em seguida, inicializa o fluxo das novas arestas que conectam aos destinos ao super-sorvedouro.
+ *
+ * @param graph O grafo ao qual o super-sorvedouro será adicionado e ao qual os destinos serão conectados.
+ * @param destinations Um vetor contendo os códigos dos destinos a serem conectados ao super-sorvedouro.
+ * @return O nome do super-sorvedouro adicionado ao grafo.
+ *
+ * @complexity O(D), onde D é o número de destinos, pois a função percorre os destinos para criar as arestas
+ * entre eles e o super-sorvedouro e inicializa o fluxo dessas novas arestas.
+ */
 string default_graph_setup_sink(Graph<string> &graph, vector<string> destinations){
 
 
@@ -113,6 +156,23 @@ string default_graph_setup_sink(Graph<string> &graph, vector<string> destination
 }
 
 
+/**
+ * @brief Lista as cidades afetadas pelo déficit de abastecimento de água.
+ *
+ * Esta função verifica se todas as cidades têm arestas de entrada completas de água.
+ * Se a cidade especificada for "all", verifica todas as cidades; caso contrário, verifica apenas a cidade especificada.
+ * Em seguida, para cada cidade verificada, calcula o déficit entre a demanda e o fluxo de água recebido.
+ * Se o déficit for positivo, indica que a cidade está com falta de água.
+ * Além disso, se um mapa de bombeamento for fornecido, ajusta o déficit com base no bombeamento disponível.
+ *
+ * @param graph O grafo representando a rede de abastecimento de água.
+ * @param city A cidade específica a ser verificada, ou "all" para verificar todas as cidades.
+ * @param pumpingMap Um ponteiro para um mapa que contém informações sobre o bombeamento de água disponível para cada cidade.
+ * Se nenhum mapa for fornecido, isso será tratado como nulo.
+ *
+ * @complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo, pois a função percorre
+ * todos os vértices e arestas relevantes para calcular o déficit de cada cidade.
+ */
 //T2.2
 void list_affected_cities(Graph<string> &graph, string city, map<string,double> *pumpingMap) {
     cout << endl << "DEFICITS:" << endl << endl;
@@ -161,6 +221,20 @@ void list_affected_cities(Graph<string> &graph, string city, map<string,double> 
     }
 }
 
+/**
+ * @brief Executa o algoritmo de Edmonds-Karp em um grafo de rede de abastecimento de água.
+ *
+ * Esta função executa o algoritmo de Edmonds-Karp no grafo fornecido, configurando os reservatórios como fontes
+ * e a cidade especificada (ou todas as cidades, se "all" for fornecido) como o sorvedouro. Em seguida, imprime
+ * as arestas do grafo com o fluxo correspondente e lista as cidades afetadas pelo déficit de abastecimento de água.
+ *
+ * @param g O grafo representando a rede de abastecimento de água.
+ * @param city A cidade específica a ser considerada como sorvedouro, ou "all" para considerar todas as cidades.
+ *
+ * @complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo, pois a função chama
+ * outras funções como `default_graph_setup_general`, `default_graph_setup_sink`, `edmonds_karp` e `list_affected_cities`,
+ * que têm complexidades lineares ou sub-lineares em relação ao número de vértices e arestas do grafo.
+ */
 void T2_1(Graph<string> &g, string city){
 
     cout << endl << "-----------------------------------------------------------------------------------" << endl << endl;
@@ -192,7 +266,24 @@ void T2_1(Graph<string> &g, string city){
     return;
 }
 
-
+/**
+ * @brief Remove um reservatório de água do grafo e executa o algoritmo de Edmonds-Karp no grafo resultante.
+ *
+ * Esta função remove o vértice representando o reservatório de água especificado do grafo fornecido.
+ * Em seguida, configura o grafo para execução do algoritmo de Edmonds-Karp, considerando os novos vértices
+ * fonte e sorvedouro após a remoção do reservatório.
+ * Após a execução do algoritmo de Edmonds-Karp, imprime as arestas do grafo com o fluxo correspondente e lista
+ * as cidades afetadas pelo déficit de abastecimento de água.
+ *
+ * @param g O grafo representando a rede de abastecimento de água.
+ * @param waterReservoir O nome do reservatório de água a ser removido do grafo.
+ * @return Verdadeiro se o reservatório foi removido com sucesso e falso caso contrário.
+ *
+ * @complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo, pois a função executa
+ * operações de remoção de vértices que têm complexidade O(V + E), além de chamar outras funções como
+ * `default_graph_setup_general`, `default_graph_setup_sink`, `edmonds_karp` e `list_affected_cities`,
+ * que têm complexidades lineares ou sub-lineares em relação ao número de vértices e arestas do grafo.
+ */
 bool T3_1(Graph<string> g, string waterReservoir){
 
     if(waterReservoir.empty())
@@ -225,6 +316,21 @@ bool T3_1(Graph<string> g, string waterReservoir){
     return true; 
 }
 
+
+/**
+ * @brief Mede os déficits de estoque das cidades na rede de abastecimento de água.
+ *
+ * Esta função configura o grafo fornecido para execução do algoritmo de Edmonds-Karp e, em seguida,
+ * executa o algoritmo para calcular o fluxo de água na rede.
+ * Em seguida, mede os déficits de estoque de cada cidade com base na demanda e no fluxo de água recebido.
+ * Os déficits são armazenados em um mapa que mapeia o nome de cada cidade para seu déficit de estoque.
+ *
+ * @param g O grafo representando a rede de abastecimento de água.
+ * @return Um mapa que mapeia o nome de cada cidade para seu déficit de estoque.
+ *
+ * @complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo, pois a função executa
+ * operações de configuração do grafo e executa o algoritmo de Edmonds-Karp, que tem complexidade O(V + E).
+ */
 //We will use this to measure the stock deficits of the cities (if there are any)
 map<string,double> getStockDeficits(Graph<string> g){
 
@@ -265,6 +371,24 @@ map<string,double> getStockDeficits(Graph<string> g){
 
 }
 
+/**
+ * @brief Verifica se a remoção de uma estação de bombeamento afeta o abastecimento de água das cidades na rede.
+ *
+ * Esta função configura o grafo fornecido para execução do algoritmo de Edmonds-Karp e, em seguida,
+ * executa o algoritmo para calcular o fluxo de água na rede.
+ * Em seguida, verifica como a remoção da estação de bombeamento especificada afeta o abastecimento de água
+ * das cidades na rede.
+ * Se a remoção da estação de bombeamento resultar em um aumento do déficit de estoque de qualquer cidade,
+ * a função imprime o novo déficit de estoque e retorna verdadeiro. Caso contrário, retorna falso.
+ *
+ * @param g O grafo representando a rede de abastecimento de água.
+ * @param pumpingStation O nome da estação de bombeamento a ser removida da rede.
+ * @param pumping_map Um mapa que mapeia o nome de cada cidade para seu déficit de estoque antes da remoção da estação de bombeamento.
+ * @return Verdadeiro se a remoção da estação de bombeamento resultar em um aumento do déficit de estoque de qualquer cidade, caso contrário, falso.
+ *
+ * @complexity O(V + E), onde V é o número de vértices e E é o número de arestas do grafo, pois a função executa
+ * operações de configuração do grafo e executa o algoritmo de Edmonds-Karp, que tem complexidade O(V + E).
+ */
 bool T3_2(Graph<string> g, string pumpingStation, map<string, double> pumping_map){
 
     bool found_deficit = false; 
@@ -330,6 +454,19 @@ bool T3_2(Graph<string> g, string pumpingStation, map<string, double> pumping_ma
 
 }
 
+/**
+ * @brief Calcula métricas relacionadas ao grafo, como diferenças entre pesos e fluxos.
+ *
+ * Esta função calcula métricas relacionadas ao grafo, como a diferença média entre o peso
+ * das arestas e o fluxo nelas, bem como a maior diferença encontrada e a aresta correspondente.
+ *
+ * @param g O grafo para o qual as métricas serão calculadas.
+ * @param iternum O número da iteração de Edmonds-Karp (padrão é 0).
+ * @return A diferença média entre peso e fluxo das arestas.
+ *
+ * @complexity O(V * E), onde V é o número de vértices e E é o número de arestas do grafo, pois
+ * percorre todas as arestas do grafo uma vez.
+ */
 double compute_metrics(Graph<string> g, int iternum=0){
 
     // Get the initial metrics without heuristics, that will aid is in improving the results
@@ -365,6 +502,21 @@ double compute_metrics(Graph<string> g, int iternum=0){
     return averageDifference; 
 }
 
+/**
+ * @brief Obtém as arestas críticas do grafo, considerando vértices críticos.
+ *
+ * Esta função calcula as arestas críticas do grafo com base nos vértices críticos fornecidos.
+ * Uma aresta é considerada crítica se sua capacidade for significativamente maior do que a média
+ * das capacidades das arestas vizinhas, e se sua capacidade for maior do que a segunda maior
+ * capacidade entre as arestas vizinhas.
+ *
+ * @param g O grafo para o qual as arestas críticas serão obtidas.
+ * @param critical_vertexes Os vértices críticos já identificados no grafo.
+ * @return Um mapa contendo as arestas críticas e suas capacidades correspondentes.
+ *
+ * @complexity O(V * E), onde V é o número de vértices e E é o número de arestas do grafo, pois
+ * percorre todos os vértices e, para cada vértice, percorre todas as suas arestas adjacentes uma vez.
+ */
 map<Edge<string> *, int> get_critical_edges(Graph<string> g, vector<string>& critical_vertexes){
 
     map<Edge<string> *, int> critical_edges; 
@@ -434,7 +586,21 @@ map<Edge<string> *, int> get_critical_edges(Graph<string> g, vector<string>& cri
     return critical_edges; 
 }
 
-
+/**
+ * @brief Realiza a execução do algoritmo T2_3 para otimização do fluxo no grafo.
+ *
+ * Este algoritmo utiliza uma abordagem baseada em heurísticas para otimizar o fluxo em um grafo.
+ * Ele identifica arestas críticas com base nas diferenças entre capacidade e fluxo, e ajusta
+ * as capacidades dessas arestas para melhorar o balanceamento do fluxo.
+ *
+ * @param g O grafo no qual o algoritmo será executado.
+ * @param dataset O conjunto de dados associado ao grafo.
+ *
+ * @complexity O(V^2 * E * n), onde V é o número de vértices, E é o número de arestas, e n é o número
+ * de iterações necessárias até que todas as arestas críticas sejam identificadas e otimizações aplicadas,
+ * pois a função executa Edmonds-Karp e computa métricas em cada iteração, além de realizar diversas operações
+ * em grafos e vetores.
+ */
 void T2_3(Graph<string> g, string dataset){
 
 
@@ -535,6 +701,20 @@ void T2_3(Graph<string> g, string dataset){
 
 }
 
+
+/**
+ * @brief Realiza a execução do algoritmo T3_3 para análise do impacto de falhas em pipelines.
+ *
+ * Este algoritmo analisa o impacto de falhas em pipelines em um grafo de fluxo. Ele identifica cidades
+ * afetadas por uma falha em um pipeline específico e calcula o déficit de abastecimento de água resultante.
+ *
+ * @param g O grafo representando a rede de pipelines.
+ * @param dataset O conjunto de dados associado ao grafo.
+ *
+ * @complexity O(V^3 * E^2), onde V é o número de vértices e E é o número de arestas do grafo, pois
+ * realiza uma série de operações em grafos, incluindo a execução de Edmonds-Karp várias vezes com diferentes
+ * conjuntos de arestas desativadas.
+ */
 void T3_3(Graph<string> g, string dataset){
 
     //Setups the Edmonds Karp of the default graph
