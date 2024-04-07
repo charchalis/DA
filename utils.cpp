@@ -57,7 +57,9 @@ vector<vector<string>> parseCSV(const string& filename) {
 }
 
 
-string bigOrSmall(){
+string bigOrSmall(string dataset=""){
+
+    if(!dataset.empty()) return dataset; //For cases like T2_3 where we call multiple times the populate_graph function
 
     string userInput;
 
@@ -78,11 +80,11 @@ string bigOrSmall(){
 
 
 template <class T>
-void populate_graph(Graph<T> &g){
+string populate_graph(Graph<T> &g, string dataset=""){
 
     cout << "parsing data..." << endl << endl;
 
-    string dataset = bigOrSmall();
+    if(dataset.empty()) dataset = bigOrSmall();
 
     auto cities = parseCSV("./" + dataset + "/Cities.csv");
     auto stations = parseCSV("./" + dataset + "/Stations.csv");
@@ -134,6 +136,8 @@ void populate_graph(Graph<T> &g){
             e->setFlow(0);
         }
     }
+
+    return dataset; 
     
 }
 
