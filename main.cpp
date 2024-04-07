@@ -15,10 +15,7 @@ int NUM_OPTIONS = 5;
 
 Graph<string> g;
 
-void menu_option_1(int data_set){
-
-    populate_graph(g, data_set); //populate graph
-
+void menu_option_1(){
     cout << "city code(type 'all' if you want every city): ";
 
     string userInput;
@@ -32,18 +29,65 @@ void menu_option_1(int data_set){
     T2_1(g,userInput);
 }
 
-void menu_option_2(int data_set){
+/*
+void balance_load() {
+    // Compute initial metrics
+    vector<int> differences;
+    int totalDifference = 0;
+    int maxDifference = 0;
 
-    populate_graph(g, data_set); //populate graph
-    T2_3(g, data_set); 
+    for (const auto& pipe : g.getEdges()) {
+        int difference = pipe.getCapacity() - pipe.getFlow();
+        differences.push_back(difference);
+        totalDifference += difference;
+        maxDifference = max(maxDifference, difference);
+    }
+
+    double averageDifference = static_cast<double>(totalDifference) / differences.size();
+
+    // Load balancing algorithm
+    for (auto& pipe : g.getEdges()) {
+        int difference = pipe.getCapacity() - pipe.getFlow();
+        double adjustment = (difference - averageDifference) / maxDifference;
+        pipe.setFlow(pipe.getFlow() + adjustment * pipe.getCapacity());
+    }
+
+    // Recalculate metrics after load balancing
+    differences.clear();
+    totalDifference = 0;
+    maxDifference = 0;
+
+    for (const auto& pipe : g.getEdges()) {
+        int difference = pipe.getCapacity() - pipe.getFlow();
+        differences.push_back(difference);
+        totalDifference += difference;
+        maxDifference = max(maxDifference, difference);
+    }
+
+    double newAverageDifference = static_cast<double>(totalDifference) / differences.size();
+
+    // Print the metrics
+    cout << "Initial Metrics:" << endl;
+    cout << "Average Difference: " << averageDifference << endl;
+    cout << "Variance: " << calculateVariance(differences) << endl;
+    cout << "Max Difference: " << maxDifference << endl;
+
+    cout << "Metrics after Load Balancing:" << endl;
+    cout << "Average Difference: " << newAverageDifference << endl;
+    cout << "Variance: " << calculateVariance(differences) << endl;
+    cout << "Max Difference: " << maxDifference << endl;
+}
+*/
+
+
+void menu_option_2(){
+
+   T2_3(g); 
 
     return;
 }
 
-void menu_option_3(int data_set){
-
-    populate_graph(g, data_set); //populate graph
-
+void menu_option_3(){
     std::cout << "reservoir: ";
 
     std::string userInput;
@@ -52,13 +96,12 @@ void menu_option_3(int data_set){
     std::cout << "removing reservoir "<< userInput << std::endl;
 
     if(!T3_1(g, userInput)){
-        menu_option_3(data_set); //retry
+        menu_option_3(); //retry
     }
 }
 
-void menu_option_4(int data_set){
+void menu_option_4(){
 
-    populate_graph(g, data_set); //populate graph
 
     // This automatic cycle is not working
     // auto verti = g.getVertexSet(); 
@@ -87,9 +130,7 @@ void menu_option_4(int data_set){
     return;
 }
 
-void menu_option_5(int data_set){
-
-    populate_graph(g, data_set); //populate graph
+void menu_option_5(){
 
     //TODO: call function
 
@@ -101,18 +142,6 @@ void menu_option_5(int data_set){
 
 
 void menu(){
-        
-    int option;
-
-    std::cout << "Which Data Set you want to use?: " << std::endl; 
-    std::cout << "(0) - Small Data Set (Madeira)"  << std::endl; 
-    std::cout << "(1) - Large Data Set (Portugal)" << std::endl;
-    std::cin >> option;
-    if (option != 0 && option != 1) {
-        std::cout << "Invalid option. Please try again." << std::endl; 
-        menu(); 
-    }
-
 
     cout << "menu:" << endl;
     
@@ -122,6 +151,7 @@ void menu(){
     cout << "\t4) Can any pumping station be temporarily taken out of service without affecting the delivery capacity to all the cities?(T3.2)" << endl;
     cout << "\t5) For each city, determine which pipelines, if ruptured i.e. with a null flow capacity, would make it impossible to deliver the desired amount of water to a given city (T3.3)" << endl;
     cout << endl;
+
 
     int userInput;
 
@@ -137,17 +167,18 @@ void menu(){
     }
     
     switch(userInput){
-        case 1: menu_option_1(option); break;
-        case 2: menu_option_2(option); break;
-        case 3: menu_option_3(option); break;
-        case 4: menu_option_4(option); break;
-        case 5: menu_option_5(option); break;
+        case 1: menu_option_1(); break;
+        case 2: menu_option_2(); break;
+        case 3: menu_option_3(); break;
+        case 4: menu_option_4(); break;
+        case 5: menu_option_5(); break;
     }
 }
-
-    
+   
 
 int main() {
+
+    populate_graph(g); //populate graph
     
     menu();
 
