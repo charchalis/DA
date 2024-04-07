@@ -265,14 +265,11 @@ map<string,double> getStockDeficits(Graph<string> g){
 
 }
 
-bool T3_2(Graph<string> g, string pumpingStation){
+bool T3_2(Graph<string> g, string pumpingStation, map<string, double> pumping_map){
 
-    if(pumpingStation.empty())
-        return false; 
-    
-    map<string, double> pumping_map = getStockDeficits(g); //Computes the defices of the stock graph
-                                                        //And inserts them into the map
-                                                        //
+    bool found_deficit = false; 
+
+    //Makes sure all the flows are set to 0                                            
     for(auto v: g.getVertexSet()){
         for(auto e: v->getAdj()){
             e->setFlow(0);
@@ -281,14 +278,6 @@ bool T3_2(Graph<string> g, string pumpingStation){
             e->setFlow(0);
         }
     }
-
-    //Removes the Vertex from the Graph
-    if(g.removeVertex(pumpingStation)) 
-        std::cout << endl << "Pumping Station " << pumpingStation << " Removed Succesfully" << std::endl; 
-    else{
-        std::cout << endl << "Pumping Station Not Found" << std::endl;
-        return false; 
-    } 
 
     vector<string> sources; 
     vector<string> destinations; 
@@ -325,17 +314,19 @@ bool T3_2(Graph<string> g, string pumpingStation){
                     if(old_deficit < deficit){
                         double new_deficit = deficit-old_deficit;
                         std::cout << name << ": " << "new deficit after removing " << pumpingStation << " :" << new_deficit << endl; 
+                        found_deficit = true; 
                     }
                 }
                 // Element was not found, therefore a deficit did not exist
                 else {
                     std::cout << name << ": " << "new deficit after removing " << pumpingStation << " :" << deficit << endl; 
+                    found_deficit = true; 
                 }
             } 
         }
     }
 
-    return true; 
+    return found_deficit; 
 
 }
 

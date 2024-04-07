@@ -49,32 +49,45 @@ void menu_option_3(){
     }
 }
 
-void menu_option_4(){
+void menu_option_4(string dataset){
 
+    //Computes the defices of the stock graph 
+    //And inserts them into the map
+    map<string, double> pumping_map = getStockDeficits(g); 
 
-    // This automatic cycle is not working
-    // auto verti = g.getVertexSet(); 
+    vector<string> critical_pumping_stations; 
+    vector<string> non_critical_pumping_stations;
+                                                        
+    for(auto v : g.getVertexSet()){
+        //Filter the pumping stations
+        if(v->getInfo()[0] == 'P' && v->getInfo()[1]=='S'){
+            //Creates a new graph
+            Graph<string> g_new; 
+            populate_graph(g_new, dataset);
+            //Removes the pumping station
+            if(g_new.removeVertex(v->getInfo()))
+                std::cout << endl << "Pumping Station " << v->getInfo() << " Removed Succesfully" << std::endl; 
+            else{
+                std::cout << "There was an error processing the given Pumping Station ... Skipping" << std::endl; 
+                continue;   
+            }
+            //Runs the algorithm in order to check for deficits
+            if(T3_2(g_new, v->getInfo(), pumping_map))
+                critical_pumping_stations.push_back(v->getInfo());
+            else
+                non_critical_pumping_stations.push_back(v->getInfo());
+        }
+    }
 
-    // // Cycle through every pump station
-    // for (auto vertex : verti) {
-    //     if (vertex->getInfo()[0] == 'P' && vertex->getInfo()[1] == 'S') { // Is a pumping station
-    //         std::cout << "removing pumping station " << vertex->getInfo() << " ..." << std::endl;  
-    //         if(!T3_2(g, vertex->getInfo())) {
-    //             std::cout << "An error occurred with this pumping station ... Skipping" << std::endl; 
-    //             continue; 
-    //         }
-    //     }
-    // }
+    std::cout << "Critical Pumping Station (Cannot be Removed): " << std::endl;
+    for(auto v : critical_pumping_stations){
+        std::cout << "Pumping Station: " << v << std::endl; 
+    }
 
-    //This approach is working tho 
-    std::cout << "pumping station: "; 
-    std::string userInput; 
-    std::cin >> userInput; 
-
-    cout << "removing pumping station " << userInput << endl; 
-    
-    T3_2(g, userInput); 
-
+    std::cout << "Non-Critical Pumping Station (Can be Removed): " << std::endl; 
+    for(auto v : non_critical_pumping_stations){
+        std::cout << "Pumping Station: " << v << std::endl; 
+    }
     
     return;
 }
@@ -119,7 +132,7 @@ void menu(string dataset){
         case 1: menu_option_1(); break;
         case 2: menu_option_2(dataset); break;
         case 3: menu_option_3(); break;
-        case 4: menu_option_4(); break;
+        case 4: menu_option_4(dataset); break;
         case 5: menu_option_5(); break;
     }
 }
