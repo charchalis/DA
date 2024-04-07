@@ -92,11 +92,9 @@ void menu_option_4(string dataset){
     return;
 }
 
-void menu_option_5(){
+void menu_option_5(string dataset){
 
-    //TODO: call function
-
-    //fulcral_pipelines() ???
+    T3_3(g, dataset);
 
     return;
 }
@@ -133,7 +131,7 @@ void menu(string dataset){
         case 2: menu_option_2(dataset); break;
         case 3: menu_option_3(); break;
         case 4: menu_option_4(dataset); break;
-        case 5: menu_option_5(); break;
+        case 5: menu_option_5(dataset); break;
     }
 }
    

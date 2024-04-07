@@ -534,3 +534,103 @@ void T2_3(Graph<string> g, string dataset){
         //So we need to keep track of our best result found so far, so we choose that one instead of the one in the last iteration
 
 }
+
+void T3_3(Graph<string> g, string dataset){
+
+    //Setups the Edmonds Karp of the default graph
+    vector<string> sources_default; 
+    vector<string> destinations_default; 
+    Graph<string> graph = default_graph_setup_general(g, sources_default, destinations_default);
+    string sink = default_graph_setup_sink(graph, destinations_default);
+
+    edmonds_karp(graph, "source", sink);
+
+    vector<string> not_meet_demand; //Cities that don't meet their demand by default 
+
+    for(auto v : graph.getVertexSet()){
+        if(v->getInfo()[0] == 'C'){
+            auto incoming = v->getIncoming();
+            float demand = v->getDemand();
+            double flow = 0;
+            for(auto e: incoming){
+                flow += e->getFlow();
+            }
+            if(flow < demand){
+                not_meet_demand.push_back(v->getInfo());
+            }
+        }
+    }
+
+
+    map<string, string> affected_cities; //Cities Affected by a given pipeline 
+    map<string, double> pipe_deficits; //The Devices provoked by a pipeline
+
+    //Iterate through every edge 
+    for(auto v : graph.getVertexSet()){
+        for(auto e: v->getAdj()){
+
+            //Temporarily set its capacity to zero (simulate the rupture/failure)
+            int original_capacity = e->getWeight();
+            e->setWeight(0); 
+
+            //Creates a new Graph and populates it 
+            Graph<string> g_new;
+            populate_graph(g_new, dataset);
+
+            //Setups the graph for Edmonds Karp
+            vector<string> sources;
+            vector<string> destinations; 
+            Graph<string> graph_new = default_graph_setup_general(g_new, sources, destinations);
+            string sink = default_graph_setup_sink(graph_new, destinations);
+
+            //Runs Edmonds Karp for the given "ruptured" edge 
+            edmonds_karp(graph_new, "source", sink);
+
+            //Check what cities got their demand affected (can no longer supply the ammount of water they need)
+            for (auto v : graph_new.getVertexSet()) {
+
+                if (v->getInfo()[0] == 'C') {
+
+                    //If this city already has a deficit, we can skip the next computations
+                    //Since this city already has a deficit by default 
+                    int occurences = count(not_meet_demand.begin(), not_meet_demand.end(), v->getInfo());
+                    if(occurences > 0)
+                        continue;   
+
+
+                    auto incoming = v->getIncoming();
+                    float demand = v->getDemand();
+
+                    //If there are no incoming edges, the we can ignore the next computations and jump right into 
+                    // saying that deficit = demand
+                    if(incoming.empty()){
+                        affected_cities.insert({e->getOrig()->getInfo()+"->"+e->getDest()->getInfo(), v->getInfo()});
+                        pipe_deficits.insert({e->getOrig()->getInfo()+"->"+e->getDest()->getInfo(), demand}); 
+                        continue; 
+                    }
+
+                    //Get the city's flow 
+                    double flow = 0;
+                    for (auto e : incoming) {
+                        flow += e->getFlow();
+                    }
+
+                    double deficit = demand - flow; 
+                    if(deficit > 0){
+                        affected_cities.insert({e->getOrig()->getInfo()+"->"+e->getDest()->getInfo(), v->getInfo()});
+                        pipe_deficits.insert({e->getOrig()->getInfo()+"->"+e->getDest()->getInfo(), deficit}); 
+                    } 
+                }
+            }
+
+            //Set the edge's capacity back to its original value
+            e->setWeight(original_capacity);
+        }
+    }
+
+    //Print the cities a pipeline affects as well as the deficit provoked by the pipeline
+    for(auto it = affected_cities.begin(); it != affected_cities.end(); ++it){
+        std::cout << "Pipeline: " << it->first << " Affected City: " << it->second << " Deficit: " << pipe_deficits[it->first] << std::endl; 
+    }   
+
+}
