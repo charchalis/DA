@@ -1,3 +1,16 @@
+/**
+ * @brief Analisa um arquivo CSV e retorna os dados em forma de vetor de vetores de strings.
+ *
+ * Esta função lê um arquivo CSV e retorna os dados em forma de vetor de vetores de strings.
+ * Cada vetor interno representa uma linha do arquivo CSV, e cada elemento desse vetor representa
+ * uma célula naquela linha.
+ *
+ * @param filename O nome do arquivo CSV a ser analisado.
+ * @return Um vetor de vetores de strings representando os dados do arquivo CSV.
+ *
+ * @complexity O(N*M), onde N é o número de linhas no arquivo CSV e M é o número máximo de células em uma linha,
+ * pois a função percorre cada linha do arquivo e divide as células em cada linha.
+ */
 vector<vector<string>> parseCSV(const string& filename) {
     vector<vector<string>> data;
 
@@ -56,7 +69,19 @@ vector<vector<string>> parseCSV(const string& filename) {
     return data;
 }
 
-
+/**
+ * @brief Retorna o nome do conjunto de dados escolhido pelo usuário.
+ *
+ * Esta função permite que o usuário escolha entre dois conjuntos de dados, "big" ou "small",
+ * e retorna o nome do conjunto de dados escolhido. Se um nome de conjunto de dados for fornecido
+ * como argumento, essa string será retornada sem solicitar entrada adicional do usuário.
+ *
+ * @param dataset O nome do conjunto de dados fornecido como argumento. Se não for fornecido, o usuário será solicitado a escolher.
+ * @return O nome do conjunto de dados escolhido ("Project1LargeDataSet" para "big" ou "Project1DataSetSmall" para "small").
+ *
+ * @complexity O(1) se o conjunto de dados já estiver fornecido como argumento, O(N) caso contrário,
+ * onde N é o número de vezes que o usuário é solicitado a fornecer a entrada correta.
+ */
 string bigOrSmall(string dataset=""){
 
     if(!dataset.empty()) return dataset; //For cases like T2_3 where we call multiple times the populate_graph function
@@ -78,7 +103,21 @@ string bigOrSmall(string dataset=""){
 
 }
 
-
+/**
+ * @brief Popula o grafo com dados de um conjunto de dados específico ou solicita ao usuário para escolher um conjunto de dados.
+ *
+ * Esta função popula o grafo com dados de um conjunto de dados específico. Se o nome do conjunto de dados não for fornecido,
+ * a função solicitará ao usuário que escolha entre os conjuntos de dados "big" ou "small". Os conjuntos de dados são esperados
+ * estar em arquivos CSV com os seguintes nomes: Cities.csv, Stations.csv, Reservoirs.csv e Pipes.csv.
+ *
+ * @param g O grafo a ser populado com os dados.
+ * @param dataset O nome do conjunto de dados a ser usado. Se não for fornecido, o usuário será solicitado a escolher.
+ * @return O nome do conjunto de dados que foi populado no grafo.
+ *
+ * @tparam T O tipo de dado dos vértices do grafo.
+ *
+ * @complexity O(N) em que N é o número de linhas nos arquivos CSV de cidades, estações, reservatórios e tubulações.
+ */
 template <class T>
 string populate_graph(Graph<T> &g, string dataset=""){
 
@@ -141,6 +180,17 @@ string populate_graph(Graph<T> &g, string dataset=""){
     
 }
 
+/**
+ * @brief Imprime os vértices e as arestas do grafo junto com o fluxo atual em cada aresta.
+ *
+ * Esta função imprime os vértices e as arestas do grafo, juntamente com o fluxo atual em cada aresta.
+ *
+ * @param g O grafo a ser impresso.
+ *
+ * @tparam T O tipo de dado dos vértices do grafo.
+ *
+ * @complexity O(V + E), onde V é o número de vértices e E é o número de arestas no grafo.
+ */
 //print edges and corresponding flow
 template <class T>
 void printGraph(Graph<T> &g){
@@ -155,6 +205,20 @@ void printGraph(Graph<T> &g){
     cout << endl;
 }
 
+/**
+ * @brief Verifica se uma cidade é válida em um grafo.
+ *
+ * Esta função verifica se uma cidade especificada é válida em um grafo. Se a cidade for "all", ela é considerada válida.
+ *
+ * @param g O grafo onde a cidade será verificada.
+ * @param city A cidade a ser verificada.
+ *
+ * @return true se a cidade for válida ou se for "all", false caso contrário.
+ *
+ * @tparam T O tipo de dado dos vértices do grafo.
+ *
+ * @complexity O(V), onde V é o número de vértices no grafo.
+ */
 template <class T>
 bool validCity(Graph<T> &g, string city){
     if(city == "all") return true;
