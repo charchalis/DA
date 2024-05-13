@@ -11,7 +11,7 @@
 #include "./algorithms.cpp"
 using namespace std;
 
-int NUM_OPTIONS = 5;
+int NUM_OPTIONS = 6;
 
 void menu_option_1(){
     cout << "chosen option 1" << endl;
@@ -47,11 +47,12 @@ void menu(){
 
         cout << endl << endl << "menu:" << endl;
         
-        cout << "\t1) Backtracking Algorithm (T2.1)" << endl;
-        cout << "\t2) Triangular Approximation Heuristic (T2.2)" << endl;
-        cout << "\t3) Other Heuristics??????????? (T2.3)" << endl;
-        cout << "\t4) TSP in the Real World (T2.4)"<< endl;
-        cout << "\t5) exit" << endl;
+        cout << "\t1) Select a dataset (T1.2)" << endl;
+        cout << "\t2) Backtracking Algorithm (T2.1)" << endl;
+        cout << "\t3) Triangular Approximation Heuristic (T2.2)" << endl;
+        cout << "\t4) Other Heuristics??????????? (T2.3)" << endl;
+        cout << "\t5) TSP in the Real World (T2.4)"<< endl;
+        cout << "\t6) exit" << endl;
         cout << endl;
 
 
