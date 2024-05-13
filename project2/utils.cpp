@@ -31,6 +31,8 @@ vector<vector<string>> parseCSV(const string& filename) {
         
         
         while (getline(ss, cell, ',')) {
+
+            cout << "c: " << cell << endl;
             
             if (cell.empty()) continue;
 
@@ -56,9 +58,10 @@ vector<vector<string>> parseCSV(const string& filename) {
                     }
                 }
             }
-
+            cout << "d: " << cell << endl;
             cell.erase(remove(cell.begin(), cell.end(), '"'), cell.end());
             cell.erase(remove(cell.begin(), cell.end(), ','), cell.end());
+            cout << "e: " << cell << endl;
             row.push_back(cell);
         }
 
@@ -67,40 +70,6 @@ vector<vector<string>> parseCSV(const string& filename) {
 
     file.close();
     return data;
-}
-
-/**
- * @brief Retorna o nome do conjunto de dados escolhido pelo usuário.
- *
- * Esta função permite que o usuário escolha entre dois conjuntos de dados, "big" ou "small",
- * e retorna o nome do conjunto de dados escolhido. Se um nome de conjunto de dados for fornecido
- * como argumento, essa string será retornada sem solicitar entrada adicional do usuário.
- *
- * @param dataset O nome do conjunto de dados fornecido como argumento. Se não for fornecido, o usuário será solicitado a escolher.
- * @return O nome do conjunto de dados escolhido ("Project1LargeDataSet" para "big" ou "Project1DataSetSmall" para "small").
- *
- * @complexity O(1) se o conjunto de dados já estiver fornecido como argumento, O(N) caso contrário,
- * onde N é o número de vezes que o usuário é solicitado a fornecer a entrada correta.
- */
-string bigOrSmall(string dataset=""){
-
-    if(!dataset.empty()) return dataset; //For cases like T2_3 where we call multiple times the populate_graph function
-
-    string userInput;
-
-    while(userInput != "big" && userInput != "small"){
-	
-	    cout << "choose dataset (type 'big' or 'small'): ";
-	    cin >> userInput;
-
-	    if(userInput != "big" && userInput != "small") cout << "invalid input, try again" << endl;
-
-	    cin.clear(); // Clear the fail state
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
-    }
-
-    return userInput == "big" ? "Project1LargeDataSet" : "Project1DataSetSmall";
-
 }
 
 /**
@@ -118,67 +87,67 @@ string bigOrSmall(string dataset=""){
  *
  * @complexity O(N) em que N é o número de linhas nos arquivos CSV de cidades, estações, reservatórios e tubulações.
  */
-template <class T>
-string populate_graph(Graph<T> &g, string dataset=""){
+// template <class T>
+// string populate_graph(Graph<T> &g, string dataset=""){
 
-    cout << "parsing data..." << endl << endl;
+//     cout << "parsing data..." << endl << endl;
 
-    if(dataset.empty()) dataset = bigOrSmall();
-
-    auto cities = parseCSV("./" + dataset + "/Cities.csv");
-    auto stations = parseCSV("./" + dataset + "/Stations.csv");
-    auto reservoirs = parseCSV("./" + dataset + "/Reservoirs.csv");
-    auto pipes = parseCSV("./" + dataset + "/Pipes.csv");
     
-    //add cities to graph
-    for(auto cityData: cities){
-        cout << "\t- adding city " << cityData[2] << " (" << cityData[0] << ")" << endl;
-        City* city = new City(cityData[0], stoi(cityData[1]), cityData[2], stof(cityData[3]), stoi(cityData[4]));
-        if(!g.addVertex(city)) cout << "\t- failed to add " << city->getInfo() << endl;
-    }
+
+//     auto cities = parseCSV("./" + dataset + "/Cities.csv");
+//     auto stations = parseCSV("./" + dataset + "/Stations.csv");
+//     auto reservoirs = parseCSV("./" + dataset + "/Reservoirs.csv");
+//     auto pipes = parseCSV("./" + dataset + "/Pipes.csv");
     
-    //add stations to graph
-    for(auto stationData: stations){
-        cout << "\t- adding pumping station " << stationData[1] << endl;
-        Station* station = new Station(stoi(stationData[0]), stationData[1]);
+//     //add cities to graph
+//     for(auto cityData: cities){
+//         cout << "\t- adding city " << cityData[2] << " (" << cityData[0] << ")" << endl;
+//         City* city = new City(cityData[0], stoi(cityData[1]), cityData[2], stof(cityData[3]), stoi(cityData[4]));
+//         if(!g.addVertex(city)) cout << "\t- failed to add " << city->getInfo() << endl;
+//     }
+    
+//     //add stations to graph
+//     for(auto stationData: stations){
+//         cout << "\t- adding pumping station " << stationData[1] << endl;
+//         Station* station = new Station(stoi(stationData[0]), stationData[1]);
 
-        if(!g.addVertex(station)) cout << "\t- failed to add " << station->getInfo() << endl;
-    }
+//         if(!g.addVertex(station)) cout << "\t- failed to add " << station->getInfo() << endl;
+//     }
 
-    //add reservoirs to graph
-    for(auto reservoirData: reservoirs){
-        cout << "\t- adding reservoir " << reservoirData[3] << " (" << reservoirData[1] << ")" << endl;
-        Reservoir* reservoir = new Reservoir(reservoirData[0], reservoirData[1], stoi(reservoirData[2]), reservoirData[3], stoi(reservoirData[4]));
+//     //add reservoirs to graph
+//     for(auto reservoirData: reservoirs){
+//         cout << "\t- adding reservoir " << reservoirData[3] << " (" << reservoirData[1] << ")" << endl;
+//         Reservoir* reservoir = new Reservoir(reservoirData[0], reservoirData[1], stoi(reservoirData[2]), reservoirData[3], stoi(reservoirData[4]));
 
-        if(!g.addVertex(reservoir)) cout << "\t- failed to add " << reservoir->getInfo() << endl;
-    }
+//         if(!g.addVertex(reservoir)) cout << "\t- failed to add " << reservoir->getInfo() << endl;
+//     }
  
-    //add pipes to graph
-    for(auto pipeData: pipes){
+//     //add pipes to graph
+//     for(auto pipeData: pipes){
         
-        string source = pipeData[0];
-        string destination = pipeData[1];
-        int capacity = stoi(pipeData[2]);
-        bool bidirectional = !(bool)stoi(pipeData[3]);
+//         string source = pipeData[0];
+//         string destination = pipeData[1];
+//         int capacity = stoi(pipeData[2]);
+//         bool bidirectional = !(bool)stoi(pipeData[3]);
         
-        cout << "\t -adding " << (bidirectional ? "bi" : "uni") << "directional pipe from " << source << " to " << destination << endl;
+//         cout << "\t -adding " << (bidirectional ? "bi" : "uni") << "directional pipe from " << source << " to " << destination << endl;
 
-        if(bidirectional) g.addBidirectionalEdge(source, destination, capacity);
-        else g.addEdge(source, destination, capacity);
-    }   
+//         if(bidirectional) g.addBidirectionalEdge(source, destination, capacity);
+//         else g.addEdge(source, destination, capacity);
+//     }   
     
-    //set flow of edges to zero
-    auto verti = g.getVertexSet();
-    for(auto v: verti){
-        auto edges = v->getAdj();
-        for(auto e: edges){
-            e->setFlow(0);
-        }
-    }
+//     //set flow of edges to zero
+//     auto verti = g.getVertexSet();
+//     for(auto v: verti){
+//         auto edges = v->getAdj();
+//         for(auto e: edges){
+//             e->setFlow(0);
+//         }
+//     }
 
-    return dataset; 
+//     return dataset; 
     
-}
+// }
 
 /**
  * @brief Imprime os vértices e as arestas do grafo junto com o fluxo atual em cada aresta.

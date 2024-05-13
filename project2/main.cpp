@@ -7,7 +7,7 @@
 #include <filesystem>
 #include <cstdio>
 #include "./data_structures/Graph.h"
-//#include "./utils.cpp"
+#include "./utils.cpp"
 #include "./algorithms.cpp"
 using namespace std;
 
@@ -84,6 +84,7 @@ void menu(){
 
 int main() {
     
+
     menu();
 
     return 0;
