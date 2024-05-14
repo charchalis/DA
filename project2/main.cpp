@@ -24,13 +24,13 @@ void menu_option_2(Graph<int> &g){
 
     vector<int> best_path;
 
-    auto res = tsp_backtracking(g, 0, best_path);
-    cout << res << endl;
+    auto min_cost = tsp_backtracking(g, 0, best_path);
 
-    cout << "best path" << endl;
+    cout << "best path: ";
     for(int path_point: best_path){
-        cout << path_point << endl;
+        cout << path_point;
     }
+    cout << "\tcost: " << min_cost << endl;
 }
 
 void menu_option_3(){
@@ -99,9 +99,7 @@ int main() {
     populate_graph(g);
     printGraph(g);
 
-    menu_option_2(g);
-
-    //menu(g);
+    menu(g);
 
     return 0;
 }
