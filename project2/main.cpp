@@ -22,9 +22,15 @@ void menu_option_2(Graph<int> &g){
 
     cout << "tsp backtracking" << endl;
 
-    int minCost = 1000000000; //big number
+    vector<int> best_path;
 
-    tsp_backtracking(g, 0, bestPath, minCost);
+    auto min_cost = tsp_backtracking(g, 0, best_path);
+
+    cout << "best path: ";
+    for(int path_point: best_path){
+        cout << path_point;
+    }
+    cout << "\tcost: " << min_cost << endl;
 }
 
 void menu_option_3(){
@@ -91,7 +97,6 @@ int main() {
     Graph<int> g;
     
     populate_graph(g);
-
     printGraph(g);
 
     menu(g);
