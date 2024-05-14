@@ -22,9 +22,9 @@ void menu_option_2(Graph<int> &g){
 
     cout << "tsp backtracking" << endl;
 
-    int minCost = 1000000000; //big number
+    cout << INF << endl;
 
-    tsp_backtracking(g, 0, bestPath, minCost);
+    tsp_backtracking(g, 0);
 }
 
 void menu_option_3(){
