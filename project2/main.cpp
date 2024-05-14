@@ -22,9 +22,15 @@ void menu_option_2(Graph<int> &g){
 
     cout << "tsp backtracking" << endl;
 
-    cout << INF << endl;
+    vector<int> best_path;
 
-    tsp_backtracking(g, 0);
+    auto res = tsp_backtracking(g, 0, best_path);
+    cout << res << endl;
+
+    cout << "best path" << endl;
+    for(int path_point: best_path){
+        cout << path_point << endl;
+    }
 }
 
 void menu_option_3(){
@@ -91,10 +97,11 @@ int main() {
     Graph<int> g;
     
     populate_graph(g);
-
     printGraph(g);
 
-    menu(g);
+    menu_option_2(g);
+
+    //menu(g);
 
     return 0;
 }
