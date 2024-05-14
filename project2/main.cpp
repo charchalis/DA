@@ -24,9 +24,7 @@ void menu_option_2(Graph<int> &g){
 
     int minCost = 1000000000; //big number
 
-    vector<int> bestPath;
-
-    tsp_backtracking(g, g.getNumVertex(), 0, bestPath, minCost);
+    tsp_backtracking(g, 0, bestPath, minCost);
 }
 
 void menu_option_3(){
