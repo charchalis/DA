@@ -76,7 +76,8 @@ void menu(){
             case 2: menu_option_2(); break;
             case 3: menu_option_3(); break;
             case 4: menu_option_4(); break;
-            case 5: return;
+            case 5: menu_option_5(); break;
+            case 6: return;
             default: break;
         }
     }
@@ -84,7 +85,12 @@ void menu(){
    
 
 int main() {
+
+    Graph<int> g;
     
+    populate_graph(g);
+
+    printGraph(g);
 
     menu();
 
