@@ -18,11 +18,15 @@ void menu_option_1(){
 
 }
 
-void menu_option_2(){
+void menu_option_2(Graph<int> &g){
 
-   tsp_backtracking(g, 1,1,1,1,1);
+    cout << "tsp backtracking" << endl;
 
-    return;
+    int minCost = 1000000000; //big number
+
+    vector<int> bestPath;
+
+    tsp_backtracking(g, g.getNumVertex(), 0, bestPath, minCost);
 }
 
 void menu_option_3(){
@@ -40,8 +44,8 @@ void menu_option_5(){
 }
 
 
-
-void menu(){
+template <class T>
+void menu(Graph<T> &g){
 
     while(true){
 

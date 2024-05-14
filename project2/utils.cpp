@@ -18,8 +18,6 @@ vector<vector<string>> parseCSV(const string& filename) {
         
         
         while (getline(ss, cell, ',')) {
-
-            cout << "c: " << cell << endl;
             
             if (cell.empty()) continue;
 
@@ -45,10 +43,8 @@ vector<vector<string>> parseCSV(const string& filename) {
                     }
                 }
             }
-            cout << "d: " << cell << endl;
             cell.erase(remove(cell.begin(), cell.end(), '"'), cell.end());
             cell.erase(remove(cell.begin(), cell.end(), ','), cell.end());
-            cout << "e: " << cell << endl;
             row.push_back(cell);
         }
 

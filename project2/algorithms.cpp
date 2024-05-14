@@ -1,11 +1,13 @@
 //TODO: everything .-.
 
-template <class T>
-int tsp_backtracking(Graph<T> &g, int curr_pos, int n, int count, int cost, int& min_cost){
-    
-    cout << "tsp backtracking" << endl;
+int tsp_backtracking(Graph<int> &g, int numNodes, int currentNode, vector<int> bestPath, int& minCost){
 
-    //TODO
+    cout << "current node: " << currentNode << endl;
+
+    
+
+    if(currentNode < numNodes - 1)
+        tsp_backtracking(g, numNodes, currentNode + 1, bestPath, minCost);
 
     return 0;
 }
