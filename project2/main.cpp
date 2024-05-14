@@ -20,7 +20,7 @@ void menu_option_1(){
 
 void menu_option_2(){
 
-   cout << "chosen option 2" << endl;
+   tsp_backtracking(g, 1,1,1,1,1);
 
     return;
 }
@@ -73,7 +73,7 @@ void menu(){
         
         switch(userInput){
             case 1: menu_option_1(); break;
-            case 2: menu_option_2(); break;
+            case 2: menu_option_2(g); break;
             case 3: menu_option_3(); break;
             case 4: menu_option_4(); break;
             case 5: menu_option_5(); break;
@@ -92,7 +92,7 @@ int main() {
 
     printGraph(g);
 
-    menu();
+    menu(g);
 
     return 0;
 }
