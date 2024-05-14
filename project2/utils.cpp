@@ -59,77 +59,67 @@ vector<vector<string>> parseCSV(const string& filename) {
     return data;
 }
 
-// template <class T>
-// string populate_graph(Graph<T> &g, string dataset=""){
-
-//     cout << "parsing data..." << endl << endl;
-
-    
-
-//     auto cities = parseCSV("./" + dataset + "/Cities.csv");
-//     auto stations = parseCSV("./" + dataset + "/Stations.csv");
-//     auto reservoirs = parseCSV("./" + dataset + "/Reservoirs.csv");
-//     auto pipes = parseCSV("./" + dataset + "/Pipes.csv");
-    
-//     //add cities to graph
-//     for(auto cityData: cities){
-//         cout << "\t- adding city " << cityData[2] << " (" << cityData[0] << ")" << endl;
-//         City* city = new City(cityData[0], stoi(cityData[1]), cityData[2], stof(cityData[3]), stoi(cityData[4]));
-//         if(!g.addVertex(city)) cout << "\t- failed to add " << city->getInfo() << endl;
-//     }
-    
-//     //add stations to graph
-//     for(auto stationData: stations){
-//         cout << "\t- adding pumping station " << stationData[1] << endl;
-//         Station* station = new Station(stoi(stationData[0]), stationData[1]);
-
-//         if(!g.addVertex(station)) cout << "\t- failed to add " << station->getInfo() << endl;
-//     }
-
-//     //add reservoirs to graph
-//     for(auto reservoirData: reservoirs){
-//         cout << "\t- adding reservoir " << reservoirData[3] << " (" << reservoirData[1] << ")" << endl;
-//         Reservoir* reservoir = new Reservoir(reservoirData[0], reservoirData[1], stoi(reservoirData[2]), reservoirData[3], stoi(reservoirData[4]));
-
-//         if(!g.addVertex(reservoir)) cout << "\t- failed to add " << reservoir->getInfo() << endl;
-//     }
- 
-//     //add pipes to graph
-//     for(auto pipeData: pipes){
-        
-//         string source = pipeData[0];
-//         string destination = pipeData[1];
-//         int capacity = stoi(pipeData[2]);
-//         bool bidirectional = !(bool)stoi(pipeData[3]);
-        
-//         cout << "\t -adding " << (bidirectional ? "bi" : "uni") << "directional pipe from " << source << " to " << destination << endl;
-
-//         if(bidirectional) g.addBidirectionalEdge(source, destination, capacity);
-//         else g.addEdge(source, destination, capacity);
-//     }   
-    
-//     //set flow of edges to zero
-//     auto verti = g.getVertexSet();
-//     for(auto v: verti){
-//         auto edges = v->getAdj();
-//         for(auto e: edges){
-//             e->setFlow(0);
-//         }
-//     }
-
-//     return dataset; 
-    
-// }
-
-
 template <class T>
-void printGraph(Graph<T> &g){
-    cout << endl << "FINAL RESULT: " << endl << endl;
+string populate_graph(Graph<T> &g, string dataset=""){
+
+    cout << "parsing data..." << endl << endl;
+
+    
+
+    auto data = parseCSV("Toy-Graphs/tourism.csv");
+    
+    int nodeIndex = -1;
+    //add nodes to graph
+    for(auto row: data){
+
+        int source = stoi(row[0]);
+        int destination = stoi(row[1]);
+        int distance = stoi(row[2]);
+        
+        //cout << "\t- adding node " << cityData[2] << " (" << cityData[0] << ")" << endl;
+        if(g.addVertex(source)) cout << "\t- added node " << source << endl;
+        if(g.addVertex(destination)) cout << "\t- added node " << destination << endl;
+
+        g.addBidirectionalEdge(source, destination, distance);
+
+    }
+ 
+    //add edges to graph
+    // for(auto edgeData: edges){
+        
+    //     string source = pipeData[0];
+    //     string destination = pipeData[1];
+    //     int capacity = stoi(pipeData[2]);
+    //     bool bidirectional = !(bool)stoi(pipeData[3]);
+        
+    //     cout << "\t -adding " << (bidirectional ? "bi" : "uni") << "directional pipe from " << source << " to " << destination << endl;
+
+    //     if(bidirectional) g.addBidirectionalEdge(source, destination, capacity);
+    //     else g.addEdge(source, destination, capacity);
+    // }   
+    
+    //set flow of edges to zero
     auto verti = g.getVertexSet();
     for(auto v: verti){
         auto edges = v->getAdj();
         for(auto e: edges){
-            cout << "edge: " << e->getOrig()->getInfo() << "-" << e->getDest()->getInfo() << "  \tflow: " << e->getFlow() << "/" << (e->getWeight() == 1000000000 ? "inf" : to_string((int)e->getWeight())) <<  endl;
+            e->setFlow(0);
+        }
+    }
+
+    return dataset; 
+    
+}
+
+
+template <class T>
+void printGraph(Graph<T> &g){
+    cout << endl << "GRAPH: " << endl << endl;
+    auto verti = g.getVertexSet();
+    for(auto v: verti){
+        auto edges = v->getAdj();
+        for(auto e: edges){
+            cout << "edge: " << e->getOrig()->getInfo() << "-" << e->getDest()->getInfo() << "  \tdistance: " << e->getWeight() <<  endl;
         }
     }
     cout << endl;
