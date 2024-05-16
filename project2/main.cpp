@@ -99,9 +99,16 @@ int main() {
     populate_graph(g);
     printGraph(g);
 
-    Edge<int> *edge = getShortestEdge(g.getVertexSet()[0]->getAdj());
+    vector<Edge<int>*> mstEdges;
 
-    cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << ":\t" << edge->getWeight() << endl;
+    cout << prim(g, 0, mstEdges) << endl;
+
+    for(auto edge: mstEdges){
+        cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << ":\t" << edge->getWeight() << endl;
+    }
+
+    vector<int> best_path;
+    cout << tsp_backtracking(g, 0, best_path) << endl;
 
     //menu(g);
 

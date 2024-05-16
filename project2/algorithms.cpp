@@ -1,4 +1,6 @@
-//TODO: everything .-.
+#include <unordered_set>
+//----------------------------------------------T2.1----------------------------------------
+
 
 // Utility function to perform backtracking for TSP
 double tsp_backtracking_iteration(Graph<int> g, Vertex<int> *curr, std::vector<bool> &visited, std::vector<int> &path, double cost, double &min_cost, std::vector<int> &best_path) {
@@ -65,29 +67,57 @@ double tsp_backtracking(Graph<int> g, const int start, std::vector<int> &best_pa
     return min_cost;
 }
 
-Edge<int> *getShortestEdge(vector<Edge<int>*> edges){
-
-    double minWeight = INF;
-    Edge<int> *minEdge;
- 
-    for (Edge<int> *edge: edges){
-
-            cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << ":\t" << edge->getWeight() << endl;
 
 
-        if(edge->getDest()->isVisited()) continue;
+//----------------------------------------------T2.2----------------------------------------
 
-        double weight = edge->getWeight();
 
-        if(weight < minWeight){
-            minEdge = edge;
-            minWeight = weight;
+
+double prim(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
+    for (auto v : g.getVertexSet()) {
+        v->setDist(INF);  //distance
+        v->setPath(nullptr);
+        v->setVisited(false);
+    }
+
+    auto s = g.findVertex(start);
+    if (s == nullptr) return 0;
+
+    s->setDist(0);  //distance
+    MutablePriorityQueue<Vertex<int>> queue;
+    std::unordered_set<Vertex<int>*> inQueue; //keeps track of what's in queue 
+
+    queue.insert(s);
+    inQueue.insert(s);
+
+    double totalWeight = 0;
+
+    while (!queue.empty()) {
+        auto v = queue.extractMin(); //smallest distance vertex in queue
+        inQueue.erase(v);
+        v->setVisited(true);
+
+        if (v->getPath() != nullptr) { //if vertex has path, its on the mst
+            mstEdges.push_back(v->getPath());
+            totalWeight += v->getPath()->getWeight();
+        }
+
+        for (auto e : v->getAdj()) {
+            auto w = e->getDest();
+            if (!w->isVisited() && e->getWeight() < w->getDist()) { //if there are multiple nodes pointing to w,
+                                                                    //w will get the dist value of the lowest weight edge
+                w->setDist(e->getWeight());
+                w->setPath(e);
+
+                if (inQueue.find(w) != inQueue.end()) {
+                    queue.decreaseKey(w);
+                } else {
+                    queue.insert(w);
+                    inQueue.insert(w);
+                }
+            }
         }
     }
- 
-    return minEdge;
-}
 
-void primMST(){
-
+    return totalWeight;
 }
