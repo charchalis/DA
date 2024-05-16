@@ -99,7 +99,7 @@ double prim(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
 
 
     while (!queue.empty()) {
-        auto v = queue.extractMin(); //smallest distance vertex in queue
+        auto v = queue.extractMin(); //smallest distance vertex in queue 
         inQueue.erase(v);
         v->setVisited(true);
         lastNode = v;
