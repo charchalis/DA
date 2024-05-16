@@ -99,7 +99,11 @@ int main() {
     populate_graph(g);
     printGraph(g);
 
-    menu(g);
+    Edge<int> *edge = getShortestEdge(g.getVertexSet()[0]->getAdj());
+
+    cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << ":\t" << edge->getWeight() << endl;
+
+    //menu(g);
 
     return 0;
 }

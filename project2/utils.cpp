@@ -79,20 +79,6 @@ string populate_graph(Graph<T> &g, string dataset=""){
         g.addBidirectionalEdge(source, destination, distance);
 
     }
- 
-    //add edges to graph
-    // for(auto edgeData: edges){
-        
-    //     string source = pipeData[0];
-    //     string destination = pipeData[1];
-    //     int capacity = stoi(pipeData[2]);
-    //     bool bidirectional = !(bool)stoi(pipeData[3]);
-        
-    //     cout << "\t -adding " << (bidirectional ? "bi" : "uni") << "directional pipe from " << source << " to " << destination << endl;
-
-    //     if(bidirectional) g.addBidirectionalEdge(source, destination, capacity);
-    //     else g.addEdge(source, destination, capacity);
-    // }   
     
     //set flow of edges to zero
     auto verti = g.getVertexSet();

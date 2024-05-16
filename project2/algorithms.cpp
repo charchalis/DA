@@ -31,6 +31,7 @@ double tsp_backtracking_iteration(Graph<int> g, Vertex<int> *curr, std::vector<b
         return min_cost;
     }
 
+    //get next node on path
     for (Edge<int>* edge : curr->getAdj()) {
         //cout << "current edge: " << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << endl;
         Vertex<int>* next = edge->getDest();
@@ -62,4 +63,31 @@ double tsp_backtracking(Graph<int> g, const int start, std::vector<int> &best_pa
     tsp_backtracking_iteration(g, startVertex, visited, path, 0, min_cost, best_path);
 
     return min_cost;
+}
+
+Edge<int> *getShortestEdge(vector<Edge<int>*> edges){
+
+    double minWeight = INF;
+    Edge<int> *minEdge;
+ 
+    for (Edge<int> *edge: edges){
+
+            cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << ":\t" << edge->getWeight() << endl;
+
+
+        if(edge->getDest()->isVisited()) continue;
+
+        double weight = edge->getWeight();
+
+        if(weight < minWeight){
+            minEdge = edge;
+            minWeight = weight;
+        }
+    }
+ 
+    return minEdge;
+}
+
+void primMST(){
+
 }
