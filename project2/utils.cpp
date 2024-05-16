@@ -62,7 +62,7 @@ string populate_graph(Graph<T> &g, string dataset=""){
 
     
 
-    auto data = parseCSV("Toy-Graphs/tourism.csv");
+    auto data = parseCSV(dataset);
     
     int nodeIndex = -1;
     //add nodes to graph

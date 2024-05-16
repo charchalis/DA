@@ -97,12 +97,12 @@ void menu(Graph<T> &g){
 //measures the execution time of a function.
 //it passes a function and its arguments as arguments (mind blown)
 template<typename Func, typename... Args>
-double measureExecutionTime(Func&& func, Args&&... args) {
+double measureExecutionTime(Func&& func, double &result, Args&&... args) {
     // Record the start time
     auto start = std::chrono::high_resolution_clock::now();
 
     // Call the function passed as argument with provided arguments
-    std::forward<Func>(func)(std::forward<Args>(args)...);
+    result = std::forward<Func>(func)(std::forward<Args>(args)...);
 
     // Record the end time
     auto end = std::chrono::high_resolution_clock::now();
@@ -123,21 +123,21 @@ int main() {
 
     Graph<int> g;
     
-    populate_graph(g);
+    //populate_graph(g, "datasets/Extra_Fully_Connected_Graphs/edges_25.csv");
+    populate_graph(g, "datasets/Toy-Graphs/tourism.csv");
     printGraph(g);
 
-    vector<Edge<int>*> mstEdges;
+    // vector<Edge<int>*> mstEdges;
+    // double result;
+    // double executionTime = measureExecutionTime(primUsingEdges, result, g, 0, mstEdges);
 
-    cout << prim(g, 0, mstEdges) << endl;
+    // for(auto edge: mstEdges){
+    //     cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << ":\t" << edge->getWeight() << endl;
+    // }
 
-    for(auto edge: mstEdges){
-        cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << ":\t" << edge->getWeight() << endl;
-    }
+    // cout << "approximate distance: " << result << endl;
+    // cout << "execution time: " << executionTime << "s" << endl;
 
-
-    double executionTime = measureExecutionTime(prim, g, 0, mstEdges);
-
-    cout << "execution time: " << executionTime << "s" << endl;
 
 
     vector<int> best_path;

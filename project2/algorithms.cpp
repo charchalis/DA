@@ -3,7 +3,7 @@
 
 
 // Utility function to perform backtracking for TSP
-double tsp_backtracking_iteration(Graph<int> g, Vertex<int> *curr, std::vector<bool> &visited, std::vector<int> &path, double cost, double &min_cost, std::vector<int> &best_path) {
+double tsp_backtracking_iteration(Graph<int> g, Vertex<int> *curr, std::vector<int> &path, double cost, double &min_cost, std::vector<int> &best_path) {
     //cout << "current node: " << curr->getInfo() << endl;
     if (path.size() == g.getNumVertex()) {
         for (Edge<int>* edge : curr->getAdj()) {
@@ -38,12 +38,12 @@ double tsp_backtracking_iteration(Graph<int> g, Vertex<int> *curr, std::vector<b
         //cout << "current edge: " << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << endl;
         Vertex<int>* next = edge->getDest();
         int index = next->getInfo() - g.getVertexSet()[0]->getInfo();
-        if (!visited[index]) {
-            visited[index] = true;
+        if (!next->isVisited()) {
+            next->setVisited(true);
             path.push_back(next->getInfo());
-            tsp_backtracking_iteration(g, next, visited, path, cost + edge->getWeight(), min_cost, best_path);
+            tsp_backtracking_iteration(g, next, path, cost + edge->getWeight(), min_cost, best_path);
             path.pop_back();
-            visited[index] = false;
+            next->setVisited(false);
         }
         
     }
@@ -56,13 +56,13 @@ double tsp_backtracking(Graph<int> g, const int start, std::vector<int> &best_pa
     Vertex<int>* startVertex = g.findVertex(start);
     if (!startVertex) return INF;  // Return a large value if start vertex is not found
 
-    std::vector<bool> visited(g.getVertexSet().size(), false);
+    startVertex->setVisited(true);
+
     std::vector<int> path;
     double min_cost = INF;
 
-    visited[startVertex - g.getVertexSet()[0]] = true;
     path.push_back(start);
-    tsp_backtracking_iteration(g, startVertex, visited, path, 0, min_cost, best_path);
+    tsp_backtracking_iteration(g, startVertex, path, 0, min_cost, best_path);
 
     return min_cost;
 }
@@ -72,8 +72,8 @@ double tsp_backtracking(Graph<int> g, const int start, std::vector<int> &best_pa
 //----------------------------------------------T2.2----------------------------------------
 
 
-
-double prim(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
+//this is the prim algorithm for distance datasets (as opposed to coordinate datasets)
+double primUsingEdges(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
     for (auto v : g.getVertexSet()) {
         v->setDist(INF);  //distance
         v->setPath(nullptr);
@@ -99,7 +99,7 @@ double prim(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
 
 
     while (!queue.empty()) {
-        auto v = queue.extractMin(); //smallest distance vertex in queue
+        Vertex<int>* v = queue.extractMin(); //smallest distance vertex in queue
         inQueue.erase(v);
         v->setVisited(true);
         lastNode = v;
