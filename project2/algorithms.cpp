@@ -92,10 +92,17 @@ double prim(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
 
     double totalWeight = 0;
 
+
+    int numNodes = g.getNumVertex();
+    int numVisitedNodes = 0;
+    Vertex<int>* lastNode;
+
+
     while (!queue.empty()) {
         auto v = queue.extractMin(); //smallest distance vertex in queue
         inQueue.erase(v);
         v->setVisited(true);
+        lastNode = v;
 
         if (v->getPath() != nullptr) { //if vertex has path, its on the mst
             mstEdges.push_back(v->getPath());
@@ -118,6 +125,9 @@ double prim(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
             }
         }
     }
+
+    //from last node go back to zero if possible
+
 
     return totalWeight;
 }

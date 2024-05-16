@@ -6,6 +6,9 @@
 #include <vector>
 #include <filesystem>
 #include <cstdio>
+#include <chrono>
+#include <functional>
+#include <iostream>
 #include "./data_structures/Graph.h"
 #include "./utils.cpp"
 #include "./algorithms.cpp"
@@ -90,7 +93,31 @@ void menu(Graph<T> &g){
         }
     }
 }
+
+//measures the execution time of a function.
+//it passes a function and its arguments as arguments (mind blown)
+template<typename Func, typename... Args>
+double measureExecutionTime(Func&& func, Args&&... args) {
+    // Record the start time
+    auto start = std::chrono::high_resolution_clock::now();
+
+    // Call the function passed as argument with provided arguments
+    std::forward<Func>(func)(std::forward<Args>(args)...);
+
+    // Record the end time
+    auto end = std::chrono::high_resolution_clock::now();
+
+    // Calculate the duration
+    std::chrono::duration<double> duration = end - start;
+
+    // Return the duration in seconds
+    return duration.count();
+}
    
+void exampleFunction(int a, int b) {
+    // Simulate a time-consuming task
+    for (volatile int i = 0; i < a * b; ++i);
+}
 
 int main() {
 
@@ -106,6 +133,12 @@ int main() {
     for(auto edge: mstEdges){
         cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << ":\t" << edge->getWeight() << endl;
     }
+
+
+    double executionTime = measureExecutionTime(prim, g, 0, mstEdges);
+
+    cout << "execution time: " << executionTime << "s" << endl;
+
 
     vector<int> best_path;
     cout << tsp_backtracking(g, 0, best_path) << endl;
