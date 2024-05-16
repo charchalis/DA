@@ -14,7 +14,7 @@ double tsp_backtracking_iteration(Graph<int> g, Vertex<int> *curr, std::vector<i
                 //------------for testing. should be taken off???? or nah ????-----------------//
                 cout << "path: ";
                 for(int path_point: path){
-                    cout << path_point ;
+                    cout << path_point << "-";
                 }
                 cout << "0\t cost: " << total_cost << endl;
                 //------------for testing. should be taken off???? or nah ????-----------------//
@@ -37,7 +37,6 @@ double tsp_backtracking_iteration(Graph<int> g, Vertex<int> *curr, std::vector<i
     for (Edge<int>* edge : curr->getAdj()) {
         //cout << "current edge: " << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << endl;
         Vertex<int>* next = edge->getDest();
-        int index = next->getInfo() - g.getVertexSet()[0]->getInfo();
         if (!next->isVisited()) {
             next->setVisited(true);
             path.push_back(next->getInfo());
@@ -95,14 +94,12 @@ double primUsingEdges(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
 
     int numNodes = g.getNumVertex();
     int numVisitedNodes = 0;
-    Vertex<int>* lastNode;
 
 
     while (!queue.empty()) {
         Vertex<int>* v = queue.extractMin(); //smallest distance vertex in queue
         inQueue.erase(v);
         v->setVisited(true);
-        lastNode = v;
 
         if (v->getPath() != nullptr) { //if vertex has path, its on the mst
             mstEdges.push_back(v->getPath());
@@ -126,8 +123,60 @@ double primUsingEdges(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
         }
     }
 
-    //from last node go back to zero if possible
+    return totalWeight;
+}
 
+//this is the prim algorithm for coordinates datasets
+double primUsingCoords(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
+    for (auto v : g.getVertexSet()) {
+        v->setDist(INF);  //distance
+        v->setPath(nullptr);
+        v->setVisited(false);
+    }
+
+    auto s = g.findVertex(start);
+    if (s == nullptr) return 0;
+
+    s->setDist(0);  //distance
+    MutablePriorityQueue<Vertex<int>> queue;
+    std::unordered_set<Vertex<int>*> inQueue; //keeps track of what's in queue 
+
+    queue.insert(s);
+    inQueue.insert(s);
+
+    double totalWeight = 0;
+
+
+    int numNodes = g.getNumVertex();
+    int numVisitedNodes = 0;
+
+
+    while (!queue.empty()) {
+        Vertex<int>* v = queue.extractMin(); //smallest distance vertex in queue
+        inQueue.erase(v);
+        v->setVisited(true);
+
+        if (v->getPath() != nullptr) { //if vertex has path, its on the mst
+            mstEdges.push_back(v->getPath());
+            totalWeight += v->getPath()->getWeight();
+        }
+
+        for (auto w : g.getVertexSet()) {
+            if(v->getInfo() == w->getInfo()) continue;
+    HHHHEEEEERRRRREEEE you should change the edge weight into the distance of the coordinates        if (!w->isVisited() && e->getWeight() < w->getDist()) { //if there are multiple nodes pointing to w,
+                                                                    //w will get the dist value of the lowest weight edge
+                w->setDist(e->getWeight());
+                w->setPath(e);
+
+                if (inQueue.find(w) != inQueue.end()) {
+                    queue.decreaseKey(w);
+                } else {
+                    queue.insert(w);
+                    inQueue.insert(w);
+                }
+            }
+        }
+    }
 
     return totalWeight;
 }

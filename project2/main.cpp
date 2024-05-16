@@ -124,24 +124,34 @@ int main() {
     Graph<int> g;
     
     //populate_graph(g, "datasets/Extra_Fully_Connected_Graphs/edges_25.csv");
-    populate_graph(g, "datasets/Toy-Graphs/tourism.csv");
+    populate_graph(g, "datasets/Toy-Graphs/shipping.csv");
     printGraph(g);
 
-    // vector<Edge<int>*> mstEdges;
-    // double result;
-    // double executionTime = measureExecutionTime(primUsingEdges, result, g, 0, mstEdges);
-
-    // for(auto edge: mstEdges){
-    //     cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << ":\t" << edge->getWeight() << endl;
-    // }
-
-    // cout << "approximate distance: " << result << endl;
-    // cout << "execution time: " << executionTime << "s" << endl;
-
-
+    double result;
 
     vector<int> best_path;
-    cout << tsp_backtracking(g, 0, best_path) << endl;
+    double min_cost;
+    double executionTime = measureExecutionTime(tsp_backtracking, min_cost,g,0,best_path);
+
+    cout << "best path: ";
+    for(int path_point: best_path){
+        cout << path_point << "-";
+    }
+    cout << "\tprecise distance: " << min_cost << endl;
+    cout << "execution time: " << executionTime << "s" << endl;
+
+    vector<Edge<int>*> mstEdges;
+    
+    executionTime = measureExecutionTime(primUsingEdges, result, g, 0, mstEdges);
+
+    for(auto edge: mstEdges){
+        cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << "\tcost: " << edge->getWeight() << endl;
+    }
+
+    cout << "approximate distance: " << result << endl;
+    cout << "execution time: " << executionTime << "s" << endl;
+
+
 
     //menu(g);
 
