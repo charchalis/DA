@@ -107,7 +107,6 @@ string populate_graph(Graph<T> &g, string dataset=""){
     
 }
 
-
 template <class T>
 void printGraph(Graph<T> &g){
     cout << endl << "GRAPH: " << endl << endl;

@@ -6,6 +6,7 @@
 #include <vector>
 #include <filesystem>
 #include <cstdio>
+#include <random>
 #include "./data_structures/Graph.h"
 #include "./utils.cpp"
 #include "./algorithms.cpp"
@@ -37,9 +38,11 @@ void menu_option_3(){
     cout << "chosen option 3" << endl;
 }
 
-void menu_option_4(){
+void menu_option_4(Graph<int> &g){
 
     cout << "chosen option 4" << endl;
+
+    T2_3(g);
 }
 
 void menu_option_5(){
@@ -83,7 +86,7 @@ void menu(Graph<T> &g){
             case 1: menu_option_1(); break;
             case 2: menu_option_2(g); break;
             case 3: menu_option_3(); break;
-            case 4: menu_option_4(); break;
+            case 4: menu_option_4(g); break;
             case 5: menu_option_5(); break;
             case 6: return;
             default: break;
