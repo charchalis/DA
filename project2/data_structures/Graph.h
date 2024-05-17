@@ -296,7 +296,7 @@ void Vertex<T>::setLongitude(double longitude) {
 }
 
 template <class T>
-double Vertex<T>::getLongitude() const {
+double Vertex<T>::getLongitude() {
     return this->longitude;
 }
 
@@ -306,7 +306,7 @@ void Vertex<T>::setLatitude(double latitude) {
 }
 
 template <class T>
-double Vertex<T>::getLatitude() const {
+double Vertex<T>::getLatitude() {
     return this->latitude;
 }
 

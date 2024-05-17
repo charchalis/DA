@@ -36,8 +36,8 @@ void menu_option_2(Graph<int> &g){
     cout << "\tcost: " << min_cost << endl;
 }
 
-void menu_option_3(){
-    cout << "chosen option 3" << endl;
+void menu_option_3(Graph<int> g){
+    T2_2(g);
 }
 
 void menu_option_4(){
@@ -85,7 +85,7 @@ void menu(Graph<T> &g){
         switch(userInput){
             case 1: menu_option_1(); break;
             case 2: menu_option_2(g); break;
-            case 3: menu_option_3(); break;
+            case 3: menu_option_3(g); break;
             case 4: menu_option_4(); break;
             case 5: menu_option_5(); break;
             case 6: return;
@@ -94,66 +94,18 @@ void menu(Graph<T> &g){
     }
 }
 
-//measures the execution time of a function.
-//it passes a function and its arguments as arguments (mind blown)
-template<typename Func, typename... Args>
-double measureExecutionTime(Func&& func, double &result, Args&&... args) {
-    // Record the start time
-    auto start = std::chrono::high_resolution_clock::now();
 
-    // Call the function passed as argument with provided arguments
-    result = std::forward<Func>(func)(std::forward<Args>(args)...);
 
-    // Record the end time
-    auto end = std::chrono::high_resolution_clock::now();
-
-    // Calculate the duration
-    std::chrono::duration<double> duration = end - start;
-
-    // Return the duration in seconds
-    return duration.count();
-}
-   
-void exampleFunction(int a, int b) {
-    // Simulate a time-consuming task
-    for (volatile int i = 0; i < a * b; ++i);
-}
 
 int main() {
 
     Graph<int> g;
-    
-    //populate_graph(g, "datasets/Extra_Fully_Connected_Graphs/edges_25.csv");
-    populate_graph(g, "datasets/Toy-Graphs/shipping.csv");
-    printGraph(g);
 
-    double result;
-
-    vector<int> best_path;
-    double min_cost;
-    double executionTime = measureExecutionTime(tsp_backtracking, min_cost,g,0,best_path);
-
-    cout << "best path: ";
-    for(int path_point: best_path){
-        cout << path_point << "-";
-    }
-    cout << "\tprecise distance: " << min_cost << endl;
-    cout << "execution time: " << executionTime << "s" << endl;
-
-    vector<Edge<int>*> mstEdges;
-    
-    executionTime = measureExecutionTime(primUsingEdges, result, g, 0, mstEdges);
-
-    for(auto edge: mstEdges){
-        cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << "\tcost: " << edge->getWeight() << endl;
-    }
-
-    cout << "approximate distance: " << result << endl;
-    cout << "execution time: " << executionTime << "s" << endl;
+    populate_graph_real_world(g,"datasets/Real-world\ Graphs/graph1");
 
 
 
-    //menu(g);
+    menu(g);
 
     return 0;
 }
