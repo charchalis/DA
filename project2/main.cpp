@@ -6,13 +6,10 @@
 #include <vector>
 #include <filesystem>
 #include <cstdio>
-<<<<<<< HEAD
 #include <random>
-=======
 #include <chrono>
 #include <functional>
 #include <iostream>
->>>>>>> project2setup
 #include "./data_structures/Graph.h"
 #include "./utils.cpp"
 #include "./algorithms.cpp"
