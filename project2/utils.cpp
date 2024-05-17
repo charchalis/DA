@@ -60,7 +60,41 @@ string populate_graph(Graph<T> &g, string dataset=""){
 
     cout << "parsing data..." << endl << endl;
 
+    auto data = parseCSV(dataset);
     
+    int nodeIndex = -1;
+    //add nodes to graph
+    for(auto row: data){
+
+        int source = stoi(row[0]);
+        int destination = stoi(row[1]);
+        int distance = stoi(row[2]);
+        
+        //cout << "\t- adding node " << cityData[2] << " (" << cityData[0] << ")" << endl;
+        if(g.addVertex(source)) cout << "\t- added node " << source << endl;
+        if(g.addVertex(destination)) cout << "\t- added node " << destination << endl;
+
+        g.addBidirectionalEdge(source, destination, distance);
+
+    }
+    
+    //set flow of edges to zero
+    auto verti = g.getVertexSet();
+    for(auto v: verti){
+        auto edges = v->getAdj();
+        for(auto e: edges){
+            e->setFlow(0);
+        }
+    }
+
+    return dataset; 
+    
+}
+
+template <class T>
+string populate_graph_real_world(Graph<T> &g, string dataset=""){
+
+    cout << "parsing data..." << endl << endl;
 
     auto data = parseCSV(dataset);
     

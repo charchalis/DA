@@ -163,7 +163,7 @@ double primUsingCoords(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
 
         for (auto w : g.getVertexSet()) {
             if(v->getInfo() == w->getInfo()) continue;
-    HHHHEEEEERRRRREEEE you should change the edge weight into the distance of the coordinates        if (!w->isVisited() && e->getWeight() < w->getDist()) { //if there are multiple nodes pointing to w,
+                if (!w->isVisited() && e->getWeight() < w->getDist()) { //if there are multiple nodes pointing to w,
                                                                     //w will get the dist value of the lowest weight edge
                 w->setDist(e->getWeight());
                 w->setPath(e);
