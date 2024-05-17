@@ -70,33 +70,24 @@ string populate_graph(Graph<T> &g, string dataset=""){
         int destination = stoi(row[1]);
         int distance = stoi(row[2]);
         
-        //cout << "\t- adding node " << cityData[2] << " (" << cityData[0] << ")" << endl;
         if(g.addVertex(source)) cout << "\t- added node " << source << endl;
         if(g.addVertex(destination)) cout << "\t- added node " << destination << endl;
 
-        g.addBidirectionalEdge(source, destination, distance);
-
+        if(g.addBidirectionalEdge(source, destination, distance)) cout << "\t- added edge " << source << "-" << destination << " (" << distance << ")" << endl;
+        
     }
     
-    //set flow of edges to zero
-    auto verti = g.getVertexSet();
-    for(auto v: verti){
-        auto edges = v->getAdj();
-        for(auto e: edges){
-            e->setFlow(0);
-        }
-    }
 
     return dataset; 
     
 }
 
 template <class T>
-string populate_graph_real_world(Graph<T> &g, string dataset=""){
+void populate_graph_real_world(Graph<T> &g, string nodesDataset="", string edgesDataset=""){
 
     cout << "parsing data..." << endl << endl;
 
-    auto data = parseCSV(dataset + "/nodes.csv");
+    auto data = parseCSV(nodesDataset);
     
     int nodeIndex = -1;
     //add nodes to graph
@@ -115,7 +106,7 @@ string populate_graph_real_world(Graph<T> &g, string dataset=""){
         }
     }
 
-    data = parseCSV(dataset + "/edges.csv");
+    data = parseCSV(edgesDataset);
 
     for(auto row: data){
         int source = stoi(row[0]);
@@ -127,8 +118,6 @@ string populate_graph_real_world(Graph<T> &g, string dataset=""){
         cout << "\t- added edge " << source << "-" << destination << " (" << weight <<  ")" << endl;
     }
     
-
-    return dataset; 
     
 }
 
@@ -164,4 +153,13 @@ double measureExecutionTime(Func&& func, double &result, Args&&... args) {
 
     // Return the duration in seconds
     return duration.count();
+}
+
+void clearGraph(Graph<int> &g){
+    for(auto v: g.getVertexSet()){
+        for(auto e: v->getAdj()){
+            v->removeEdge(e->getDest()->getInfo());
+        }
+        g.removeVertex(v->getInfo());
+    }
 }
