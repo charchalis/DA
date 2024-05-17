@@ -60,9 +60,7 @@ string populate_graph(Graph<T> &g, string dataset=""){
 
     cout << "parsing data..." << endl << endl;
 
-    
-
-    auto data = parseCSV("Toy-Graphs/tourism.csv");
+    auto data = parseCSV(dataset);
     
     int nodeIndex = -1;
     //add nodes to graph
@@ -72,38 +70,54 @@ string populate_graph(Graph<T> &g, string dataset=""){
         int destination = stoi(row[1]);
         int distance = stoi(row[2]);
         
-        //cout << "\t- adding node " << cityData[2] << " (" << cityData[0] << ")" << endl;
         if(g.addVertex(source)) cout << "\t- added node " << source << endl;
         if(g.addVertex(destination)) cout << "\t- added node " << destination << endl;
 
-        g.addBidirectionalEdge(source, destination, distance);
-
+        if(g.addBidirectionalEdge(source, destination, distance)) cout << "\t- added edge " << source << "-" << destination << " (" << distance << ")" << endl;
+        
     }
- 
-    //add edges to graph
-    // for(auto edgeData: edges){
-        
-    //     string source = pipeData[0];
-    //     string destination = pipeData[1];
-    //     int capacity = stoi(pipeData[2]);
-    //     bool bidirectional = !(bool)stoi(pipeData[3]);
-        
-    //     cout << "\t -adding " << (bidirectional ? "bi" : "uni") << "directional pipe from " << source << " to " << destination << endl;
-
-    //     if(bidirectional) g.addBidirectionalEdge(source, destination, capacity);
-    //     else g.addEdge(source, destination, capacity);
-    // }   
     
-    //set flow of edges to zero
-    auto verti = g.getVertexSet();
-    for(auto v: verti){
-        auto edges = v->getAdj();
-        for(auto e: edges){
-            e->setFlow(0);
+
+    return dataset; 
+    
+}
+
+template <class T>
+void populate_graph_real_world(Graph<T> &g, string nodesDataset="", string edgesDataset=""){
+
+    cout << "parsing data..." << endl << endl;
+
+    auto data = parseCSV(nodesDataset);
+    
+    int nodeIndex = -1;
+    //add nodes to graph
+    for(auto row: data){
+
+        int id = stoi(row[0]);
+        double longitude = stod(row[1]);
+        double latitude = stod(row[2]);
+        
+        //cout << "\t- adding node " << cityData[2] << " (" << cityData[0] << ")" << endl;
+        if(g.addVertex(id)){
+            cout << "\t- added node " << id << "(" << longitude << ", " << latitude <<  ")" << endl;
+            auto v = g.findVertex(id);
+            v->setLongitude(longitude);
+            v->setLatitude(latitude);
         }
     }
 
-    return dataset; 
+    data = parseCSV(edgesDataset);
+
+    for(auto row: data){
+        int source = stoi(row[0]);
+        int destination = stoi(row[1]);
+        double weight = stod(row[2]);
+
+        g.addBidirectionalEdge(source, destination, weight);
+
+        cout << "\t- added edge " << source << "-" << destination << " (" << weight <<  ")" << endl;
+    }
+    
     
 }
 
@@ -118,4 +132,33 @@ void printGraph(Graph<T> &g){
         }
     }
     cout << endl;
+}
+
+//measures the execution time of a function.
+//it passes a function and its arguments as arguments (mind blown)
+template<typename Func, typename... Args>
+double measureExecutionTime(Func&& func, double &result, Args&&... args) {
+    // Record the start time
+    auto start = std::chrono::high_resolution_clock::now();
+
+    // Call the function passed as argument with provided arguments
+    result = std::forward<Func>(func)(std::forward<Args>(args)...);
+
+    // Record the end time
+    auto end = std::chrono::high_resolution_clock::now();
+
+    // Calculate the duration
+    std::chrono::duration<double> duration = end - start;
+
+    // Return the duration in seconds
+    return duration.count();
+}
+
+void clearGraph(Graph<int> &g){
+    for(auto v: g.getVertexSet()){
+        for(auto e: v->getAdj()){
+            v->removeEdge(e->getDest()->getInfo());
+        }
+        g.removeVertex(v->getInfo());
+    }
 }

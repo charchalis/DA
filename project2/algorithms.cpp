@@ -1,7 +1,13 @@
-//TODO: everything .-.
+#include <unordered_set>
+#include <math.h>
+
+const double PI = 3.14159265358979323846;
+
+//----------------------------------------------T2.1----------------------------------------
+
 
 // Utility function to perform backtracking for TSP
-double tsp_backtracking_iteration(Graph<int> g, Vertex<int> *curr, std::vector<bool> &visited, std::vector<int> &path, double cost, double &min_cost, std::vector<int> &best_path) {
+double tsp_backtracking_iteration(Graph<int> g, Vertex<int> *curr, std::vector<int> &path, double cost, double &min_cost, std::vector<int> &best_path) {
     //cout << "current node: " << curr->getInfo() << endl;
     if (path.size() == g.getNumVertex()) {
         for (Edge<int>* edge : curr->getAdj()) {
@@ -12,7 +18,7 @@ double tsp_backtracking_iteration(Graph<int> g, Vertex<int> *curr, std::vector<b
                 //------------for testing. should be taken off???? or nah ????-----------------//
                 cout << "path: ";
                 for(int path_point: path){
-                    cout << path_point ;
+                    cout << path_point << "-";
                 }
                 cout << "0\t cost: " << total_cost << endl;
                 //------------for testing. should be taken off???? or nah ????-----------------//
@@ -31,16 +37,16 @@ double tsp_backtracking_iteration(Graph<int> g, Vertex<int> *curr, std::vector<b
         return min_cost;
     }
 
+    //get next node on path
     for (Edge<int>* edge : curr->getAdj()) {
         //cout << "current edge: " << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << endl;
         Vertex<int>* next = edge->getDest();
-        int index = next->getInfo() - g.getVertexSet()[0]->getInfo();
-        if (!visited[index]) {
-            visited[index] = true;
+        if (!next->isVisited()) {
+            next->setVisited(true);
             path.push_back(next->getInfo());
-            tsp_backtracking_iteration(g, next, visited, path, cost + edge->getWeight(), min_cost, best_path);
+            tsp_backtracking_iteration(g, next, path, cost + edge->getWeight(), min_cost, best_path);
             path.pop_back();
-            visited[index] = false;
+            next->setVisited(false);
         }
         
     }
@@ -53,16 +59,17 @@ double tsp_backtracking(Graph<int> g, const int start, std::vector<int> &best_pa
     Vertex<int>* startVertex = g.findVertex(start);
     if (!startVertex) return INF;  // Return a large value if start vertex is not found
 
-    std::vector<bool> visited(g.getVertexSet().size(), false);
+    startVertex->setVisited(true);
+
     std::vector<int> path;
     double min_cost = INF;
 
-    visited[startVertex - g.getVertexSet()[0]] = true;
     path.push_back(start);
-    tsp_backtracking_iteration(g, startVertex, visited, path, 0, min_cost, best_path);
+    tsp_backtracking_iteration(g, startVertex, path, 0, min_cost, best_path);
 
     return min_cost;
 }
+
 
 //Auxiliary function that dictates wheter or not values occur/are in a given vector
 bool vectorContainsVal(std::vector<int> vec, int val){
@@ -414,4 +421,163 @@ void T2_3(Graph<int> &g){
 
     return; 
     
+
+
+//----------------------------------------------T2.2----------------------------------------
+
+
+//this is the prim algorithm for distance datasets (as opposed to coordinate datasets)
+double primUsingEdges(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
+    for (auto v : g.getVertexSet()) {
+        v->setDist(INF);  //distance
+        v->setPath(nullptr);
+        v->setVisited(false);
+    }
+
+    auto s = g.findVertex(start);
+    if (s == nullptr) return 0;
+
+    s->setDist(0);  //distance
+    MutablePriorityQueue<Vertex<int>> queue;
+    std::unordered_set<Vertex<int>*> inQueue; //keeps track of what's in queue 
+
+    queue.insert(s);
+    inQueue.insert(s);
+
+    double totalWeight = 0;
+
+    int numNodes = g.getNumVertex();
+    int numVisitedNodes = 0;
+
+
+    while (!queue.empty()) {
+        Vertex<int>* v = queue.extractMin(); //smallest distance vertex in queue
+        inQueue.erase(v);
+        v->setVisited(true);
+
+        if (v->getPath() != nullptr) { //if vertex has path, its on the mst
+            mstEdges.push_back(v->getPath());
+            totalWeight += v->getPath()->getWeight();
+        }
+
+        for (auto e : v->getAdj()) {
+            auto w = e->getDest();
+            if (!w->isVisited() && e->getWeight() < w->getDist()) { //if there are multiple nodes pointing to w,
+                                                                    //w will get the dist value of the lowest weight edge
+                w->setDist(e->getWeight());
+                w->setPath(e);
+
+                if (inQueue.find(w) != inQueue.end()) {
+                    queue.decreaseKey(w);
+                } else {
+                    queue.insert(w);
+                    inQueue.insert(w);
+                }
+            }
+        }
+    }
+
+    return totalWeight;
+}
+
+double calculateDistance(Vertex<int>* v, Vertex<int>* w){
+
+    double v_longitude = v->getLongitude() * PI / 180;
+    double w_longitude = w->getLongitude() * PI / 180;
+    double v_latitude = v->getLatitude() * PI / 180;
+    double w_latitude = w->getLatitude() * PI / 180;
+
+    double delta_longitude = abs(v_longitude - w_longitude);
+    double delta_latitude = abs(v_latitude - w_latitude);
+
+    double a = sin(delta_latitude/2) * sin(delta_latitude/2) + cos(v_latitude)*cos(w_latitude)*sin(delta_longitude/2)*sin(delta_longitude);
+    double c = 2*atan2(sqrt(a), sqrt(1-a));
+    double d = 6371*1000 * c;
+
+    return d;
+}
+
+//this is the prim algorithm for coordinates datasets
+double primUsingCoords(Graph<int> g, int start, vector<Edge<int>*> &mstEdges) {
+
+    for (auto v : g.getVertexSet()) {
+        v->setDist(INF);  //distance
+        v->setPath(nullptr);
+        v->setVisited(false);
+    }
+
+    auto s = g.findVertex(start);
+    if (s == nullptr) return 0;
+
+    s->setDist(0);  //distance
+    MutablePriorityQueue<Vertex<int>> queue;
+    std::unordered_set<Vertex<int>*> inQueue; //keeps track of what's in queue 
+
+    queue.insert(s);
+    inQueue.insert(s);
+
+    double totalWeight = 0;
+
+
+    int numNodes = g.getNumVertex();
+    int numVisitedNodes = 0;
+
+
+    while (!queue.empty()) {
+        Vertex<int>* v = queue.extractMin(); //smallest distance vertex in queue
+        inQueue.erase(v);
+        v->setVisited(true);
+
+        if (v->getDist() < INF) { //if vertex has path, its on the mst
+            totalWeight += v->getDist();
+        }
+
+        for (auto w : g.getVertexSet()) {
+            if(v->getInfo() == w->getInfo()) continue;
+            double distance = calculateDistance(v,w);
+            //Edge<int>* proximationEdge = new Edge<int>(v,w,distance);
+            if (!w->isVisited() && distance < w->getDist()) { //if there are multiple nodes pointing to w,
+                                                                    //w will get the dist value of the lowest weight edge
+                w->setDist(distance);
+                //w->setPath(proximationEdge);
+
+                if (inQueue.find(w) != inQueue.end()) {
+                    queue.decreaseKey(w);
+                } else {
+                    queue.insert(w);
+                    inQueue.insert(w);
+                }
+            }
+        }
+    }
+
+    return totalWeight;
+}
+
+void T2_2(Graph<int> g){
+    double result;
+
+    vector<Edge<int>*> mstEdges2;
+
+    double executionTime = measureExecutionTime(primUsingCoords, result, g, 0, mstEdges2);
+
+    // for(auto edge: mstEdges2){
+    //     cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << "\tcost: " << edge->getWeight() << endl;
+    // }
+
+    cout << "\nApproximate Triangulation Distance: " << result << endl;
+    cout << "execution time: " << executionTime << "s" << endl;
+
+    cout << endl;
+
+    vector<Edge<int>*> mstEdges;
+
+    executionTime = measureExecutionTime(primUsingEdges, result, g, 0, mstEdges);
+
+    // for(auto edge: mstEdges){
+    //     cout << edge->getOrig()->getInfo() << "-" << edge->getDest()->getInfo() << "\tcost: " << edge->getWeight() << endl;
+    // }
+
+    cout << "MST Distance: " << result << endl;
+    cout << "execution time: " << executionTime << "s" << endl;
 }

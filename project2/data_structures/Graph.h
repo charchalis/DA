@@ -48,6 +48,12 @@ public:
     void setDemand(float demand); //for cities
     float getDemand(); //for cities
 
+    void setLongitude(double longitude);
+    double getLongitude();
+
+    void setLatitude(double longitude);
+    double getLatitude();
+
     friend class MutablePriorityQueue<Vertex>;
 protected:
     T info;                // info node
@@ -60,6 +66,8 @@ protected:
     double dist = 0;
     Edge<T> *path = nullptr;
     float demand = -1; //for cities
+    double longitude;
+    double latitude;
 
     std::vector<Edge<T> *> incoming; // incoming edges
 
@@ -280,6 +288,26 @@ void Vertex<T>::setDist(double dist) {
 template <class T>
 void Vertex<T>::setPath(Edge<T> *path) {
     this->path = path;
+}
+
+template <class T>
+void Vertex<T>::setLongitude(double longitude) {
+    this->longitude = longitude;
+}
+
+template <class T>
+double Vertex<T>::getLongitude() {
+    return this->longitude;
+}
+
+template <class T>
+void Vertex<T>::setLatitude(double latitude) {
+    this->latitude = latitude;
+}
+
+template <class T>
+double Vertex<T>::getLatitude() {
+    return this->latitude;
 }
 
 template <class T>
