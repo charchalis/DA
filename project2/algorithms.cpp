@@ -581,3 +581,95 @@ void T2_2(Graph<int> g){
     cout << "MST Distance: " << result << endl;
     cout << "execution time: " << executionTime << "s" << endl;
 }
+
+
+//----------------------------------------------T2.4----------------------------------------
+
+struct Edge {
+    int to;
+    double weight;
+};
+
+struct Node {
+    int id;
+    double lat, lon;
+    std::vector<Edge> edges;
+};
+
+//  Add Haversine Distance Calculation
+const double EARTH_RADIUS = 6371000; 
+
+double haversine(double lat1, double lon1, double lat2, double lon2) {
+    double dLat = (lat2 - lat1) * M_PI / 180.0;
+    double dLon = (lon2 - lon1) * M_PI / 180.0;
+    lat1 = lat1 * M_PI / 180.0;
+    lat2 = lat2 * M_PI / 180.0;
+
+    double a = std::sin(dLat / 2) * std::sin(dLat / 2) +
+               std::cos(lat1) * std::cos(lat2) *
+               std::sin(dLon / 2) * std::sin(dLon / 2);
+    double c = 2 * std::atan2(std::sqrt(a), std::sqrt(1 - a));
+    return EARTH_RADIUS * c;
+}
+
+//  Add Graph Connectivity Check
+bool isConnected(const std::vector<Node> &nodes, int start) {
+    std::unordered_set<int> visited;
+    std::queue<int> q;
+    q.push(start);
+    visited.insert(start);
+
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        for (const Edge &e : nodes[node].edges) {
+            if (visited.find(e.to) == visited.end()) {
+                visited.insert(e.to);
+                q.push(e.to);
+            }
+        }
+    }
+    return visited.size() == nodes.size();
+}
+
+//  Add Nearest Neighbor Heuristic
+std::vector<int> nearestNeighborTSP(const std::vector<Node> &nodes, int start) {
+    std::vector<int> tour;
+    std::unordered_set<int> visited;
+    int current = start;
+    tour.push_back(current);
+    visited.insert(current);
+
+    while (tour.size() < nodes.size()) {
+        double minDist = std::numeric_limits<double>::infinity();
+        int nextNode = -1;
+        for (const Edge &e : nodes[current].edges) {
+            if (visited.find(e.to) == visited.end() && e.weight < minDist) {
+                minDist = e.weight;
+                nextNode = e.to;
+            }
+        }
+        if (nextNode == -1) {
+            // Handle case where no connected node is found
+            break;
+        }
+        current = nextNode;
+        tour.push_back(current);
+        visited.insert(current);
+    }
+
+    return tour;
+}
+
+//  Add Main Function for Real-World TSP Solution
+std::vector<int> solveRealWorldTSP(std::vector<Node> &nodes, int start) {
+    if (!isConnected(nodes, start)) {
+        std::cerr << "The graph is not fully connected from the starting point." << std::endl;
+        return {};
+    }
+    return nearestNeighborTSP(nodes, start);
+}
+
+
+
+
