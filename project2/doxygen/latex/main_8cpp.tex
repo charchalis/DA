@@ -1,0 +1,249 @@
+\doxysection{code/main.cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{code/main.cpp@{code/main.cpp}}
+
+
+This file contains the menu interface. It is the entry point of the program. Not much goes one here, as the main purpose of this file is to call the menu function, as well as populate the graph and call the algorithms functions when the user selects an option.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include "{}./data\+\_\+structures/\+Graph.\+h"{}}\newline
+{\ttfamily \#include "{}./utils.\+cpp"{}}\newline
+{\ttfamily \#include "{}./algorithms.\+cpp"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8cpp_aa97da210c9fc91edc1ae299f3566a6f8}{user\+Input}} ()
+\begin{DoxyCompactList}\small\item\em Get user input with validation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a5eaa9bb4e95a39f1de28422d9dcaa049}{toy\+\_\+menu}} (Graph$<$ int $>$ \&g)
+\begin{DoxyCompactList}\small\item\em Display and handle the Toy Graphs menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a9afb46e25d2fd202bab1f3b44202ddf0}{extra\+\_\+fully\+\_\+menu}} (Graph$<$ int $>$ \&g)
+\begin{DoxyCompactList}\small\item\em Display and handle the Extra Fully Connected Graphs menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_aae54f8f364fcfeed3d65845b23517988}{real\+\_\+world\+\_\+menu}} (Graph$<$ int $>$ \&g)
+\begin{DoxyCompactList}\small\item\em Display and handle the Real World Graphs menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a43c9063121ff2a98e9ba903dd132f3aa}{menu\+\_\+option\+\_\+1}} (Graph$<$ int $>$ \&g)
+\begin{DoxyCompactList}\small\item\em Handle menu option 1 -\/\texorpdfstring{$>$}{>} Selecting the dataset. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a124bb620966465a36fbc63ce86aa5e76}{menu\+\_\+option\+\_\+2}} (Graph$<$ int $>$ \&g)
+\begin{DoxyCompactList}\small\item\em Handle menu option 2 -\/\texorpdfstring{$>$}{>} TSP using backtracking. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a66364d01de037b1c55b7d57ed72331e1}{menu\+\_\+option\+\_\+3}} (Graph$<$ int $>$ \&g)
+\begin{DoxyCompactList}\small\item\em Handle menu option 3 -\/\texorpdfstring{$>$}{>} TSP using Triangular Approximation Heuristic. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a29c7224eea1544652c68e9f18de45473}{menu\+\_\+option\+\_\+4}} (Graph$<$ int $>$ \&g)
+\begin{DoxyCompactList}\small\item\em Handle menu option 4 -\/\texorpdfstring{$>$}{>} TSP using a custom heuristic (Tabu Search using 2-\/opt metaheuristic) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ad05d52c21cb1aa1c60bb787d05dd30d1}{menu\+\_\+option\+\_\+5}} ()
+\begin{DoxyCompactList}\small\item\em Handle menu option 5. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{main_8cpp_a494b885c10fe42b24ef9fce39e98d941}{menu}} (Graph$<$ T $>$ \&g)
+\begin{DoxyCompactList}\small\item\em Main menu function. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main menu function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8cpp_ab00a0dea068ea1400785c7ae7355bcb3}\label{main_8cpp_ab00a0dea068ea1400785c7ae7355bcb3} 
+int {\bfseries NUM\+\_\+\+OPTIONS} = 6
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains the menu interface. It is the entry point of the program. Not much goes one here, as the main purpose of this file is to call the menu function, as well as populate the graph and call the algorithms functions when the user selects an option. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_a9afb46e25d2fd202bab1f3b44202ddf0}\label{main_8cpp_a9afb46e25d2fd202bab1f3b44202ddf0} 
+\index{main.cpp@{main.cpp}!extra\_fully\_menu@{extra\_fully\_menu}}
+\index{extra\_fully\_menu@{extra\_fully\_menu}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{extra\_fully\_menu()}{extra\_fully\_menu()}}
+{\footnotesize\ttfamily void extra\+\_\+fully\+\_\+menu (\begin{DoxyParamCaption}\item[{Graph$<$ int $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Display and handle the Extra Fully Connected Graphs menu. 
+
+This function presents a menu for selecting a dataset from extra fully connected graphs and populates the graph with the selected dataset.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Reference to the graph object to be populated \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main menu function. 
+
+This function presents the main menu and handles user selection for various options.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of the graph nodes \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Reference to the graph object \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_a494b885c10fe42b24ef9fce39e98d941}\label{main_8cpp_a494b885c10fe42b24ef9fce39e98d941} 
+\index{main.cpp@{main.cpp}!menu@{menu}}
+\index{menu@{menu}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{menu()}{menu()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void menu (\begin{DoxyParamCaption}\item[{Graph$<$ T $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Main menu function. 
+
+This function presents the main menu and handles user selection for various options.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of the graph nodes \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Reference to the graph object \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_a43c9063121ff2a98e9ba903dd132f3aa}\label{main_8cpp_a43c9063121ff2a98e9ba903dd132f3aa} 
+\index{main.cpp@{main.cpp}!menu\_option\_1@{menu\_option\_1}}
+\index{menu\_option\_1@{menu\_option\_1}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{menu\_option\_1()}{menu\_option\_1()}}
+{\footnotesize\ttfamily void menu\+\_\+option\+\_\+1 (\begin{DoxyParamCaption}\item[{Graph$<$ int $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Handle menu option 1 -\/\texorpdfstring{$>$}{>} Selecting the dataset. 
+
+This function presents a sub-\/menu for selecting a type of dataset (toy graphs, extra fully connected graphs, or real-\/world graphs) and populates the graph with the selected dataset.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Reference to the graph object to be populated \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_a124bb620966465a36fbc63ce86aa5e76}\label{main_8cpp_a124bb620966465a36fbc63ce86aa5e76} 
+\index{main.cpp@{main.cpp}!menu\_option\_2@{menu\_option\_2}}
+\index{menu\_option\_2@{menu\_option\_2}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{menu\_option\_2()}{menu\_option\_2()}}
+{\footnotesize\ttfamily void menu\+\_\+option\+\_\+2 (\begin{DoxyParamCaption}\item[{Graph$<$ int $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Handle menu option 2 -\/\texorpdfstring{$>$}{>} TSP using backtracking. 
+
+This function calls the TSP backtracking algorithm and displays the best path and its cost.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Reference to the graph object \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_a66364d01de037b1c55b7d57ed72331e1}\label{main_8cpp_a66364d01de037b1c55b7d57ed72331e1} 
+\index{main.cpp@{main.cpp}!menu\_option\_3@{menu\_option\_3}}
+\index{menu\_option\_3@{menu\_option\_3}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{menu\_option\_3()}{menu\_option\_3()}}
+{\footnotesize\ttfamily void menu\+\_\+option\+\_\+3 (\begin{DoxyParamCaption}\item[{Graph$<$ int $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Handle menu option 3 -\/\texorpdfstring{$>$}{>} TSP using Triangular Approximation Heuristic. 
+
+This function calls the Triangular Approximation Heuristic.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Reference to the graph object \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_a29c7224eea1544652c68e9f18de45473}\label{main_8cpp_a29c7224eea1544652c68e9f18de45473} 
+\index{main.cpp@{main.cpp}!menu\_option\_4@{menu\_option\_4}}
+\index{menu\_option\_4@{menu\_option\_4}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{menu\_option\_4()}{menu\_option\_4()}}
+{\footnotesize\ttfamily void menu\+\_\+option\+\_\+4 (\begin{DoxyParamCaption}\item[{Graph$<$ int $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Handle menu option 4 -\/\texorpdfstring{$>$}{>} TSP using a custom heuristic (Tabu Search using 2-\/opt metaheuristic) 
+
+This function calls another heuristic function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Reference to the graph object \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_ad05d52c21cb1aa1c60bb787d05dd30d1}\label{main_8cpp_ad05d52c21cb1aa1c60bb787d05dd30d1} 
+\index{main.cpp@{main.cpp}!menu\_option\_5@{menu\_option\_5}}
+\index{menu\_option\_5@{menu\_option\_5}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{menu\_option\_5()}{menu\_option\_5()}}
+{\footnotesize\ttfamily void menu\+\_\+option\+\_\+5 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handle menu option 5. 
+
+This function handles TSP problems in real world scenarios (Where graphs are not always fully connected). \Hypertarget{main_8cpp_aae54f8f364fcfeed3d65845b23517988}\label{main_8cpp_aae54f8f364fcfeed3d65845b23517988} 
+\index{main.cpp@{main.cpp}!real\_world\_menu@{real\_world\_menu}}
+\index{real\_world\_menu@{real\_world\_menu}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{real\_world\_menu()}{real\_world\_menu()}}
+{\footnotesize\ttfamily void real\+\_\+world\+\_\+menu (\begin{DoxyParamCaption}\item[{Graph$<$ int $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Display and handle the Real World Graphs menu. 
+
+This function presents a menu for selecting a dataset from real-\/world graphs and populates the graph with the selected dataset.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Reference to the graph object to be populated \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_a5eaa9bb4e95a39f1de28422d9dcaa049}\label{main_8cpp_a5eaa9bb4e95a39f1de28422d9dcaa049} 
+\index{main.cpp@{main.cpp}!toy\_menu@{toy\_menu}}
+\index{toy\_menu@{toy\_menu}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{toy\_menu()}{toy\_menu()}}
+{\footnotesize\ttfamily void toy\+\_\+menu (\begin{DoxyParamCaption}\item[{Graph$<$ int $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Display and handle the Toy Graphs menu. 
+
+This function presents a menu for selecting a dataset from toy graphs and populates the graph with the selected dataset.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Reference to the graph object to be populated \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_aa97da210c9fc91edc1ae299f3566a6f8}\label{main_8cpp_aa97da210c9fc91edc1ae299f3566a6f8} 
+\index{main.cpp@{main.cpp}!userInput@{userInput}}
+\index{userInput@{userInput}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{userInput()}{userInput()}}
+{\footnotesize\ttfamily int user\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get user input with validation. 
+
+This function prompts the user for input and ensures it is a valid number within a specified range.
+
+\begin{DoxyReturn}{Returns}
+int The user\textquotesingle{}s valid input 
+\end{DoxyReturn}

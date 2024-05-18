@@ -1,0 +1,169 @@
+\doxysection{utils.\+cpp}
+\hypertarget{utils_8cpp_source}{}\label{utils_8cpp_source}\index{code/utils.cpp@{code/utils.cpp}}
+\mbox{\hyperlink{utils_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00017\ vector<vector<string>>\ \mbox{\hyperlink{utils_8cpp_a2e05f3eea61c181394c204b93d0d50fb}{parseCSV}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ filename)\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ vector<vector<string>>\ data;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ ifstream\ file(filename);}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{if}\ (!file.is\_open())\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ open\ the\ file:\ "{}}\ <<\ filename\ <<\ endl;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{string}\ line;}
+\DoxyCodeLine{00027\ \ \ \ \ getline(file,\ line);\ \textcolor{comment}{//skip\ first\ line}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{while}\ (getline(file,\ line))\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ vector<string>\ row;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ stringstream\ ss(line);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ cell;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ inQuotes\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{/*pra\ tratar\ das\ virgulas\ dentro\ das\ aspas*/}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (getline(ss,\ cell,\ \textcolor{charliteral}{','}))\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cell.empty())\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cell.front()\ ==\ \textcolor{charliteral}{'"{}'}\ \&\&\ cell.back()\ ==\ \textcolor{charliteral}{'"{}'})\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cell\ =\ cell.substr(1,\ cell.length()\ -\/\ 2);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (cell.front()\ ==\ \textcolor{charliteral}{'"{}'})\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inQuotes\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cell.erase(0,\ 1);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (cell.back()\ ==\ \textcolor{charliteral}{'"{}'})\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inQuotes\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cell.pop\_back();}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inQuotes)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ temp;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (std::getline(ss,\ temp,\ \textcolor{charliteral}{','}))\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cell+=\ \textcolor{stringliteral}{"{},"{}}\ +\ temp;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (temp.back()\ ==\ \textcolor{charliteral}{'"{}'}\ )\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cell.pop\_back();}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inQuotes\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ cell.erase(remove(cell.begin(),\ cell.end(),\ \textcolor{charliteral}{'"{}'}),\ cell.end());}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ cell.erase(remove(cell.begin(),\ cell.end(),\ \textcolor{charliteral}{','}),\ cell.end());}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ row.push\_back(cell);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ data.push\_back(row);}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ file.close();}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
+\DoxyCodeLine{00072\ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00083\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00084\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{utils_8cpp_a72d8ec0e99d0ae595c4ba84d21784c30}{populate\_graph}}(Graph<T>\ \&g,\ \textcolor{keywordtype}{string}\ dataset=\textcolor{stringliteral}{"{}"{}})\{}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}parsing\ data..."{}}\ <<\ endl\ <<\ endl;}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{auto}\ data\ =\ \mbox{\hyperlink{utils_8cpp_a2e05f3eea61c181394c204b93d0d50fb}{parseCSV}}(dataset);}
+\DoxyCodeLine{00089\ \ \ \ \ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{int}\ nodeIndex\ =\ -\/1;}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//add\ nodes\ to\ graph}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ row:\ data)\{}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ source\ =\ stoi(row[0]);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ destination\ =\ stoi(row[1]);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ distance\ =\ stoi(row[2]);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(g.addVertex(source))\ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)t-\/\ added\ node\ "{}}\ <<\ source\ <<\ endl;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(g.addVertex(destination))\ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)t-\/\ added\ node\ "{}}\ <<\ destination\ <<\ endl;}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(g.addBidirectionalEdge(source,\ destination,\ distance))\ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)t-\/\ added\ edge\ "{}}\ <<\ source\ <<\ \textcolor{stringliteral}{"{}-\/"{}}\ <<\ destination\ <<\ \textcolor{stringliteral}{"{}\ ("{}}\ <<\ distance\ <<\ \textcolor{stringliteral}{"{})"{}}\ <<\ endl;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+\DoxyCodeLine{00104\ \ \ \ \ }
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{return}\ dataset;\ }
+\DoxyCodeLine{00107\ \ \ \ \ }
+\DoxyCodeLine{00108\ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00119\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00120\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{utils_8cpp_a7904b0d3f5ac9d5ac566a79e9f5836c5}{populate\_graph\_real\_world}}(Graph<T>\ \&g,\ \textcolor{keywordtype}{string}\ nodesDataset=\textcolor{stringliteral}{"{}"{}},\ \textcolor{keywordtype}{string}\ edgesDataset=\textcolor{stringliteral}{"{}"{}})\{}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}parsing\ data..."{}}\ <<\ endl\ <<\ endl;}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{auto}\ data\ =\ \mbox{\hyperlink{utils_8cpp_a2e05f3eea61c181394c204b93d0d50fb}{parseCSV}}(nodesDataset);}
+\DoxyCodeLine{00125\ \ \ \ \ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{int}\ nodeIndex\ =\ -\/1;}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{comment}{//add\ nodes\ to\ graph}}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ row:\ data)\{}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id}\ =\ stoi(row[0]);}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ longitude\ =\ stod(row[1]);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ latitude\ =\ stod(row[2]);}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{comment}{//cout\ <<\ "{}\(\backslash\)t-\/\ adding\ node\ "{}\ <<\ cityData[2]\ <<\ "{}\ ("{}\ <<\ cityData[0]\ <<\ "{})"{}\ <<\ endl;}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(g.addVertex(\textcolor{keywordtype}{id}))\{}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)t-\/\ added\ node\ "{}}\ <<\ \textcolor{keywordtype}{id}\ <<\ \textcolor{stringliteral}{"{}("{}}\ <<\ longitude\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ latitude\ <<\ \ \textcolor{stringliteral}{"{})"{}}\ <<\ endl;}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ v\ =\ g.findVertex(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ v-\/>setLongitude(longitude);}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ v-\/>setLatitude(latitude);}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00141\ \ \ \ \ \}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ data\ =\ \mbox{\hyperlink{utils_8cpp_a2e05f3eea61c181394c204b93d0d50fb}{parseCSV}}(edgesDataset);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ row:\ data)\{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ source\ =\ stoi(row[0]);}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ destination\ =\ stoi(row[1]);}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ weight\ =\ stod(row[2]);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ g.addBidirectionalEdge(source,\ destination,\ weight);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)t-\/\ added\ edge\ "{}}\ <<\ source\ <<\ \textcolor{stringliteral}{"{}-\/"{}}\ <<\ destination\ <<\ \textcolor{stringliteral}{"{}\ ("{}}\ <<\ weight\ <<\ \ \textcolor{stringliteral}{"{})"{}}\ <<\ endl;}
+\DoxyCodeLine{00153\ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \ \ \ \ }
+\DoxyCodeLine{00155\ \ \ \ \ }
+\DoxyCodeLine{00156\ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00165\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00166\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{utils_8cpp_a944dda62a3b9f4ed7c9695f57b5ed0c9}{printGraph}}(Graph<T>\ \&g)\{}
+\DoxyCodeLine{00167\ \ \ \ \ cout\ <<\ endl\ <<\ \textcolor{stringliteral}{"{}GRAPH:\ "{}}\ <<\ endl\ <<\ endl;}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keyword}{auto}\ verti\ =\ g.getVertexSet();}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v:\ verti)\{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ edges\ =\ v-\/>getAdj();}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ edges)\{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}edge:\ "{}}\ <<\ e-\/>getOrig()-\/>getInfo()\ <<\ \textcolor{stringliteral}{"{}-\/"{}}\ <<\ e-\/>getDest()-\/>getInfo()\ <<\ \textcolor{stringliteral}{"{}\ \ \(\backslash\)tdistance:\ "{}}\ <<\ e-\/>getWeight()\ <<\ \ endl;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00174\ \ \ \ \ \}}
+\DoxyCodeLine{00175\ \ \ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00176\ \}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00188\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Func,\ \textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00189\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{utils_8cpp_ab8f46c1d5216ff8c22956977fccb0e1a}{measureExecutionTime}}(Func\&\&\ func,\ \textcolor{keywordtype}{double}\ \&result,\ Args\&\&...\ args)\ \{}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{comment}{//\ Record\ the\ start\ time}}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keyword}{auto}\ start\ =\ std::chrono::high\_resolution\_clock::now();}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ function\ passed\ as\ argument\ with\ provided\ arguments}}
+\DoxyCodeLine{00194\ \ \ \ \ result\ =\ std::forward<Func>(func)(std::forward<Args>(args)...);}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{comment}{//\ Record\ the\ end\ time}}
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keyword}{auto}\ end\ =\ std::chrono::high\_resolution\_clock::now();}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{comment}{//\ Calculate\ the\ duration}}
+\DoxyCodeLine{00200\ \ \ \ \ std::chrono::duration<double>\ duration\ =\ end\ -\/\ start;}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ duration\ in\ seconds}}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordflow}{return}\ duration.count();}
+\DoxyCodeLine{00204\ \}}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00213\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{utils_8cpp_a1d1930278fb7d758385cebae557e9074}{clearGraph}}(Graph<int>\ \&g)\{}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ v:\ g.getVertexSet())\{}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ e:\ v-\/>getAdj())\{}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ v-\/>removeEdge(e-\/>getDest()-\/>getInfo());}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ g.removeVertex(v-\/>getInfo());}
+\DoxyCodeLine{00219\ \ \ \ \ \}}
+\DoxyCodeLine{00220\ \}}
+
+\end{DoxyCode}

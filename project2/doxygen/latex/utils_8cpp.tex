@@ -1,0 +1,144 @@
+\doxysection{code/utils.cpp File Reference}
+\hypertarget{utils_8cpp}{}\label{utils_8cpp}\index{code/utils.cpp@{code/utils.cpp}}
+
+
+This file contains utility functions for the project. Namely graph population and csv file parsing. There are also functions used to compute the execution time of a function and to clear a graph.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ vector$<$ string $>$ $>$ \mbox{\hyperlink{utils_8cpp_a2e05f3eea61c181394c204b93d0d50fb}{parse\+CSV}} (const string \&filename)
+\begin{DoxyCompactList}\small\item\em Parses a CSV file and returns the data as a 2D vector of strings. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\string \mbox{\hyperlink{utils_8cpp_a72d8ec0e99d0ae595c4ba84d21784c30}{populate\+\_\+graph}} (Graph$<$ T $>$ \&g, string dataset="{}"{})
+\begin{DoxyCompactList}\small\item\em Populates a graph with nodes and edges from a dataset. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{utils_8cpp_a7904b0d3f5ac9d5ac566a79e9f5836c5}{populate\+\_\+graph\+\_\+real\+\_\+world}} (Graph$<$ T $>$ \&g, string nodes\+Dataset="{}"{}, string edges\+Dataset="{}"{})
+\begin{DoxyCompactList}\small\item\em Populates a graph with real-\/world data from nodes and edges datasets. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{utils_8cpp_a944dda62a3b9f4ed7c9695f57b5ed0c9}{print\+Graph}} (Graph$<$ T $>$ \&g)
+\begin{DoxyCompactList}\small\item\em Prints the graph\textquotesingle{}s edges and their weights. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func , typename... Args$>$ }\\double \mbox{\hyperlink{utils_8cpp_ab8f46c1d5216ff8c22956977fccb0e1a}{measure\+Execution\+Time}} (Func \&\&func, double \&result, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Measures the execution time of a function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{utils_8cpp_a1d1930278fb7d758385cebae557e9074}{clear\+Graph}} (Graph$<$ int $>$ \&g)
+\begin{DoxyCompactList}\small\item\em Clears the graph by removing all vertices and edges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains utility functions for the project. Namely graph population and csv file parsing. There are also functions used to compute the execution time of a function and to clear a graph. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{utils_8cpp_a1d1930278fb7d758385cebae557e9074}\label{utils_8cpp_a1d1930278fb7d758385cebae557e9074} 
+\index{utils.cpp@{utils.cpp}!clearGraph@{clearGraph}}
+\index{clearGraph@{clearGraph}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{clearGraph()}{clearGraph()}}
+{\footnotesize\ttfamily void clear\+Graph (\begin{DoxyParamCaption}\item[{Graph$<$ int $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Clears the graph by removing all vertices and edges. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to be cleared.\\
+\hline
+\end{DoxyParams}
+@timecomplexity O(n + m), where n is the number of nodes and m is the number of edges. \Hypertarget{utils_8cpp_ab8f46c1d5216ff8c22956977fccb0e1a}\label{utils_8cpp_ab8f46c1d5216ff8c22956977fccb0e1a} 
+\index{utils.cpp@{utils.cpp}!measureExecutionTime@{measureExecutionTime}}
+\index{measureExecutionTime@{measureExecutionTime}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{measureExecutionTime()}{measureExecutionTime()}}
+{\footnotesize\ttfamily template$<$typename Func , typename... Args$>$ \\
+double measure\+Execution\+Time (\begin{DoxyParamCaption}\item[{Func \&\&}]{func,  }\item[{double \&}]{result,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+
+
+Measures the execution time of a function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & The function to measure. \\
+\hline
+{\em result} & The result of the function. \\
+\hline
+{\em args} & The arguments to pass to the function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The duration in seconds.
+\end{DoxyReturn}
+@timecomplexity O(t), where t is the time complexity of the function being measured. \Hypertarget{utils_8cpp_a2e05f3eea61c181394c204b93d0d50fb}\label{utils_8cpp_a2e05f3eea61c181394c204b93d0d50fb} 
+\index{utils.cpp@{utils.cpp}!parseCSV@{parseCSV}}
+\index{parseCSV@{parseCSV}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{parseCSV()}{parseCSV()}}
+{\footnotesize\ttfamily vector$<$ vector$<$ string $>$ $>$ parse\+CSV (\begin{DoxyParamCaption}\item[{const string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Parses a CSV file and returns the data as a 2D vector of strings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The name of the CSV file to parse. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A 2D vector of strings containing the parsed data.
+\end{DoxyReturn}
+@timecomplexity O(n \texorpdfstring{$\ast$}{*} m), where n is the number of lines and m is the average number of cells per line. \Hypertarget{utils_8cpp_a72d8ec0e99d0ae595c4ba84d21784c30}\label{utils_8cpp_a72d8ec0e99d0ae595c4ba84d21784c30} 
+\index{utils.cpp@{utils.cpp}!populate\_graph@{populate\_graph}}
+\index{populate\_graph@{populate\_graph}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{populate\_graph()}{populate\_graph()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+string populate\+\_\+graph (\begin{DoxyParamCaption}\item[{Graph$<$ T $>$ \&}]{g,  }\item[{string}]{dataset = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+
+
+
+Populates a graph with nodes and edges from a dataset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to be populated. \\
+\hline
+{\em dataset} & The dataset file containing nodes and edges information. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The name of the dataset file.
+\end{DoxyReturn}
+@timecomplexity O(n), where n is the number of rows in the dataset. \Hypertarget{utils_8cpp_a7904b0d3f5ac9d5ac566a79e9f5836c5}\label{utils_8cpp_a7904b0d3f5ac9d5ac566a79e9f5836c5} 
+\index{utils.cpp@{utils.cpp}!populate\_graph\_real\_world@{populate\_graph\_real\_world}}
+\index{populate\_graph\_real\_world@{populate\_graph\_real\_world}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{populate\_graph\_real\_world()}{populate\_graph\_real\_world()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void populate\+\_\+graph\+\_\+real\+\_\+world (\begin{DoxyParamCaption}\item[{Graph$<$ T $>$ \&}]{g,  }\item[{string}]{nodes\+Dataset = {\ttfamily "{}"{}},  }\item[{string}]{edges\+Dataset = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+
+
+
+Populates a graph with real-\/world data from nodes and edges datasets. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to be populated. \\
+\hline
+{\em nodes\+Dataset} & The dataset file containing nodes information. \\
+\hline
+{\em edges\+Dataset} & The dataset file containing edges information.\\
+\hline
+\end{DoxyParams}
+@timecomplexity O(n + m), where n is the number of nodes and m is the number of edges. \Hypertarget{utils_8cpp_a944dda62a3b9f4ed7c9695f57b5ed0c9}\label{utils_8cpp_a944dda62a3b9f4ed7c9695f57b5ed0c9} 
+\index{utils.cpp@{utils.cpp}!printGraph@{printGraph}}
+\index{printGraph@{printGraph}!utils.cpp@{utils.cpp}}
+\doxysubsubsection{\texorpdfstring{printGraph()}{printGraph()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void print\+Graph (\begin{DoxyParamCaption}\item[{Graph$<$ T $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Prints the graph\textquotesingle{}s edges and their weights. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to be printed.\\
+\hline
+\end{DoxyParams}
+@timecomplexity O(n + m), where n is the number of nodes and m is the number of edges. 

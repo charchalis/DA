@@ -1,0 +1,553 @@
+\doxysection{algorithms.\+cpp}
+\hypertarget{algorithms_8cpp_source}{}\label{algorithms_8cpp_source}\index{code/algorithms.cpp@{code/algorithms.cpp}}
+\mbox{\hyperlink{algorithms_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ PI\ =\ 3.14159265358979323846;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/T2.1-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{algorithms_8cpp_a6f8c3fb1951a1f05e6b2c8b37cda0a76}{tsp\_backtracking\_iteration}}(Graph<int>\ g,\ Vertex<int>\ *curr,\ std::vector<int>\ \&path,\ \textcolor{keywordtype}{double}\ cost,\ \textcolor{keywordtype}{double}\ \&min\_cost,\ std::vector<int>\ \&best\_path)\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{if}\ (path.size()\ ==\ g.getNumVertex())\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (Edge<int>*\ edge\ :\ curr-\/>getAdj())\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (edge-\/>getDest()\ ==\ g.getVertexSet()[0])\ \{\ \ \textcolor{comment}{//\ Check\ if\ there's\ a\ path\ back\ to\ the\ start}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ total\_cost\ =\ cost\ +\ edge-\/>getWeight();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (total\_cost\ <\ min\_cost)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ min\_cost\ =\ total\_cost;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ best\_path\ =\ path;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ best\_path.push\_back(edge-\/>getDest()-\/>getInfo());\ \ \textcolor{comment}{//\ Add\ the\ start\ node\ to\ complete\ the\ cycle}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ min\_cost;}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ Get\ next\ node\ on\ path}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{for}\ (Edge<int>*\ edge\ :\ curr-\/>getAdj())\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ Vertex<int>*\ next\ =\ edge-\/>getDest();}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!next-\/>isVisited())\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ next-\/>setVisited(\textcolor{keyword}{true});}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ path.push\_back(next-\/>getInfo());}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a6f8c3fb1951a1f05e6b2c8b37cda0a76}{tsp\_backtracking\_iteration}}(g,\ next,\ path,\ cost\ +\ edge-\/>getWeight(),\ min\_cost,\ best\_path);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ path.pop\_back();}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ next-\/>setVisited(\textcolor{keyword}{false});}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ min\_cost;}
+\DoxyCodeLine{00057\ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00069\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{algorithms_8cpp_a1f4e302060adb98b28f67602780f019f}{tsp\_backtracking}}(Graph<int>\ g,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ start,\ std::vector<int>\ \&best\_path)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ Vertex<int>*\ startVertex\ =\ g.findVertex(start);}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{if}\ (!startVertex)\ \textcolor{keywordflow}{return}\ INF;\ \ \textcolor{comment}{//\ Return\ a\ large\ value\ if\ start\ vertex\ is\ not\ found}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ startVertex-\/>setVisited(\textcolor{keyword}{true});}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ std::vector<int>\ path;}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{double}\ min\_cost\ =\ INF;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ path.push\_back(start);}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a6f8c3fb1951a1f05e6b2c8b37cda0a76}{tsp\_backtracking\_iteration}}(g,\ startVertex,\ path,\ 0,\ min\_cost,\ best\_path);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{return}\ min\_cost;}
+\DoxyCodeLine{00082\ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00093\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{algorithms_8cpp_a8b46ff3a5dc6c342348e977165ca3dbc}{vectorContainsVal}}(std::vector<int>\ vec,\ \textcolor{keywordtype}{int}\ val)\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{return}\ std::find(vec.begin(),\ vec.end(),\ val)\ !=\ vec.end();}
+\DoxyCodeLine{00095\ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00107\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_a0fb8f9da22252c42a0c4809b9f9def07}{swap\_values}}(std::vector<int>\ original,\ \textcolor{keywordtype}{int}\ pos1,\ \textcolor{keywordtype}{int}\ pos2,\ std::vector<int>\ \&modified)\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ val\ :\ original)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (val\ ==\ pos1)\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ val\ =\ pos2;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (val\ ==\ pos2)\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ val\ =\ pos1;}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ modified.push\_back(val);\ \ \textcolor{comment}{//\ Save\ all\ the\ changes}}
+\DoxyCodeLine{00116\ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/T2.3-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00122\ \textcolor{comment}{*}}
+\DoxyCodeLine{00123\ \textcolor{comment}{*\ \ \ 2.3\ -\/>\ Using\ MetaHeuristics\ to\ find\ a\ good\ but\ not\ optimal\ solution\ in\ a\ much\ faster\ time\ than\ other\ approaches}}
+\DoxyCodeLine{00124\ \textcolor{comment}{*\ \ \ We\ have\ to\ make\ sure\ that\ the\ starting\ point\ is\ the\ same\ as\ the\ end\ point\ so\ we\ cannot\ change\ those\ things}}
+\DoxyCodeLine{00125\ \textcolor{comment}{*\ \ \ In\ a\ nutshell:\ Select\ a\ path\ that\ has\ the\ same\ starting\ and\ ending\ point\ and\ then\ generate\ neighbors\ from\ that\ path}}
+\DoxyCodeLine{00126\ \textcolor{comment}{*\ \ \ DO\ NOT\ LET\ THE\ START\ AND\ END\ POINT\ BE\ CHANGED\ AT\ ALL\ COSTS\ !!!\ }}
+\DoxyCodeLine{00127\ \textcolor{comment}{*\ \ \ BASICLY:\ THE\ OTHER\ ALGORITHMS\ MAY\ NEED\ SOME\ CHANGES}}
+\DoxyCodeLine{00128\ \textcolor{comment}{*}}
+\DoxyCodeLine{00129\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00132\ \textcolor{comment}{*}}
+\DoxyCodeLine{00133\ \textcolor{comment}{*\ \ \ Utility\ Functions\ }}
+\DoxyCodeLine{00134\ \textcolor{comment}{*}}
+\DoxyCodeLine{00135\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00146\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{algorithms_8cpp_a0b45649b16cd8fb687985b5be820b74a}{is\_val\_in\_vector}}(std::vector<int>\ vec,\ \textcolor{keywordtype}{int}\ val)\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordflow}{return}\ std::find(vec.begin(),\ vec.end(),\ val)\ !=\ vec.end();}
+\DoxyCodeLine{00148\ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00161\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{algorithms_8cpp_ad98321d397e3cd44eb7008becad3b589}{generates\_random\_vertex}}(std::vector<int>\ swappedVertexes,\ \textcolor{keywordtype}{int}\ pathSize,\ \textcolor{keywordtype}{bool}\ isStartVertex)\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ std::random\_device\ rd;}
+\DoxyCodeLine{00163\ \ \ \ \ std::mt19937\ gen(rd());}
+\DoxyCodeLine{00164\ \ \ \ \ std::uniform\_int\_distribution<>\ dis(1,\ pathSize\ -\/\ 2);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{int}\ generatedVertex\ =\ dis(gen);}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordflow}{if}\ (isStartVertex)\ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (generatedVertex\ ==\ 0\ ||\ \mbox{\hyperlink{algorithms_8cpp_a0b45649b16cd8fb687985b5be820b74a}{is\_val\_in\_vector}}(swappedVertexes,\ generatedVertex))\ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ generatedVertex\ =\ dis(gen);}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00172\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (generatedVertex\ ==\ 0)\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ generatedVertex\ =\ dis(gen);}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00176\ \ \ \ \ \}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordflow}{return}\ generatedVertex;}
+\DoxyCodeLine{00179\ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \textcolor{comment}{/*\ END\ OF\ UTILITY\ FUNCTIONS\ */}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00194\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_ad636dec4a7274e831cde1dc219b98158}{generate\_neighbors}}(std::vector<int>\ path,\ std::vector<std::vector<int>>\ \&neighbors,\ \textcolor{keywordtype}{bool}\ tweakable\_param)\ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{int}\ max\_number\_of\_neighbors\ =\ 100;}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordtype}{int}\ neighbor\_counter\ =\ 0;}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ std::vector<int>\ swappedVertexes;}
+\DoxyCodeLine{00199\ \ \ \ \ std::vector<int>\ modifiedPath;}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ srand(time(NULL));}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{int}\ temp\ =\ -\/1;}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (swappedVertexes.size()\ ==\ path.size()\ -\/\ 2)}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((neighbor\_counter\ ==\ max\_number\_of\_neighbors)\ \&\&\ tweakable\_param)}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ modifiedPath\ =\ path;}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ random\_vertex\_start\ =\ \mbox{\hyperlink{algorithms_8cpp_ad98321d397e3cd44eb7008becad3b589}{generates\_random\_vertex}}(swappedVertexes,\ path.size(),\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ random\_vertex\_end\ =\ \mbox{\hyperlink{algorithms_8cpp_ad98321d397e3cd44eb7008becad3b589}{generates\_random\_vertex}}(swappedVertexes,\ path.size(),\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ temp\ =\ -\/1;}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ temp\ =\ modifiedPath.at(random\_vertex\_start);}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ modifiedPath.at(random\_vertex\_start)\ =\ random\_vertex\_end;}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ modifiedPath.at(random\_vertex\_end)\ =\ temp;}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ swappedVertexes.push\_back(temp);}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ neighbors.push\_back(modifiedPath);}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ neighbor\_counter++;}
+\DoxyCodeLine{00227\ \ \ \ \ \}}
+\DoxyCodeLine{00228\ \}}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00241\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_a0c75d0e1c4e432164afede952e34ceff}{get\_path\_cost\_feasibility}}(std::vector<int>\ path,\ Graph<int>\ \&g,\ \textcolor{keywordtype}{bool}\ \&isPathFeasible,\ \textcolor{keywordtype}{double}\ \&pathCost)\ \{}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordtype}{bool}\ found\_edge\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ it\ =\ 0;\ it\ <\ path.size();\ it++)\ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ curr\_vertex\ =\ path[it];}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ edge\ :\ g.getVertexSet()[curr\_vertex]-\/>getAdj())\ \{}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ found\_edge\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (curr\_vertex\ ==\ 0\ \&\&\ (it\ ==\ path.size()\ -\/\ 1))\ \{}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ next\_vertex\ =\ path[it\ +\ 1];}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ edgeStartingPoint\ =\ edge-\/>getOrig()-\/>getInfo();}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ edgeDestination\ =\ edge-\/>getDest()-\/>getInfo();}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (edgeStartingPoint\ ==\ curr\_vertex\ \&\&\ edgeDestination\ ==\ next\_vertex)\ \{}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pathCost\ +=\ edge-\/>getWeight();}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ found\_edge\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (edgeStartingPoint\ ==\ next\_vertex\ \&\&\ edgeDestination\ ==\ curr\_vertex)\ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pathCost\ +=\ edge-\/>getWeight();}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ found\_edge\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!found\_edge)\ \{}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ isPathFeasible\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00276\ \ \ \ \ \}}
+\DoxyCodeLine{00277\ \}}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00294\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_a914120bda1db570cdd5f676d3ce5e90d}{find\_start\_path}}(Graph<int>\ \&g,\ \textcolor{keywordtype}{int}\ start\_node,\ vector<int>\ \&starting\_path)\{}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \ \ \ \ starting\_path.push\_back(start\_node);\ \textcolor{comment}{//Add\ the\ starting\ node\ to\ the\ path\ (start\ of\ the\ path)}}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ verti\ :\ g.getVertexSet())\{}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(verti-\/>getInfo()\ !=\ start\_node)\{}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Check\ if\ the\ node\ has\ edges\ assigned}}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(verti-\/>getAdj().size()\ >\ 0)\{}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ starting\_path.push\_back(verti-\/>getInfo());\ \textcolor{comment}{//Add\ the\ node\ to\ the\ graph}}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Otherwise\ don't\ consider\ the\ node\ to\ be\ important\ for\ the\ given\ dataset}}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ }
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ }
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00308\ \ \ \ \ \}}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00310\ \ \ \ \ starting\_path.push\_back(start\_node);\ \textcolor{comment}{//Add\ the\ starting\ node\ to\ the\ path\ (end\ of\ the\ path)}}
+\DoxyCodeLine{00311\ \ \ \ \ }
+\DoxyCodeLine{00312\ \}}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00321\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_a6d53a990c8cec6885ae0d34e48db29cd}{update\_tabu\_list}}(std::map<std::vector<int>,\ \textcolor{keywordtype}{int}>\ \&tabu\_list)\{}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \ \ \ \ std::vector<std::vector<int>>\ to\_remove;}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ it\ =\ tabu\_list.begin();\ it\ !=\ tabu\_list.end();\ it++)\{}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ it-\/>second-\/-\/;\ }
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Tabu\ tenure\ expired\ }}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(it-\/>second\ ==\ 0)\{}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ to\_remove.push\_back(it-\/>first);}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00331\ \ \ \ \ \}}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ \&path\ :\ to\_remove)\{}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ tabu\_list.erase(path);}
+\DoxyCodeLine{00335\ \ \ \ \ \}}
+\DoxyCodeLine{00336\ \}}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00349\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{algorithms_8cpp_a74f9ffdbf0cc13e83342a82e1918539b}{meets\_aspiration\_criteria}}(std::vector<int>\ path,\ std::map<std::vector<int>,\ \textcolor{keywordtype}{int}>\ tabu\_list,\ \textcolor{keywordtype}{int}\ tabu\_tenure,\ \textcolor{keywordtype}{double}\ best\_cost)\{}
+\DoxyCodeLine{00350\ }
+\DoxyCodeLine{00351\ \ \ \ \ \textcolor{comment}{//The\ aspiration\ treshhold\ is\ something\ extra\ that\ we\ can\ add\ to\ the\ aspiration\ criteria\ }}
+\DoxyCodeLine{00352\ \ \ \ \ \textcolor{comment}{//To\ make\ it\ slightly\ "{}stronger"{}\ if\ we\ want\ to\ }}
+\DoxyCodeLine{00353\ \ \ \ \ \textcolor{comment}{//SEE:\ https://www.linkedin.com/advice/0/what-\/advantages-\/disadvantages-\/using-\/aspiration}}
+\DoxyCodeLine{00354\ \ \ \ \ \textcolor{keywordtype}{int}\ aspiration\_treshhold\ =\ 0;\ }
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00356\ \ \ \ \ \textcolor{comment}{//If\ the\ best\ neighbor\ is\ tabu\ but\ meets\ the\ aspiration\ criteria\ }}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \textcolor{comment}{//ASPIRATION\ CRITERIA:\ THE\ BEST\ NEIGHBOR\ IS\ TABU\ BUT\ IT\ HAS\ NOT\ BEEN\ INSERTED\ RECENTLY\ }}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \textcolor{comment}{//AND\ IT\ IS\ BETTER\ THAN\ THE\ CURRENT\ BEST\ COST\ FOUND\ UNTIL\ NOW}}
+\DoxyCodeLine{00359\ \ \ \ \ \textcolor{keywordflow}{if}((tabu\_list.find(path)\ !=\ tabu\_list.end())\ \&\&\ (tabu\_list[path]\ <\ tabu\_tenure)\ \&\&\ (tabu\_list[path]\ <\ (best\_cost+aspiration\_treshhold)))\{}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ }
+\DoxyCodeLine{00361\ \ \ \ \ \}}
+\DoxyCodeLine{00362\ }
+\DoxyCodeLine{00363\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00364\ \}}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00377\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_aebd8c7a0a578c04a5751a972ecaca17a}{tabu\_search}}(Graph<int>\ \&g,\ std::vector<int>\ starting\_path,\ \textcolor{keywordtype}{double}\ starting\_cost,\ std::vector<int>\ \&best\_path,\ \textcolor{keywordtype}{double}\ \&best\_cost)\{}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00379\ \ \ \ \ std::vector<int>\ current\_path\ =\ starting\_path;\ }
+\DoxyCodeLine{00380\ \ \ \ \ std::map<std::vector<int>,\ \textcolor{keywordtype}{int}>\ tabu\_list;\ }
+\DoxyCodeLine{00381\ \ \ \ \ std::vector<std::vector<int>>\ neighbors;}
+\DoxyCodeLine{00382\ \ \ \ \ std::map<double,\ std::vector<int>,\ std::greater<>>\ neighborMap;}
+\DoxyCodeLine{00383\ \ \ \ \ \textcolor{keywordtype}{double}\ current\_cost\ =\ 0;\ }
+\DoxyCodeLine{00384\ \ \ \ \ \textcolor{keywordtype}{int}\ tabu\_tenure\ =\ 3;\ }
+\DoxyCodeLine{00385\ \ \ \ \ \textcolor{keywordtype}{int}\ iter\_counter\ =\ 0;\ }
+\DoxyCodeLine{00386\ \ \ \ \ \textcolor{comment}{//Responsible\ for\ flagging\ the\ search\ for\ a\ possible\ worst\ solution,\ who\ is\ not\ tabu\ or\ meets\ the\ aspiration\ criteria}}
+\DoxyCodeLine{00387\ \ \ \ \ \textcolor{keywordtype}{bool}\ find\_next\_no\_tabu\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00389\ \ \ \ \ \textcolor{comment}{//Get\ a\ random\ iteration\ number\ in\ order\ to\ make\ the\ algorithm\ stronger\ }}
+\DoxyCodeLine{00390\ \ \ \ \ std::random\_device\ rd;}
+\DoxyCodeLine{00391\ \ \ \ \ std::mt19937\ gen(rd());}
+\DoxyCodeLine{00392\ \ \ \ \ std::uniform\_int\_distribution<int>\ dist(2,\ 4);}
+\DoxyCodeLine{00393\ \ \ \ \ \textcolor{keywordtype}{int}\ random\_multiplier\ =\ dist(gen);}
+\DoxyCodeLine{00394\ \ \ \ \ \textcolor{keywordtype}{int}\ max\_iterations\ =\ g.getNumVertex()*random\_multiplier;\ }
+\DoxyCodeLine{00395\ }
+\DoxyCodeLine{00396\ \ \ \ \ \textcolor{keywordtype}{int}\ total\_iterations\ =\ 0;\ }
+\DoxyCodeLine{00397\ \ \ \ \ \textcolor{keywordtype}{int}\ total\_iterations\_best\_result\ =\ 0;\ }
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \ \ \ \ best\_path\ =\ starting\_path;}
+\DoxyCodeLine{00400\ \ \ \ \ best\_cost\ =\ starting\_cost;\ }
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \ \ \ \ \textcolor{keywordflow}{while}(iter\_counter\ !=\ max\_iterations)\{}
+\DoxyCodeLine{00403\ }
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Iteration\ number\ after\ reset:\ "{}}\ <<\ iter\_counter\ <<\ std::endl;}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Current\ Best\ Cost:\ "{}}\ <<\ best\_cost\ <<\ std::endl;\ \ }
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Best\ Result\ Found\ at\ Total\ Iteration\ Number:\ "{}}\ <<\ total\_iterations\_best\_result\ <<\ std::endl;}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Best\ Path\ }}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Best\ Path:\ "{}}\ <<\ std::endl;\ }
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ vertex\ :\ best\_path)\{}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ vertex\ <<\ \textcolor{stringliteral}{"{}\ "{}};\ }
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ std::cout\ <<\ std::endl;\ }
+\DoxyCodeLine{00414\ }
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a6d53a990c8cec6885ae0d34e48db29cd}{update\_tabu\_list}}(tabu\_list);\ }
+\DoxyCodeLine{00416\ }
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ neighbors.clear();\ \textcolor{comment}{//Resets\ the\ neighbors\ vector}}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ neighborMap.clear();\ \textcolor{comment}{//Resets\ the\ neighbors\ and\ its\ costs\ map}}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ find\_next\_no\_tabu\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//Reset\ the\ flag}}
+\DoxyCodeLine{00420\ }
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Generates\ the\ neighbors\ of\ a\ given\ path\ }}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_ad636dec4a7274e831cde1dc219b98158}{generate\_neighbors}}(starting\_path,\ neighbors,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00423\ }
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ best\ neighbor\ out\ of\ all\ the\ neighbors\ generated}}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ neighbor\ :\ neighbors)\{}
+\DoxyCodeLine{00426\ }
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Gets\ neighbor\ cost\ and\ feasibility}}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isPathFeasible\ =\ \textcolor{keyword}{true};\ }
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ pathCost\ =\ 0;\ }
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a0c75d0e1c4e432164afede952e34ceff}{get\_path\_cost\_feasibility}}(neighbor,\ g,\ isPathFeasible,\ pathCost);}
+\DoxyCodeLine{00432\ }
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Ignore\ the\ neighbor\ if\ it\ is\ not\ feasible}}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!isPathFeasible)\{}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pathCost\ =\ INF;\ }
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ }
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Store\ them\ in\ a\ map\ (with\ values\ sorted\ in\ descending\ order\ (std::greater\ comparison\ function))}}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ neighborMap[pathCost]\ =\ neighbor;}
+\DoxyCodeLine{00441\ }
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00443\ }
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Map\ is\ sorted\ in\ ascending\ order\ so\ we\ are\ going\ to\ iterate\ through\ the\ neighbors\ }}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Starting\ at\ the\ best\ and\ ending\ at\ the\ worst\ neighbor\ }}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ neighbor\ :\ neighborMap)\{}
+\DoxyCodeLine{00447\ }
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//It\ is\ not\ tabu\ }}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(tabu\_list.find(neighbor.second)\ ==\ tabu\_list.end())\{}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_path\ =\ neighbor.second;\ }
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_cost\ =\ neighbor.first;\ }
+\DoxyCodeLine{00452\ }
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Update\ the\ tabu\ list\ }}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tabu\_list[neighbor.second]\ =\ tabu\_tenure;}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Meets\ the\ aspiration\ criteria\ }}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{algorithms_8cpp_a74f9ffdbf0cc13e83342a82e1918539b}{meets\_aspiration\_criteria}}(neighbor.second,\ tabu\_list,\ tabu\_tenure,\ best\_cost))\{}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_path\ =\ neighbor.second;\ }
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_cost\ =\ neighbor.first;\ }
+\DoxyCodeLine{00461\ }
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Update\ the\ tabu\ list}}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tabu\_list[neighbor.second]\ =\ tabu\_tenure;}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Is\ Tabu\ and\ does\ not\ meet\ aspiration\ criteria\ so\ we\ will\ look\ for\ another\ neighbor\ }}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Who\ meets\ our\ requirements}}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ }
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00471\ }
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00473\ }
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Is\ our\ new\ found\ path\ and\ solution\ better\ than\ the\ best\ one\ found\ yet?}}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ it\ is,\ update\ it\ and\ reset\ the\ iteration\ counter}}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(current\_cost\ <\ best\_cost)\{}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ best\_path\ =\ current\_path;\ }
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ best\_cost\ =\ current\_cost;\ }
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \ \ \ \ iter\_counter\ =\ 0;\ }
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \ \ total\_iterations\_best\_result\ =\ total\_iterations;\ }
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00482\ }
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ iter\_counter++;\ }
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ total\_iterations++;\ }
+\DoxyCodeLine{00485\ \ \ \ \ \}}
+\DoxyCodeLine{00486\ }
+\DoxyCodeLine{00487\ \}}
+\DoxyCodeLine{00488\ }
+\DoxyCodeLine{00494\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_a0e872e775c5f2167f9ce3f9649f52845}{T2\_3}}(Graph<int>\ \&g)\{}
+\DoxyCodeLine{00495\ }
+\DoxyCodeLine{00496\ \ \ \ \ std::vector<int>\ starting\_path;\ }
+\DoxyCodeLine{00497\ \ \ \ \ std::vector<int>\ best\_path;\ }
+\DoxyCodeLine{00498\ \ \ \ \ \textcolor{keywordtype}{double}\ best\_cost;\ }
+\DoxyCodeLine{00499\ }
+\DoxyCodeLine{00500\ \ \ \ \ \textcolor{comment}{//Generate\ a\ random\ path\ from\ the\ graph\ in\ order\ to\ have\ a\ good\ starting\ point\ for\ our\ neighboring\ function}}
+\DoxyCodeLine{00501\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a914120bda1db570cdd5f676d3ce5e90d}{find\_start\_path}}(g,\ 0,\ starting\_path);\ }
+\DoxyCodeLine{00502\ }
+\DoxyCodeLine{00503\ \ \ \ \ \textcolor{keywordtype}{bool}\ isPathFeasible\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00504\ \ \ \ \ \textcolor{keywordtype}{double}\ startingPathCost\ =\ 0;}
+\DoxyCodeLine{00505\ }
+\DoxyCodeLine{00506\ \ \ \ \ \textcolor{comment}{//Calculate\ the\ cost\ and\ feasiblity\ of\ the\ starting\ path\ }}
+\DoxyCodeLine{00507\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_a0c75d0e1c4e432164afede952e34ceff}{get\_path\_cost\_feasibility}}(starting\_path,\ g,\ isPathFeasible,\ startingPathCost);}
+\DoxyCodeLine{00508\ }
+\DoxyCodeLine{00509\ \ \ \ \ \textcolor{keywordflow}{if}(!isPathFeasible)}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ startingPathCost\ =\ INF;\ }
+\DoxyCodeLine{00511\ }
+\DoxyCodeLine{00512\ \ \ \ \ \mbox{\hyperlink{algorithms_8cpp_aebd8c7a0a578c04a5751a972ecaca17a}{tabu\_search}}(g,\ starting\_path,\ startingPathCost,\ best\_path,\ best\_cost);}
+\DoxyCodeLine{00513\ }
+\DoxyCodeLine{00514\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Best\ Found\ Path:\ "{}}\ <<\ std::endl;\ }
+\DoxyCodeLine{00515\ }
+\DoxyCodeLine{00516\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\ vertex\ :\ best\_path)\{}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ std::cout\ <<\ vertex\ <<\ \textcolor{stringliteral}{"{}\ "{}};\ }
+\DoxyCodeLine{00518\ \ \ \ \ \}}
+\DoxyCodeLine{00519\ }
+\DoxyCodeLine{00520\ \ \ \ \ std::cout\ <<\ std::endl;\ }
+\DoxyCodeLine{00521\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Path\ Cost:\ "{}}\ <<\ best\_cost\ <<\ std::endl;}
+\DoxyCodeLine{00522\ }
+\DoxyCodeLine{00523\ \ \ \ \ \textcolor{keywordflow}{return};\ }
+\DoxyCodeLine{00524\ \ \ \ \ }
+\DoxyCodeLine{00525\ \}}
+\DoxyCodeLine{00526\ }
+\DoxyCodeLine{00527\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/T2.2-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00528\ }
+\DoxyCodeLine{00539\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{algorithms_8cpp_af13935b1770316633a1629fd39a5ff1a}{primUsingEdges}}(Graph<int>\ g,\ \textcolor{keywordtype}{int}\ start,\ vector<Edge<int>*>\ \&mstEdges)\ \{}
+\DoxyCodeLine{00540\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ v\ :\ g.getVertexSet())\ \{}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ v-\/>setDist(INF);\ \ \textcolor{comment}{//distance}}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ v-\/>setPath(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ v-\/>setVisited(\textcolor{keyword}{false});}
+\DoxyCodeLine{00544\ \ \ \ \ \}}
+\DoxyCodeLine{00545\ }
+\DoxyCodeLine{00546\ \ \ \ \ \textcolor{keyword}{auto}\ s\ =\ g.findVertex(start);}
+\DoxyCodeLine{00547\ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ ==\ \textcolor{keyword}{nullptr})\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00548\ }
+\DoxyCodeLine{00549\ \ \ \ \ s-\/>setDist(0);\ \ \textcolor{comment}{//distance}}
+\DoxyCodeLine{00550\ \ \ \ \ MutablePriorityQueue<Vertex<int>>\ queue;}
+\DoxyCodeLine{00551\ \ \ \ \ std::unordered\_set<Vertex<int>*>\ inQueue;\ \textcolor{comment}{//keeps\ track\ of\ what's\ in\ queue\ }}
+\DoxyCodeLine{00552\ }
+\DoxyCodeLine{00553\ \ \ \ \ queue.insert(s);}
+\DoxyCodeLine{00554\ \ \ \ \ inQueue.insert(s);}
+\DoxyCodeLine{00555\ }
+\DoxyCodeLine{00556\ \ \ \ \ \textcolor{keywordtype}{double}\ totalWeight\ =\ 0;}
+\DoxyCodeLine{00557\ }
+\DoxyCodeLine{00558\ \ \ \ \ \textcolor{keywordtype}{int}\ numNodes\ =\ g.getNumVertex();}
+\DoxyCodeLine{00559\ \ \ \ \ \textcolor{keywordtype}{int}\ numVisitedNodes\ =\ 0;}
+\DoxyCodeLine{00560\ }
+\DoxyCodeLine{00561\ }
+\DoxyCodeLine{00562\ \ \ \ \ \textcolor{keywordflow}{while}\ (!queue.empty())\ \{}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ Vertex<int>*\ v\ =\ queue.extractMin();\ \textcolor{comment}{//smallest\ distance\ vertex\ in\ queue}}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ inQueue.erase(v);}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ v-\/>setVisited(\textcolor{keyword}{true});}
+\DoxyCodeLine{00566\ }
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (v-\/>getPath()\ !=\ \textcolor{keyword}{nullptr})\ \{\ \textcolor{comment}{//if\ vertex\ has\ path,\ its\ on\ the\ mst}}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ mstEdges.push\_back(v-\/>getPath());}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ totalWeight\ +=\ v-\/>getPath()-\/>getWeight();}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00571\ }
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ e\ :\ v-\/>getAdj())\ \{}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ w\ =\ e-\/>getDest();}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!w-\/>isVisited()\ \&\&\ e-\/>getWeight()\ <\ w-\/>getDist())\ \{\ \textcolor{comment}{//if\ there\ are\ multiple\ nodes\ pointing\ to\ w,}}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//w\ will\ get\ the\ dist\ value\ of\ the\ lowest\ weight\ edge}}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w-\/>setDist(e-\/>getWeight());}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w-\/>setPath(e);}
+\DoxyCodeLine{00578\ }
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inQueue.find(w)\ !=\ inQueue.end())\ \{}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queue.decreaseKey(w);}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queue.insert(w);}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inQueue.insert(w);}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00587\ \ \ \ \ \}}
+\DoxyCodeLine{00588\ }
+\DoxyCodeLine{00589\ \ \ \ \ \textcolor{keywordflow}{return}\ totalWeight;}
+\DoxyCodeLine{00590\ \}}
+\DoxyCodeLine{00591\ }
+\DoxyCodeLine{00601\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{algorithms_8cpp_afe4e7a479e4a8cba5dbb9162cec10d74}{calculateDistance}}(Vertex<int>*\ v,\ Vertex<int>*\ w)\{}
+\DoxyCodeLine{00602\ }
+\DoxyCodeLine{00603\ \ \ \ \ \textcolor{keywordtype}{double}\ v\_longitude\ =\ v-\/>getLongitude()\ *\ PI\ /\ 180;}
+\DoxyCodeLine{00604\ \ \ \ \ \textcolor{keywordtype}{double}\ w\_longitude\ =\ w-\/>getLongitude()\ *\ PI\ /\ 180;}
+\DoxyCodeLine{00605\ \ \ \ \ \textcolor{keywordtype}{double}\ v\_latitude\ =\ v-\/>getLatitude()\ *\ PI\ /\ 180;}
+\DoxyCodeLine{00606\ \ \ \ \ \textcolor{keywordtype}{double}\ w\_latitude\ =\ w-\/>getLatitude()\ *\ PI\ /\ 180;}
+\DoxyCodeLine{00607\ }
+\DoxyCodeLine{00608\ \ \ \ \ \textcolor{keywordtype}{double}\ delta\_longitude\ =\ abs(v\_longitude\ -\/\ w\_longitude);}
+\DoxyCodeLine{00609\ \ \ \ \ \textcolor{keywordtype}{double}\ delta\_latitude\ =\ abs(v\_latitude\ -\/\ w\_latitude);}
+\DoxyCodeLine{00610\ }
+\DoxyCodeLine{00611\ \ \ \ \ \textcolor{keywordtype}{double}\ a\ =\ sin(delta\_latitude/2)\ *\ sin(delta\_latitude/2)\ +\ cos(v\_latitude)*cos(w\_latitude)*sin(delta\_longitude/2)*sin(delta\_longitude);}
+\DoxyCodeLine{00612\ \ \ \ \ \textcolor{keywordtype}{double}\ c\ =\ 2*atan2(sqrt(a),\ sqrt(1-\/a));}
+\DoxyCodeLine{00613\ \ \ \ \ \textcolor{keywordtype}{double}\ d\ =\ 6371*1000\ *\ c;}
+\DoxyCodeLine{00614\ }
+\DoxyCodeLine{00615\ \ \ \ \ \textcolor{keywordflow}{return}\ d;}
+\DoxyCodeLine{00616\ \}}
+\DoxyCodeLine{00617\ }
+\DoxyCodeLine{00628\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{algorithms_8cpp_a7ab8f7f2df9abd7ae4fdf38d1f3ea450}{primUsingCoords}}(Graph<int>\ g,\ \textcolor{keywordtype}{int}\ start,\ vector<Edge<int>*>\ \&mstEdges)\ \{}
+\DoxyCodeLine{00629\ }
+\DoxyCodeLine{00630\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ v\ :\ g.getVertexSet())\ \{}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ v-\/>setDist(INF);\ \ \textcolor{comment}{//distance}}
+\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ v-\/>setPath(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ v-\/>setVisited(\textcolor{keyword}{false});}
+\DoxyCodeLine{00634\ \ \ \ \ \}}
+\DoxyCodeLine{00635\ }
+\DoxyCodeLine{00636\ \ \ \ \ \textcolor{keyword}{auto}\ s\ =\ g.findVertex(start);}
+\DoxyCodeLine{00637\ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ ==\ \textcolor{keyword}{nullptr})\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00638\ }
+\DoxyCodeLine{00639\ \ \ \ \ s-\/>setDist(0);\ \ \textcolor{comment}{//distance}}
+\DoxyCodeLine{00640\ \ \ \ \ MutablePriorityQueue<Vertex<int>>\ queue;}
+\DoxyCodeLine{00641\ \ \ \ \ std::unordered\_set<Vertex<int>*>\ inQueue;\ \textcolor{comment}{//keeps\ track\ of\ what's\ in\ queue\ }}
+\DoxyCodeLine{00642\ }
+\DoxyCodeLine{00643\ \ \ \ \ queue.insert(s);}
+\DoxyCodeLine{00644\ \ \ \ \ inQueue.insert(s);}
+\DoxyCodeLine{00645\ }
+\DoxyCodeLine{00646\ \ \ \ \ \textcolor{keywordtype}{double}\ totalWeight\ =\ 0;}
+\DoxyCodeLine{00647\ }
+\DoxyCodeLine{00648\ }
+\DoxyCodeLine{00649\ \ \ \ \ \textcolor{keywordtype}{int}\ numNodes\ =\ g.getNumVertex();}
+\DoxyCodeLine{00650\ \ \ \ \ \textcolor{keywordtype}{int}\ numVisitedNodes\ =\ 0;}
+\DoxyCodeLine{00651\ }
+\DoxyCodeLine{00652\ }
+\DoxyCodeLine{00653\ \ \ \ \ \textcolor{keywordflow}{while}\ (!queue.empty())\ \{}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ Vertex<int>*\ v\ =\ queue.extractMin();\ \textcolor{comment}{//smallest\ distance\ vertex\ in\ queue}}
+\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ inQueue.erase(v);}
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ v-\/>setVisited(\textcolor{keyword}{true});}
+\DoxyCodeLine{00657\ }
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (v-\/>getDist()\ <\ INF)\ \{\ \textcolor{comment}{//if\ vertex\ has\ path,\ its\ on\ the\ mst}}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \ \ \ \ totalWeight\ +=\ v-\/>getDist();}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00661\ }
+\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ w\ :\ g.getVertexSet())\ \{}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(v-\/>getInfo()\ ==\ w-\/>getInfo())\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ distance\ =\ \mbox{\hyperlink{algorithms_8cpp_afe4e7a479e4a8cba5dbb9162cec10d74}{calculateDistance}}(v,w);}
+\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Edge<int>*\ proximationEdge\ =\ new\ Edge<int>(v,w,distance);}}
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!w-\/>isVisited()\ \&\&\ distance\ <\ w-\/>getDist())\ \{\ \textcolor{comment}{//if\ there\ are\ multiple\ nodes\ pointing\ to\ w,}}
+\DoxyCodeLine{00667\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//w\ will\ get\ the\ dist\ value\ of\ the\ lowest\ weight\ edge}}
+\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w-\/>setDist(distance);}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//w-\/>setPath(proximationEdge);}}
+\DoxyCodeLine{00670\ }
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inQueue.find(w)\ !=\ inQueue.end())\ \{}
+\DoxyCodeLine{00672\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queue.decreaseKey(w);}
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queue.insert(w);}
+\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inQueue.insert(w);}
+\DoxyCodeLine{00676\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00677\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00678\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00679\ \ \ \ \ \}}
+\DoxyCodeLine{00680\ }
+\DoxyCodeLine{00681\ \ \ \ \ \textcolor{keywordflow}{return}\ totalWeight;}
+\DoxyCodeLine{00682\ \}}
+\DoxyCodeLine{00683\ }
+\DoxyCodeLine{00689\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{algorithms_8cpp_a0e587049579507b6e91f11255a8d107c}{T2\_2}}(Graph<int>\ g)\{}
+\DoxyCodeLine{00690\ \ \ \ \ \textcolor{keywordtype}{double}\ result;}
+\DoxyCodeLine{00691\ }
+\DoxyCodeLine{00692\ \ \ \ \ vector<Edge<int>*>\ mstEdges2;}
+\DoxyCodeLine{00693\ }
+\DoxyCodeLine{00694\ \ \ \ \ \textcolor{keywordtype}{double}\ executionTime\ =\ \mbox{\hyperlink{utils_8cpp_ab8f46c1d5216ff8c22956977fccb0e1a}{measureExecutionTime}}(\mbox{\hyperlink{algorithms_8cpp_a7ab8f7f2df9abd7ae4fdf38d1f3ea450}{primUsingCoords}},\ result,\ g,\ 0,\ mstEdges2);}
+\DoxyCodeLine{00695\ }
+\DoxyCodeLine{00696\ \ \ \ \ \textcolor{comment}{//\ for(auto\ edge:\ mstEdges2)\{}}
+\DoxyCodeLine{00697\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ cout\ <<\ edge-\/>getOrig()-\/>getInfo()\ <<\ "{}-\/"{}\ <<\ edge-\/>getDest()-\/>getInfo()\ <<\ "{}\(\backslash\)tcost:\ "{}\ <<\ edge-\/>getWeight()\ <<\ endl;}}
+\DoxyCodeLine{00698\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00699\ }
+\DoxyCodeLine{00700\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nApproximate\ Triangulation\ Distance:\ "{}}\ <<\ result\ <<\ endl;}
+\DoxyCodeLine{00701\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}execution\ time:\ "{}}\ <<\ executionTime\ <<\ \textcolor{stringliteral}{"{}s"{}}\ <<\ endl;}
+\DoxyCodeLine{00702\ }
+\DoxyCodeLine{00703\ \ \ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00704\ }
+\DoxyCodeLine{00705\ \ \ \ \ vector<Edge<int>*>\ mstEdges;}
+\DoxyCodeLine{00706\ }
+\DoxyCodeLine{00707\ \ \ \ \ executionTime\ =\ \mbox{\hyperlink{utils_8cpp_ab8f46c1d5216ff8c22956977fccb0e1a}{measureExecutionTime}}(\mbox{\hyperlink{algorithms_8cpp_af13935b1770316633a1629fd39a5ff1a}{primUsingEdges}},\ result,\ g,\ 0,\ mstEdges);}
+\DoxyCodeLine{00708\ }
+\DoxyCodeLine{00709\ \ \ \ \ \textcolor{comment}{//\ for(auto\ edge:\ mstEdges)\{}}
+\DoxyCodeLine{00710\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ cout\ <<\ edge-\/>getOrig()-\/>getInfo()\ <<\ "{}-\/"{}\ <<\ edge-\/>getDest()-\/>getInfo()\ <<\ "{}\(\backslash\)tcost:\ "{}\ <<\ edge-\/>getWeight()\ <<\ endl;}}
+\DoxyCodeLine{00711\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00712\ }
+\DoxyCodeLine{00713\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}MST\ Distance:\ "{}}\ <<\ result\ <<\ endl;}
+\DoxyCodeLine{00714\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}execution\ time:\ "{}}\ <<\ executionTime\ <<\ \textcolor{stringliteral}{"{}s"{}}\ <<\ endl;}
+\DoxyCodeLine{00715\ \}}
+
+\end{DoxyCode}
