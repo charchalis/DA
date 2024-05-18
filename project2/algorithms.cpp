@@ -94,6 +94,8 @@ void swap_values(std::vector<int> original, int pos1, int pos2, std::vector<int>
       
 }
 
+//----------------------------------------------T2.3----------------------------------------
+
 /*
 *
 *   2.3 -> Using MetaHeuristics to find a good but not optimal solution in a much faster time than other approaches
@@ -153,7 +155,17 @@ int generates_random_vertex(std::vector<int> swappedVertexes, int pathSize, bool
 
 //Neighboring function: 
 //Generates the neighbors of a given path
-void generate_neighbors(std::vector<int> path, std::vector<std::vector<int>> &neighbors){
+void generate_neighbors(std::vector<int> path, std::vector<std::vector<int>> &neighbors, bool tweakable_param){
+
+    //Tweakable parameters: If the dataset is too large we can decrease the number of neighbors generated
+        //Example for a dataset with 900 vertexes we can generate only 100 vertexes 
+        //instead of swapping each one to a random position at a time which would generate 900 neighbors
+        //For a single path/iteration
+    //REMEMBER: LOCAL SEARCH ALGORITHMS LIKE TABU SEARCH CAN LEAD TO GREAT RESULTS BUT MAY TAKE A LONG TIME 
+    //TO FIND THE GLOBAL OPTIMUM SOLUTION -> IF YOU WANT TO DIMINISH THE TIME, THEREFORE HAVING A WORST SOLUTION
+    //YOU CAN TWEAK SOME PARAMETERS LIKE THE NUMBER OF NEIGHBORS GENERATED AND THE MAX ITERATIONS WITHOUT IMPROVEMENT
+    int max_number_of_neighbors = 100;
+    int neighbor_counter = 0; 
 
     std::vector<int> swappedVertexes; 
     std::vector<int> modifiedPath; 
@@ -170,6 +182,10 @@ void generate_neighbors(std::vector<int> path, std::vector<std::vector<int>> &ne
         //So we are going to iterate until the swapped_vertexes vector has the same size as the PathVector-2
         if(swappedVertexes.size() == path.size()-2)
             break; 
+
+        //Tweakable parameters: Only generate a certain number of neighbors
+        if((neighbor_counter == max_number_of_neighbors) && tweakable_param)
+            break;
 
         //Resets the path in order to start from the original "unmodified" path 
         modifiedPath = path; 
@@ -190,6 +206,8 @@ void generate_neighbors(std::vector<int> path, std::vector<std::vector<int>> &ne
 
         //Add the modified path to the neighbors vector
         neighbors.push_back(modifiedPath); 
+
+        neighbor_counter++;
     }
 
 }
@@ -251,13 +269,27 @@ void get_path_cost_feasibility(std::vector<int> path, Graph<int> &g, bool &isPat
 
 //Generates a random path from the graph
 //Not known to be feasible
+//Since we load in the whole graph 
+//All the nodes are added to it
+//But only some edges are loaded based on the dataset
+//There are some cases, ie. extra fully connected graphs dataset were we only need a small percentege of them
+//So, in order to avoid generating a path with nodes that are not loaded in
+//We only load the nodes which have edges assigned
+//Therefore avoiding the generation of paths with no edges assigned which would break our algorithm
+//Since we would no longer have a fully connected graph
 void find_start_path(Graph<int> &g, int start_node, vector<int> &starting_path){
 
     starting_path.push_back(start_node); //Add the starting node to the path (start of the path)
 
     for(auto verti : g.getVertexSet()){
         if(verti->getInfo() != start_node){
-            starting_path.push_back(verti->getInfo()); //Add the rest of the nodes to the path
+            //Check if the node has edges assigned
+            if(verti->getAdj().size() > 0){
+                starting_path.push_back(verti->getInfo()); //Add the node to the graph
+            }
+            //Otherwise don't consider the node to be important for the given dataset
+            else 
+                continue; 
         }
     }
 
@@ -307,16 +339,36 @@ void tabu_search(Graph<int> &g, std::vector<int> starting_path, double starting_
     std::vector<std::vector<int>> neighbors;
     std::map<double, std::vector<int>, std::greater<>> neighborMap;
     double current_cost = 0; 
-    int max_iterations = 500;
     int tabu_tenure = 3; 
     int iter_counter = 0; 
     //Responsible for flagging the search for a possible worst solution, who is not tabu or meets the aspiration criteria
     bool find_next_no_tabu = false; 
 
+    //Get a random iteration number in order to make the algorithm stronger 
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(2, 4);
+    int random_multiplier = dist(gen);
+    int max_iterations = g.getNumVertex()*random_multiplier; 
+
+    int total_iterations = 0; 
+    int total_iterations_best_result = 0; 
+
     best_path = starting_path;
     best_cost = starting_cost; 
 
     while(iter_counter != max_iterations){
+
+        std::cout << "Iteration number after reset: " << iter_counter << std::endl;
+        std::cout << "Current Best Cost: " << best_cost << std::endl;  
+        std::cout << "Best Result Found at Total Iteration Number: " << total_iterations_best_result << std::endl;
+
+        //Best Path 
+        std::cout << "Best Path: " << std::endl; 
+        for(auto vertex : best_path){
+            std::cout << vertex << " "; 
+        }
+        std::cout << std::endl; 
 
         update_tabu_list(tabu_list); 
 
@@ -325,7 +377,7 @@ void tabu_search(Graph<int> &g, std::vector<int> starting_path, double starting_
         find_next_no_tabu = false; //Reset the flag
 
         //Generates the neighbors of a given path 
-        generate_neighbors(starting_path, neighbors);
+        generate_neighbors(starting_path, neighbors, false);
 
         //Get the best neighbor out of all the neighbors generated
         for(auto neighbor : neighbors){
@@ -338,7 +390,7 @@ void tabu_search(Graph<int> &g, std::vector<int> starting_path, double starting_
 
             //Ignore the neighbor if it is not feasible
             if(!isPathFeasible){
-                pathCost = -1; 
+                pathCost = INF; 
                 continue; 
             }
 
@@ -383,9 +435,11 @@ void tabu_search(Graph<int> &g, std::vector<int> starting_path, double starting_
             best_path = current_path; 
             best_cost = current_cost; 
             iter_counter = 0; 
+            total_iterations_best_result = total_iterations; 
         }
 
         iter_counter++; 
+        total_iterations++; 
     }
 
 }
@@ -406,7 +460,7 @@ void T2_3(Graph<int> &g){
     get_path_cost_feasibility(starting_path, g, isPathFeasible, startingPathCost);
 
     if(!isPathFeasible)
-        startingPathCost = -1; 
+        startingPathCost = INF; 
 
     tabu_search(g, starting_path, startingPathCost, best_path, best_cost);
 
